@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="title">
+      Planeje !
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="auth-form">
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <ion-button [routerLink]="['/registration']" expand="block" color="success">Faça o registro</ion-button>
+
+        <span class="divider line one-line">ou</span>
+
+        <span class="already">Já é um usuário?</span>
+
+        <ion-button [routerLink]="['/login']" expand="block" color="danger">Faça o login</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
