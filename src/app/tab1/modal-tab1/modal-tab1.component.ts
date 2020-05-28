@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -7,18 +7,23 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./modal-tab1.component.scss'],
 })
 export class ModalTab1Component implements OnInit {
-  @Input() req: string;
-  @Output() salvar = new EventEmitter<string>();
+  @Input() transactionType: string;
 
   constructor(
     private modalCtrl: ModalController
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('tipo da modal ->', this.transactionType);
+  }
   close() {
     this.modalCtrl.dismiss();
   }
   save(){
-    this.salvar.emit(this.req)
+    if(this.transactionType === 'revenue') {
+      console.log('criar receita');
+    } else {
+      console.log('crair despesa');
+    }
   }
 }

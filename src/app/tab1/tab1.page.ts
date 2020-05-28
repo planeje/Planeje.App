@@ -12,11 +12,11 @@ export class Tab1Page {
   constructor(
     private modalCtlr: ModalController
   ) {}
-  
+
     async showModalTab1(){
       const modalTab1 =  await this.modalCtlr.create({
         component: ModalTab1Component,
-        // data: {'revenue': 'revenue'}
+        componentProps: { transactionType: 'revenue' }
       });
       modalTab1.present();
     }
