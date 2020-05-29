@@ -9,7 +9,23 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Saldo atual: R$</ion-title>
+      <ion-title size="large">Transações R$</ion-title>
     </ion-toolbar>
   </ion-header>
+<!-- fab placed in the center of the content with a list on each side -->
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="warning"> 
+    <ion-icon name="add-outline"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+  <ion-fab-button class="botaoFab" color="success" (click)="showModalRevenue()">
+    <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+  <ion-fab-list side="start">
+  <ion-fab-button class="botaoFab" color="danger" (click)="showModalExpense()">
+    <ion-icon name="remove-outline"></ion-icon>
+  </ion-fab-button>
+  </ion-fab-list>
+  </ion-fab>
 </ion-content>
