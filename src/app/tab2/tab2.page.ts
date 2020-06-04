@@ -1,34 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ModalTabComponent } from '../usual/modal-tab/modal-tab.component';
-import { CommonModule } from '@angular/common';
+import { TransactionType } from '../models/transactionType.enum';
+import { TransactionService } from './transaction.service';
+import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
+import { Actions } from '../models/actions.enum';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
+
+  public transactions: any[];
 
   constructor(
-    private modalCtlr: ModalController
+    private modalCtlr: ModalController,
+    private _transactionService: TransactionService
   ) {}
 
-    async showModalRevenue(){
-      const modalTab1 =  await this.modalCtlr.create({
-        component: ModalTabComponent,
-        componentProps: { transactionType: 'revenue', visibility: false, isBankAccount: false, isCategory: false, isTransaction:true }
-      });
-      modalTab1.present();
-      console.log('Não tem que aparecer categoria');
-    }
+  ngOnInit() {
+    this._transactionService.getTransactions().subscribe(response => {
+      this.transactions = response;
+    })
+  }
 
-    async showModalExpense(){
-      const modalTab1 =  await this.modalCtlr.create({
-        component: ModalTabComponent,
-        componentProps: { transactionType: 'expense', visibility: true, isBankAccount: false, isCategory: false, isTransaction:false }
-      });
-      modalTab1.present();
-      console.log('Tem que aparecer categoria');
+  public async showModalExpense(expense: any) {
+    const expenseModal = await this.modalCtlr.create({
+      component: ExpenseSettingsComponent,
+      componentProps: { data:  expense},
+    });
+    expenseModal.present();
+
+    const dataEmitted = (await expenseModal.onDidDismiss()).data;
+
+    if (dataEmitted.action === Actions.NEW) {
+      this.transactions = [dataEmitted.expese, ...this.transactions];
     }
+  }
+
+
+  public deleteTransaction(id: number): void {
+    this._transactionService.deleteTransaction(id).subscribe(() => {
+      const index = this.transactions.findIndex(el => el.transaction_id === id);
+      this.transactions.splice(index, 1);
+    });
+  }
 }

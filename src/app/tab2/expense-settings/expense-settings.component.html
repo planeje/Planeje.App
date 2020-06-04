@@ -1,0 +1,35 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="close()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ action === typeActions.EDIT ? 'Editar' : 'Nova' }}</ion-title>
+  </ion-toolbar>
+  <form [formGroup]="form">
+    
+    
+    <ion-item>
+      <ion-label position="stacked">Descrição</ion-label>
+      <ion-input formControlName="description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Valor da despesa</ion-label>
+      <ion-input formControlName="transactionValue"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Categoria</ion-label>
+      <ion-input formControlName="categoryId"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Conta bancária</ion-label>
+      <ion-input formControlName="bankId"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Data de vencimento</ion-label>
+      <ion-input formControlName="transactionDueDate"></ion-input>
+    </ion-item>
+    <ion-button class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
+  </form>
+</ion-content>

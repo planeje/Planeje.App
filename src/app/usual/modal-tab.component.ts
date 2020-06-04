@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { Cipher } from 'crypto';
 
 
 @Component({
@@ -45,5 +44,4 @@ export class ModalTabComponent implements OnInit {
     }
     this.close();
   }
-  
 }
