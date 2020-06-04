@@ -12,4 +12,15 @@
       <ion-title size="large">Contas Bancárias</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="warning"> 
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+    <ion-fab-button class="botaoFab" color="success" (click)="showModalBankAccount()">
+      <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    </ion-fab>
+
 </ion-content>

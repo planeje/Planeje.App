@@ -5,40 +5,60 @@
       <ion-icon name="chevron-back-outline"></ion-icon>
     </ion-button>
   </ion-buttons>
-  <ion-title>Nova Transação</ion-title>
+  <ion-title [hidden]="!isBankAccount">Nova Conta Bancária</ion-title>
+  <ion-title [hidden]="!isTransaction">Nova Receita</ion-title>
+  <ion-title [hidden]="!visibility">Nova Despesa</ion-title>
+  <ion-title  [hidden]="!isCategory">Nova Categoria</ion-title>
 </ion-toolbar>
-<ion-item>
+<div [hidden]="isBankAccount">
+<ion-item [hidden]="isCategory">
   <ion-label position="stacked">Descrição</ion-label>
+  <ion-input></ion-input>
+</ion-item>
+</div>
+<ion-item>
+  <ion-label position="stacked">Nome</ion-label>
   <ion-input></ion-input>
 </ion-item>
 <!-- <ion-item>
   <ion-label position="stacked">Origem</ion-label>
   <ion-input></ion-input>
 </ion-item> -->
-<ion-item>
+<div [hidden]="isBankAccount">
+<ion-item [hidden]="isCategory">
   <ion-label position="stacked">Conta Bancária</ion-label>
     <ion-select placeholder="selecione um banco">
       <ion-select-option value="nu">Nubank</ion-select-option>
       <ion-select-option value="in">Inter</ion-select-option>
     </ion-select>
 </ion-item>
-
-<ion-item [hidden]="!visibility">
+</div>
+<div [hidden]="!visibility">
+<div [hidden]="isBankAccount">
+<ion-item [hidden]="isCategory">
   <ion-label position="stacked">Categoria</ion-label>
     <ion-select placeholder="selecione uma categoria">
       <ion-select-option value="la">Lazer</ion-select-option>
       <ion-select-option value="ed">Educação</ion-select-option>
     </ion-select>
 </ion-item>
-
+</div>
+</div>
 <!-- <ion-item>
   <ion-label position="stacked">Cartão</ion-label>
   <ion-input></ion-input>
 </ion-item> -->
-<ion-item>
+<div [hidden]="isBankAccount">
+<ion-item [hidden]="isCategory">
   <ion-label position="stacked">Valor</ion-label>
   <ion-input type="number" placeholder="R$"></ion-input>
 </ion-item>
-
+</div>
+<div [hidden]="!isBankAccount">
+<ion-item [hidden]="isCategory">
+  <ion-label position="stacked">Saldo</ion-label>
+  <ion-input type="number" placeholder="R$"></ion-input>
+</ion-item>
+</div>
 <ion-button class="botaoModal" size="block" color="success" (click)="save()">Salvar</ion-button>
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ModalTab1Component } from './modal-tab1/modal-tab1.component';
+import { ModalTabComponent } from '../usual/modal-tab/modal-tab.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,8 +16,8 @@ export class Tab2Page {
 
     async showModalRevenue(){
       const modalTab1 =  await this.modalCtlr.create({
-        component: ModalTab1Component,
-        componentProps: { transactionType: 'revenue', visibility: false }
+        component: ModalTabComponent,
+        componentProps: { transactionType: 'revenue', visibility: false, isBankAccount: false, isCategory: false, isTransaction:true }
       });
       modalTab1.present();
       console.log('Não tem que aparecer categoria');
@@ -25,10 +25,10 @@ export class Tab2Page {
 
     async showModalExpense(){
       const modalTab1 =  await this.modalCtlr.create({
-        component: ModalTab1Component,
-        componentProps: { transactionType: 'expense', visibility: true }
+        component: ModalTabComponent,
+        componentProps: { transactionType: 'expense', visibility: true, isBankAccount: false, isCategory: false, isTransaction:false }
       });
-      console.log('Tem que aparecer categoria');
       modalTab1.present();
+      console.log('Tem que aparecer categoria');
     }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ModalTab1Component } from '../tab2/modal-tab1/modal-tab1.component';
+import { ModalTabComponent } from '../usual/modal-tab/modal-tab.component';
+
 
 @Component({
   selector: 'app-tab1',
@@ -9,7 +10,16 @@ import { ModalTab1Component } from '../tab2/modal-tab1/modal-tab1.component';
 })
 export class Tab1Page {
 
-  constructor(){
-    
+  constructor(
+    private modalCtlr: ModalController
+  ) {}
+
+    async showModalCategory(){
+      const modalTab =  await this.modalCtlr.create({
+        component: ModalTabComponent,
+        componentProps: { transactionType: 'category', visibility: false, isBankAccount:false,isCategory: true, isTransaction:false }
+      });
+      modalTab.present();
+      console.log('Categoria');
+    }
   }
-}
