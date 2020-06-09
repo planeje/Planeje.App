@@ -7,24 +7,59 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Transações</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
   <ion-item-group>
-    <ion-item *ngFor="let item of transactions" style="margin-top: 4px;">
-      <ion-label>
+    <ion-item *ngFor="let item of transactions">
+      <div class="category">
+        <ion-note style="color: blue;" slot="start">
+          {{ item.category_id }}
+        </ion-note>
+        <ion-note slot="start">
+          {{ item.transaction_date }}
+        </ion-note>
+      </div>
+      <ion-label class="description" position="stacked">
         {{ item.description }}
       </ion-label>
-      <ion-note slot="end" color="danger">
+      <ion-note class="value" position="stacked" color="danger">
         {{ item.transaction_value }}
       </ion-note>
-      <ion-tem-options side="end">
-        <ion-tem-option type="button" (click)="showModalExpense(item)">
-          Editar
-        </ion-tem-option>
-        <ion-tem-option type="button" (click)="deleteTransaction(item.transaction_id)">
-          Deletar
-        </ion-tem-option>
-      </ion-tem-options>
+      <!-- EDITAR E DELETAR -->
+        <!-- <ion-item-option slot="end" type="button" (click)="showModalExpense(item)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-item-option>
+        <ion-item-option slot="end" type="button" (click)="deleteTransaction(item.transaction_id)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-item-option> -->
+        <ion-fab horizontal="end" slot="end">
+          <ion-fab-button class="buttonItem" color="transparent">
+            <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-list class="buttonFabList" side="start">
+            <ion-fab-button  color="transparent">
+               <ion-item-option  type="button" (click)="showModalExpense(item)"> 
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-item-option> 
+            </ion-fab-button>
+            <ion-fab-button  color="transparent">
+               <ion-item-option  type="button" (click)="deleteTransaction(item.transaction_id)">
+                <ion-icon name="trash-outline"></ion-icon>
+               </ion-item-option> 
+            </ion-fab-button>
+          </ion-fab-list>
+        </ion-fab>
     </ion-item>
-  </ion-item-group>
+  </ion-item-group> 
+</ion-list>
+
+ 
+  <!-- Botão que abre o modal -->
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button color="warning"> 
     <ion-icon name="add-outline"></ion-icon>

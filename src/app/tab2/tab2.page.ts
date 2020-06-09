@@ -12,7 +12,44 @@ import { Actions } from '../models/actions.enum';
 })
 export class Tab2Page implements OnInit {
 
-  public transactions: any[];
+  public transactions = 
+  [
+    {
+      "transaction_id": 17,
+      "description": "mais uma despesa",
+      "recurrent": false,
+      "transaction_value": "20.00",
+      "category_id": "Lazer",
+      "bank_id": 0,
+      "transaction_date": "06/06/2020",
+      "transaction_due_date": "2020-12-10T03:00:00.000Z",
+      "transaction_type": 0
+    },
+    {
+      "transaction_id": 14,
+      "description": "gasolina",
+      "recurrent": true,
+      "transaction_value": "30.00",
+      "category_id": "Carro",
+      "bank_id": 0,
+      "transaction_date": "07/06/2020",
+      "transaction_due_date": "2020-06-08T03:00:00.000Z",
+      "transaction_type": 0
+    },
+    {
+      "transaction_id": 12,
+      "description": "Mercado",
+      "recurrent": true,
+      "transaction_value": "30.00",
+      "category_id": "Casa",
+      "bank_id": 0,
+      "transaction_date": "08/06/2020",
+      "transaction_due_date": "2020-06-08T03:00:00.000Z",
+      "transaction_type": 0
+    }
+  ]
+
+  ;
 
   constructor(
     private modalCtlr: ModalController,
@@ -20,9 +57,9 @@ export class Tab2Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._transactionService.getTransactions().subscribe(response => {
-      this.transactions = response;
-    })
+    // this._transactionService.getTransactions().subscribe(response => {
+    //   this.transactions = response;
+    // })
   }
 
   public async showModalExpense(expense: any) {
@@ -35,7 +72,7 @@ export class Tab2Page implements OnInit {
     const dataEmitted = (await expenseModal.onDidDismiss()).data;
 
     if (dataEmitted.action === Actions.NEW) {
-      this.transactions = [dataEmitted.expese, ...this.transactions];
+      this.transactions = [dataEmitted.expense, ...this.transactions];
     }
   }
 

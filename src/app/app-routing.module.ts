@@ -19,7 +19,7 @@ const routes: Routes = [
     loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
   {
-    path: 'excluir',
+    path: 'removido',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   }
 ];
