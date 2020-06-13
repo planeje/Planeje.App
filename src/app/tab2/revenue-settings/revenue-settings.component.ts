@@ -1,30 +1,32 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Actions } from 'src/app/models/actions.enum';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { TransactionType } from 'src/app/models/transactionType.enum';
 import { ModalController } from '@ionic/angular';
 import { TransactionService } from '../transaction.service';
-import { Actions } from 'src/app/models/actions.enum';
 
 @Component({
-  selector: 'app-expense-settings',
-  templateUrl: './expense-settings.component.html',
-  styleUrls: ['./expense-settings.component.scss'],
+  selector: 'app-revenue-settings',
+  templateUrl: './revenue-settings.component.html',
+  styleUrls: ['./revenue-settings.component.scss'],
 })
-export class ExpenseSettingsComponent implements OnInit {
+export class RevenueSettingsComponent implements OnInit {
   @Input() data: any;
+  @Output() complete = new EventEmitter<{ action: Actions, expense: any }>();
 
   public readonly typeActions = Actions;
   public action: Actions;
   public form: FormGroup;
 
   constructor(
-    private _fb: FormBuilder,
     private _modalCtrl: ModalController,
+    private _fb: FormBuilder,
     private _transactionService: TransactionService
   ) { }
 
   ngOnInit() {
-    this.form = this._buildExpenseForm()
+    console.log(this.typeActions);
+    this.form = this._buildForm()
     if(!!this.data) {
       this.action = Actions.EDIT;
       this._setFormValue(this.data);
@@ -33,53 +35,38 @@ export class ExpenseSettingsComponent implements OnInit {
     }
   }
 
-  private _buildExpenseForm(): FormGroup {
+  private _buildForm(): FormGroup {
     return this._fb.group({
       transactionId: new FormControl(null),
       description: new FormControl(''),
       recurrent: new FormControl(false),
       transactionValue: new FormControl(null),
-      categoryId: new FormControl(null),
       bankId: new FormControl(null),
       transactionDate: new FormControl(new Date()),
       transactionDueDate: new FormControl(new Date()),
-      transactionType: new FormControl(TransactionType.EXPENSE),
+      transactionType: new FormControl(TransactionType.REVENUE),
     });
   }
 
-  private _setFormValue(expense: any): void {
+  private _setFormValue(revenue: any) {
     this.form.patchValue({
-      transactionId: expense.transaction_id,
-      description: expense.description,
-      recurrent: expense.recurrent,
-      transactionValue: expense.transaction_value,
-      categoryId: expense.category_id,
-      bankId: expense.bank_id,
-      transactionDate: expense.transaction_date,
-      transactionDueDate: expense.transaction_due_date
+      ransactionId: revenue.transaction_id,
+      description: revenue.description,
+      recurrent: revenue.recurrent,
+      transactionValue: revenue.transaction_value,
+      bankId: revenue.bank_id,
+      transactionDate: revenue.transaction_date,
+      transactionDueDate: revenue.transaction_due_date
     });
   }
 
-  public _createExpense(formValue: any): void {
+  public save(formValue: any) {
     this._transactionService.createExpense(formValue).subscribe(response => {
       this._modalCtrl.dismiss({ action: Actions.EDIT, expense: formValue });
     })
   }
 
-  private _editExpense(formValue: any): void {
-    console.log(formValue);
-    this._transactionService.editTransaction(formValue).subscribe(response => {
-      this._modalCtrl.dismiss({ action: Actions.EDIT, expense: formValue });
-    });
-  }
-
-  public save(formValue: any): void {
-    this.action === Actions.NEW
-    ? this._createExpense(formValue)
-    : this._editExpense(formValue);
-  }
-
-  public closeModal(): void {
+  public closeModal(){
     this._modalCtrl.dismiss();
   }
 
