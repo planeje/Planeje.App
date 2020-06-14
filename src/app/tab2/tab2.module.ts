@@ -19,7 +19,8 @@ import { RevenueSettingsComponent } from './revenue-settings/revenue-settings.co
     Tab2PageRoutingModule,
     HttpClientModule
   ],
-  declarations: [Tab2Page,
+  declarations: [
+    Tab2Page,
     ExpenseSettingsComponent,
     RevenueSettingsComponent
   ]

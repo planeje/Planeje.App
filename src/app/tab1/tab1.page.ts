@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalTabComponent } from '../usual/modal-tab/modal-tab.component';
+import { CategoryService } from './category.service';
+import { CategorySettingsComponent } from './category-settings/category-settings.component';
 
 
 @Component({
@@ -8,18 +10,32 @@ import { ModalTabComponent } from '../usual/modal-tab/modal-tab.component';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
+
+  public categories: any[];
 
   constructor(
-    private modalCtlr: ModalController
+    private modalCtlr: ModalController,
+    private _categoryService: CategoryService
   ) {}
 
-    async showModalCategory(){
-      const modalTab =  await this.modalCtlr.create({
-        component: ModalTabComponent,
-        componentProps: { transactionType: 'category', visibility: false, isBankAccount:false,isCategory: true, isTransaction:false }
-      });
-      modalTab.present();
-      console.log('Categoria');
-    }
+  ngOnInit() {
+    this._categoryService.getCategories().subscribe(response => {
+      console.log('response =>', response);
+      this.categories = response;
+    })
   }
+
+  public async showModalCategory(category?: any) {
+    const modalTab =  await this.modalCtlr.create({
+      component: CategorySettingsComponent,
+      componentProps: { data:  category }
+    });
+    modalTab.present();
+  }
+
+  public deleteCategory(id: number) {
+    console.log(id);
+    this._categoryService.deleteCategory(id).subscribe();
+  }
+}

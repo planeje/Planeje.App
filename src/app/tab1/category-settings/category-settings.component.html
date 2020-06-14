@@ -1,0 +1,20 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="close()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{ (action === actionsType.EDIT ? 'Editar' : 'Nova') + ' categoria' }}
+    </ion-title>
+  </ion-toolbar>
+
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input formControlName="categoryName"></ion-input>
+    </ion-item>
+    <ion-button class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
+  </form>
+</ion-content>
