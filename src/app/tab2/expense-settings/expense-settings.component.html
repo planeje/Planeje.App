@@ -30,7 +30,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Data de vencimento</ion-label>
-      <ion-input formControlName="transactionDueDate"></ion-input>
+      <ion-datetime formControlName="transactionDueDate" displayFormat="DD/MM/YYYY"></ion-datetime>
     </ion-item>
     <ion-button class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
   </form>

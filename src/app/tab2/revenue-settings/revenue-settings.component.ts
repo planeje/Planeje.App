@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Actions } from 'src/app/models/actions.enum';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { TransactionType } from 'src/app/models/transactionType.enum';
 import { ModalController } from '@ionic/angular';
 import { TransactionService } from '../transaction.service';
@@ -43,7 +43,7 @@ export class RevenueSettingsComponent implements OnInit {
       transactionValue: new FormControl(null),
       bankId: new FormControl(null),
       transactionDate: new FormControl(new Date()),
-      transactionDueDate: new FormControl(new Date()),
+      transactionDueDate: new FormControl(new Date().toJSON()),
       transactionType: new FormControl(TransactionType.REVENUE),
     });
   }
@@ -68,6 +68,10 @@ export class RevenueSettingsComponent implements OnInit {
 
   public closeModal(){
     this._modalCtrl.dismiss();
+  }
+
+  public get transactionDueDateCtrl(): AbstractControl {
+    return this.form.get('transactionDueDate');
   }
 
 }

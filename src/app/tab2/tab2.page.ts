@@ -83,6 +83,12 @@ export class Tab2Page implements OnInit {
     revenueModal.present();
   }
 
+  public editTransaction(transaction: any) {
+    transaction.transaction_type === TransactionType.EXPENSE
+      ? this.showModalExpense(transaction)
+      : this.showModalRevenue(transaction);
+  }
+
 
   public deleteTransaction(id: number): void {
     this._transactionService.deleteTransaction(id).subscribe(() => {
