@@ -70,7 +70,7 @@ export class Tab2Page implements OnInit {
 
     const dataEmitted = (await expenseModal.onDidDismiss()).data;
 
-    if (dataEmitted.action === Actions.NEW) {
+    if (dataEmitted?.action === Actions.NEW) {
       this.transactions = [dataEmitted.expense, ...this.transactions];
     }
   }

@@ -22,7 +22,9 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Categoria</ion-label>
-      <ion-input formControlName="categoryId"></ion-input>
+        <ion-select placeholder="Selecione uma categoria">
+          <ion-select-option *ngFor="let item of categories" [value]="item.category_id">{{ item.category_name }}</ion-select-option>
+        </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Conta bancária</ion-label>
