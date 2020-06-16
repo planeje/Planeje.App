@@ -13,8 +13,8 @@ import { Action } from 'rxjs/internal/scheduler/Action';
 export class BankAccountSettingsComponent implements OnInit {
   @Input() data: any;
 
-  public form: FormGroup;
   public readonly actionsType = Actions;
+  public form: FormGroup;
   public action: Actions;
 
   constructor(
@@ -30,12 +30,10 @@ export class BankAccountSettingsComponent implements OnInit {
       this._setFormValue(this.data);
     } else {
       this.action = Actions.NEW;
-      console.log('new');
     }
   }
 
   private _buildForm(): FormGroup {
-    console.log('buildar')
     return this._fb.group({
       accountId: new FormControl(null),
       accountName: new FormControl(''),

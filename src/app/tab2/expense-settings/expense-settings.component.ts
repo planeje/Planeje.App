@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { TransactionService } from '../transaction.service';
 import { Actions } from 'src/app/models/actions.enum';
 import { CategoryService } from 'src/app/tab1/category.service';
+import { BankAccountService } from 'src/app/tab3/bank-account.service';
 
 @Component({
   selector: 'app-expense-settings',
@@ -17,19 +18,25 @@ export class ExpenseSettingsComponent implements OnInit {
   public readonly typeActions = Actions;
   public action: Actions;
   public form: FormGroup;
-  public categories: any;
+  public categories: any[];
+  public bankAccounts: any[];
 
   constructor(
     private _fb: FormBuilder,
     private _modalCtrl: ModalController,
     private _transactionService: TransactionService,
-    private _categoryService: CategoryService
+    private _categoryService: CategoryService,
+    private _banckAccountService: BankAccountService
   ) { }
 
   ngOnInit() {
     this.form = this._buildExpenseForm()
     this._categoryService.getCategories().subscribe(response => {
       this.categories = response;
+    });
+
+    this._banckAccountService.getBankAccounts().subscribe(response => {
+      this.bankAccounts = response;
     });
 
     if(!!this.data) {

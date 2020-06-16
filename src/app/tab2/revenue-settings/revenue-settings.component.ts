@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, AbstractControl } from '@angular/f
 import { TransactionType } from 'src/app/models/transactionType.enum';
 import { ModalController } from '@ionic/angular';
 import { TransactionService } from '../transaction.service';
+import { BankAccountService } from 'src/app/tab3/bank-account.service';
 
 @Component({
   selector: 'app-revenue-settings',
@@ -17,16 +18,21 @@ export class RevenueSettingsComponent implements OnInit {
   public readonly typeActions = Actions;
   public action: Actions;
   public form: FormGroup;
+  public bankAccounts: any[];
 
   constructor(
     private _modalCtrl: ModalController,
     private _fb: FormBuilder,
-    private _transactionService: TransactionService
+    private _transactionService: TransactionService,
+    private _banckAccountService: BankAccountService
   ) { }
 
   ngOnInit() {
-    console.log(this.typeActions);
     this.form = this._buildForm()
+    this._banckAccountService.getBankAccounts().subscribe(response => {
+      this.bankAccounts = response;
+    });
+
     if(!!this.data) {
       this.action = Actions.EDIT;
       this._setFormValue(this.data);

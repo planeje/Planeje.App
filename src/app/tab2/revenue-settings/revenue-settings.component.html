@@ -20,7 +20,9 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Conta bancária</ion-label>
-      <ion-input formControlName="bankId"></ion-input>
+      <ion-select placeholder="Selecione uma conta">
+        <ion-select-option *ngFor="let item of bankAccounts" [value]="item.account_id">{{ item.account_name }}</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Data da entrada</ion-label>
