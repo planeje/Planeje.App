@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Despesas
+      Contas Bancárias
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,6 +12,39 @@
       <ion-title size="large">Contas Bancárias</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <ion-item-group>
+      <ion-item *ngFor="let item of bankAccounts">
+        <ion-label position="stacked">
+          {{ item.account_name }}
+        </ion-label>
+        <!-- EDITAR E DELETAR -->
+          <ion-label slot="end">
+            R$ {{ item.balance }}
+          </ion-label>
+          <ion-fab horizontal="end" slot="end">
+            <ion-fab-button class="buttonItem" color="transparent">
+              <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list class="buttonFabList" side="start">
+              <ion-fab-button  color="transparent">
+                 <ion-item-option  type="button" (click)="showModalBankAccount(item)"> 
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-item-option> 
+              </ion-fab-button>
+              <ion-fab-button  color="transparent">
+                 <ion-item-option  type="button" (click)="deleteBankAccount(item.account_id)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                 </ion-item-option> 
+              </ion-fab-button>
+            </ion-fab-list>
+          </ion-fab>
+      </ion-item>
+    </ion-item-group> 
+  </ion-list>
+
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="warning"> 
       <ion-icon name="add-outline"></ion-icon>

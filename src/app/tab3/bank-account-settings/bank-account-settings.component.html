@@ -1,0 +1,24 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="close()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{ (action === actionsType.EDIT ? 'Editar' : 'Nova') + ' conta' }}
+    </ion-title>
+  </ion-toolbar>
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="stacked">Nome da conta</ion-label>
+      <ion-input formControlName="accountName" placeholder="Digite o nome do banco ou conta"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Saldo</ion-label>
+      <ion-input formControlName="balance" type="number" placeholder="R$"></ion-input>
+    </ion-item>
+    <ion-button class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
+  </form>
+</ion-content>
+
