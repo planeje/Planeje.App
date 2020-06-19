@@ -13,36 +13,36 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    <ion-item-group>
-      <ion-item *ngFor="let item of bankAccounts">
-        <ion-label position="stacked">
-          {{ item.account_name }}
-        </ion-label>
-        <!-- EDITAR E DELETAR -->
-          <ion-label slot="end">
-            R$ {{ item.balance }}
+  <ng-conainer *ngIf="loading; else accountsList">
+    <div class="spinner-container">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+  </ng-conainer>
+  <ng-template #accountsList>
+    <ion-list>
+      <ion-item-group>
+        <ion-item *ngFor="let item of bankAccounts">
+          <ion-label class="label-info" pisition="stacked">
+            <span>{{ item.account_name }}</span>
+            <span>R$ {{ item.balance }}</span>
           </ion-label>
-          <ion-fab horizontal="end" slot="end">
+          <ion-fab horizontal="end">
             <ion-fab-button class="buttonItem" color="transparent">
               <ion-icon name="ellipsis-vertical-outline"></ion-icon>
             </ion-fab-button>
             <ion-fab-list class="buttonFabList" side="start">
-              <ion-fab-button  color="transparent">
-                 <ion-item-option  type="button" (click)="showModalBankAccount(item)"> 
-                  <ion-icon name="create-outline"></ion-icon>
-                </ion-item-option> 
+              <ion-fab-button (click)="showModalBankAccount(item)" color="light">
+                <ion-icon name="create-outline"></ion-icon>
               </ion-fab-button>
-              <ion-fab-button  color="transparent">
-                 <ion-item-option  type="button" (click)="deleteBankAccount(item.account_id)">
+              <ion-fab-button (click)="deleteBankAccount(item.account_id)" color="light">
                   <ion-icon name="trash-outline"></ion-icon>
-                 </ion-item-option> 
               </ion-fab-button>
             </ion-fab-list>
           </ion-fab>
-      </ion-item>
-    </ion-item-group> 
-  </ion-list>
+        </ion-item>
+      </ion-item-group> 
+    </ion-list>
+  </ng-template>
 
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

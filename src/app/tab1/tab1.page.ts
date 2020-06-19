@@ -11,7 +11,7 @@ import { CategorySettingsComponent } from './category-settings/category-settings
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-
+  public loading = true;
   public categories: any[];
 
   constructor(
@@ -21,8 +21,8 @@ export class Tab1Page implements OnInit {
 
   ngOnInit() {
     this._categoryService.getCategories().subscribe(response => {
-      console.log('response =>', response);
       this.categories = response;
+      this.loading = false;
     })
   }
 

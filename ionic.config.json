@@ -1,6 +1,9 @@
 {
   "name": "mvp_jtz",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular",
   "id": "5c8bd9d3"
 }

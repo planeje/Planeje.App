@@ -9,6 +9,7 @@ import { BankAccountSettingsComponent } from './bank-account-settings/bank-accou
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
+  public loading = true;
   public bankAccounts: any[];
 
   constructor(
@@ -19,6 +20,7 @@ export class Tab3Page implements OnInit {
   ngOnInit() {
     this._bankAccountService.getBankAccounts().subscribe(response => {
       this.bankAccounts = response;
+      this.loading = false;
     })
   }
 

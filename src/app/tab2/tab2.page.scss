@@ -5,8 +5,25 @@ ion-title {
 ion-item-option {
     background-color: transparent;
 }
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    padding: {
+        top: 20px;
+        bottom: 20px;
+    }
+}
+
 ion-item {
     margin: 10px;
+    .label-info {
+        display: flex;
+        flex-direction: column;
+        > * {
+            margin-bottom: 4px;
+        }
+    }
 }
 ion-icon {
     color: black;;
@@ -17,13 +34,6 @@ ion-icon {
     height: 20px;
     width: 20px;
 }
-.description {
-    font-size: 20px;
-    padding: 5px;
-}
-.category {
- float: left;
-}
 .value {
  padding-top: 3px;
 }
@@ -32,7 +42,7 @@ ion-icon {
     width: 50px;
     height: 50px;
 }
-
 .buttonFabList {
-    margin: 0px 25px 0px 0px;
+    margin-top: -20px;
+    margin-right: 32px;
 }
