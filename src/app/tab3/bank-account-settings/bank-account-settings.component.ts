@@ -18,7 +18,7 @@ export class BankAccountSettingsComponent implements OnInit {
   public action: Actions;
 
   constructor(
-    private modalCtrl: ModalController,
+    private _modalCtrl: ModalController,
     private _fb: FormBuilder,
     private _bankAccountService: BankAccountService
   ) { }
@@ -51,13 +51,13 @@ export class BankAccountSettingsComponent implements OnInit {
 
   private _createAccount(bankAccount: any): void {
     this._bankAccountService.createBankAccount(bankAccount).subscribe(response => {
-      this.close();
+      this._modalCtrl.dismiss({ action: Actions.NEW });
     })
   }
 
   private _editAccount(bankAccount: any): void {
     this._bankAccountService.editBankAccount(bankAccount).subscribe(response => {
-      this.close();
+      this._modalCtrl.dismiss({ action: Actions.EDIT });
     })
   }
 
@@ -68,7 +68,7 @@ export class BankAccountSettingsComponent implements OnInit {
   }
 
   public close(): void {
-    this.modalCtrl.dismiss();
+    this._modalCtrl.dismiss();
   }
 
 }

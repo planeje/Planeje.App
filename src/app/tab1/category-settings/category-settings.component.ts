@@ -18,7 +18,7 @@ export class CategorySettingsComponent implements OnInit {
   public action: Actions;
 
   constructor(
-    private modalCtrl: ModalController,
+    private _modalCtrl: ModalController,
     private _fb: FormBuilder,
     public _categoryService: CategoryService
   ) { }
@@ -48,19 +48,26 @@ export class CategorySettingsComponent implements OnInit {
   }
 
   private createCategory(category: any): void {
-    this._categoryService.createCategory(category).pipe(finalize(() => this.close())).subscribe();
+    this._categoryService.createCategory(category)
+      .pipe(finalize(() => this.close()))
+      .subscribe(response => {
+        this._modalCtrl.dismiss({ action: Actions.NEW });
+      });;
   }
 
   private _editCategory(category: any): void {
-    this._categoryService.editCategory(category).pipe(finalize(() => this.close())).subscribe();
+    this._categoryService.editCategory(category)
+      .pipe(finalize(() => this.close()))
+      .subscribe(response => {
+        this._modalCtrl.dismiss({ action: Actions.EDIT });
+      });
   }
 
   public close(): void {
-    this.modalCtrl.dismiss();
+    this._modalCtrl.dismiss();
   }
 
   public save(formValue: any) {
-    console.log('save', formValue);
     this.action === Actions.EDIT
     ? this._editCategory(formValue)
     : this.createCategory(formValue);

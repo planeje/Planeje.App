@@ -3,6 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { ModalTabComponent } from '../usual/modal-tab/modal-tab.component';
 import { CategoryService } from './category.service';
 import { CategorySettingsComponent } from './category-settings/category-settings.component';
+import { Actions } from '../models/actions.enum';
+import { finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -20,22 +22,34 @@ export class Tab1Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._categoryService.getCategories().subscribe(response => {
+    this._getCategories();
+  }
+
+  private _getCategories() {
+    this._categoryService.getCategories()
+    .pipe(finalize(() => (this.loading = false)))
+    .subscribe(response => {
       this.categories = response;
-      this.loading = false;
-    })
+    });
   }
 
   public async showModalCategory(category?: any) {
-    const modalTab =  await this.modalCtlr.create({
+    const categorySettingsModal =  await this.modalCtlr.create({
       component: CategorySettingsComponent,
       componentProps: { data:  category }
     });
-    modalTab.present();
+    categorySettingsModal.present();
+    const dataEmitted = (await categorySettingsModal.onDidDismiss()).data;
+    if (!!dataEmitted) {
+      this.loading = true
+      this._getCategories();
+    }
   }
 
   public deleteCategory(id: number) {
-    console.log(id);
-    this._categoryService.deleteCategory(id).subscribe();
+    this._categoryService.deleteCategory(id).subscribe(() => {
+      const index = this.categories.findIndex(el => el.category_id === id);
+      this.categories.splice(index, 1);
+    });
   }
 }

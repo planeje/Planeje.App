@@ -5,6 +5,7 @@ import { TransactionService } from './transaction.service';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
 import { Actions } from '../models/actions.enum';
 import { RevenueSettingsComponent } from './revenue-settings/revenue-settings.component';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab2',
@@ -22,10 +23,16 @@ export class Tab2Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._transactionService.getTransactions().subscribe(response => {
-      this.transactions = response;
-      this.loading = false;
-    })
+    this._getTransactions();
+  }
+
+  private _getTransactions() {
+    this._transactionService.getTransactions()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe(response => {
+        this.transactions = response;
+        this.loading = false;
+      });
   }
 
   public async showModalExpense(expense?: any) {
@@ -34,11 +41,10 @@ export class Tab2Page implements OnInit {
       componentProps: { data: expense },
     });
     expenseModal.present();
-
     const dataEmitted = (await expenseModal.onDidDismiss()).data;
-
-    if (dataEmitted?.action === Actions.NEW) {
-      this.transactions = [dataEmitted.expense, ...this.transactions];
+    if (!!dataEmitted) {
+      this.loading = true;
+      this._getTransactions();
     }
   }
 
@@ -48,6 +54,11 @@ export class Tab2Page implements OnInit {
       componentProps: { data: revenue }
     });
     revenueModal.present();
+    const dataEmitted = (await revenueModal.onDidDismiss()).data;
+    if (!!dataEmitted) {
+      this.loading = true;
+      this._getTransactions();
+    }
   }
 
   public editTransaction(transaction: any) {
