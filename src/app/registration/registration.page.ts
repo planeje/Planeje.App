@@ -11,5 +11,7 @@ export class RegistrationPage implements OnInit {
 
   ngOnInit() {
   }
-
+  public back(): void {
+    history.back();
+  }
 }
