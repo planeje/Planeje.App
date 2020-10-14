@@ -11,5 +11,7 @@ export class ForgotPasswordPage implements OnInit {
 
   ngOnInit() {
   }
-
+  public back(): void {
+    history.back();
+  }
 }
