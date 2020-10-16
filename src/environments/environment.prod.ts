@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  API_URL: 'https://planeje-api.herokuapp.com',
+  production: true,
+  dev: false,
+  staging: false,
 };
