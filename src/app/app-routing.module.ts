@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'removido',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'token',
+    loadChildren: () => import('./token/token.module').then( m => m.TokenPageModule)
   }
 ];
 @NgModule({

@@ -5,7 +5,7 @@
 </ion-buttons>
 
   <ion-toolbar>
-    <ion-title>Recuperar senha</ion-title>
+    <ion-title>Insira o token</ion-title>
   </ion-toolbar>
 
 <ion-content>
@@ -13,12 +13,12 @@
 
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
-      <ion-input type="email" placeholder="Digite seu email" required></ion-input>
+      <ion-input type="text" placeholder="Insira o token" required></ion-input>
     </ion-item>
 
-    <ion-row class="botaoRecuperar">
+    <ion-row class="botaoToken">
       <ion-col>
-        <ion-button type="submit" color="tertiary"><a [routerLink]="['/token']">Enviar</a></ion-button>
+        <ion-button type="submit" color="tertiary" >Recuperar</ion-button>
       </ion-col>
     </ion-row>    
   </form>
