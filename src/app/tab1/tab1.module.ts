@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { CategorySettingsComponent } from './category-settings/category-settings.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UsualModule } from '../usual/usual.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ReactiveFormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
+    UsualModule
   ],
   declarations: [
     Tab1Page,

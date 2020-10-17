@@ -9,6 +9,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab3PageRoutingModule } from './tab3-routing.module'
 import { HttpClientModule } from '@angular/common/http';
 import { BankAccountSettingsComponent } from './bank-account-settings/bank-account-settings.component';
+import { UsualModule } from '../usual/usual.module';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { BankAccountSettingsComponent } from './bank-account-settings/bank-accou
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
+    UsualModule
   ],
   declarations: [
     Tab3Page,

@@ -1,0 +1,25 @@
+<ion-list>
+    <ion-card (click)="showDetails()">
+        <ion-item-group>
+            <ion-item>
+                <ion-grid>
+                <ion-row class="default">
+                    <ion-col>
+                    Ação
+                    </ion-col>
+                    <ion-col style="text-align: right;">
+                    31/12/1999 - 4h20
+                    </ion-col>
+                </ion-row>
+                <ion-row class="details">
+                    <ng-container *ngIf="details">
+                        <ion-col><p style="color: darkgray; text-align: left;">Transação</p> <p> Descrição da Transação</p></ion-col>
+                        <ion-col>Valor <p> R$ 3,00</p></ion-col>
+                        <ion-col>Data de cadastro <p> 01/01/2000</p></ion-col>
+                    </ng-container>
+                </ion-row>
+            </ion-grid>
+            </ion-item>
+        </ion-item-group> 
+    </ion-card>
+</ion-list>

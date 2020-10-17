@@ -1,18 +1,20 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
+    
     <ion-toolbar>
       <ion-title size="large">Transações</ion-title>
-      <ion-button>
-        <ion-menu-button content-id="menu"></ion-menu-button>
-      </ion-button>
     </ion-toolbar>
   </ion-header>
+  <!-- <app-menu (click)="openMenu()"></app-menu> -->
+  <app-menu></app-menu>
+  
 
-  <ng-conainer *ngIf="loading; else transactionList" >
+
+  <ng-container *ngIf="loading; else transactionList" >
     <div class="spinner-container">
       <ion-spinner name="crescent"></ion-spinner>
     </div>
-  </ng-conainer>
+  </ng-container>
   <ng-template #transactionList>
     <ion-list>
       <ion-item-group>

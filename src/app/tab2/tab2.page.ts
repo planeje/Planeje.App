@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { TransactionType } from '../models/transactionType.enum';
 import { TransactionService } from './transaction.service';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
@@ -19,7 +19,8 @@ export class Tab2Page implements OnInit {
 
   constructor(
     private modalCtlr: ModalController,
-    private _transactionService: TransactionService
+    private _transactionService: TransactionService,
+    private menu: MenuController
   ) {}
 
   ngOnInit() {
@@ -74,4 +75,8 @@ export class Tab2Page implements OnInit {
       this.transactions.splice(index, 1);
     });
   }
+  // openMenu() {
+  //   this.menu.toggle();
+  //   console.log('tentei');
+  // }
 }

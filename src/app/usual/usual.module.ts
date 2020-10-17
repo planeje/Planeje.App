@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ModalTabComponent } from './modal-tab/modal-tab.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { MenuComponent } from './menu/menu.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [ModalTabComponent],
+  declarations: [ModalTabComponent, MenuComponent],
   imports: [
-    CommonModule, UsualModule, BrowserModule
-  ]
+    RouterModule
+  ],
+  exports: [MenuComponent]
 })
 export class UsualModule { }

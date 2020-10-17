@@ -25,6 +25,14 @@ const routes: Routes = [
   {
     path: 'token',
     loadChildren: () => import('./token/token.module').then( m => m.TokenPageModule)
+  },
+  {
+    path: 'user-account',
+    loadChildren: () => import('./user-account/user-account.module').then( m => m.UserAccountPageModule)
+  },
+  {
+    path: 'activities',
+    loadChildren: () => import('./activities/activities.module').then( m => m.ActivitiesPageModule)
   }
 ];
 @NgModule({

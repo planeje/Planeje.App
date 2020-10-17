@@ -1,0 +1,19 @@
+<ion-menu menuId="fi" class="menu_main" content-id="menu">
+  <ion-header collapse="condense">
+      <h2>Nome do usuário</h2>
+      <p>Email do usuário</p>
+  </ion-header>
+  <ion-content>
+    <ion-item>
+      <ion-icon name="person-circle-outline"></ion-icon>
+      <ion-button color="light" slot="end" [routerLink]="['/user-account']">Conta de usuário</ion-button>
+    </ion-item>    
+    <ion-item>
+      <ion-icon name="server-outline"></ion-icon>
+      <ion-button color="light" slot="end" [routerLink]="['/activities']">Registro de atividades</ion-button>
+    </ion-item>
+  </ion-content>
+</ion-menu>
+
+<ion-content id="menu">
+</ion-content>

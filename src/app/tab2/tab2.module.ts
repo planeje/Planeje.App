@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
 import { RevenueSettingsComponent } from './revenue-settings/revenue-settings.component';
+import { UsualModule } from '../usual/usual.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { RevenueSettingsComponent } from './revenue-settings/revenue-settings.co
     ReactiveFormsModule,
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    UsualModule
   ],
   declarations: [
     Tab2Page,
