@@ -1,0 +1,27 @@
+<ion-toolbar>
+  <ion-title>Editar usuário</ion-title>
+    <ion-buttons slot="start">
+      <ion-button  (click)="closeModal()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+</ion-toolbar  >
+
+<ion-content>
+  
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nova senha</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+  <ion-item>      
+    <ion-label position="stacked">Confirmar senha senha</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-button class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
+  </form>
+</ion-content>

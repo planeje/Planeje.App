@@ -4,12 +4,12 @@
       <ion-title size="large">Contas Bancárias</ion-title>
     </ion-toolbar>
   </ion-header>
-  <app-menu></app-menu>
-  <ng-conainer *ngIf="loading; else accountsList">
+
+  <ng-container *ngIf="loading; else accountsList">
     <div class="spinner-container">
       <ion-spinner name="crescent"></ion-spinner>
     </div>
-  </ng-conainer>
+  </ng-container>
   <ng-template #accountsList>
     <ion-list>
       <ion-item-group>
@@ -47,5 +47,5 @@
       </ion-fab-button>
     </ion-fab-list>
     </ion-fab>
-
+    <app-menu></app-menu>
 </ion-content>

@@ -1,5 +1,9 @@
+<ion-toolbar>
+    <ion-title>Registro de Atividades</ion-title>
+  </ion-toolbar>
+<ion-content>
 <ion-list>
-    <ion-card (click)="showDetails()">
+    <ion-card>
         <ion-item-group>
             <ion-item>
                 <ion-grid>
@@ -7,15 +11,27 @@
                     <ion-col>
                     Ação
                     </ion-col>
-                    <ion-col style="text-align: right;">
+                    <ion-col size="5">
                     31/12/1999 - 4h20
+                    </ion-col>                    
+                    <ion-col size="2" (click)="show()">
+                            <ng-container *ngIf="!details">
+                                <ion-button color="light" class="botaoDetails">
+                                <ion-icon name="add-outline"></ion-icon>
+                            </ion-button>
+                            </ng-container>                            
+                            <ng-container *ngIf="details">
+                                <ion-button color="light" class="botaoDetails">
+                                <ion-icon name="remove-outline"></ion-icon>
+                            </ion-button>
+                            </ng-container>
                     </ion-col>
                 </ion-row>
                 <ion-row class="details">
                     <ng-container *ngIf="details">
                         <ion-col><p style="color: darkgray; text-align: left;">Transação</p> <p> Descrição da Transação</p></ion-col>
                         <ion-col>Valor <p> R$ 3,00</p></ion-col>
-                        <ion-col>Data de cadastro <p> 01/01/2000</p></ion-col>
+                        <ion-col><p style="color: darkgray; text-align: left;">Data da transação</p><p> 01/01/2000</p></ion-col>
                     </ng-container>
                 </ion-row>
             </ion-grid>
@@ -23,3 +39,5 @@
         </ion-item-group> 
     </ion-card>
 </ion-list>
+</ion-content>
+<app-menu></app-menu>

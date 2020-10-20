@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, MenuController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { BankAccountService } from './bank-account.service';
 import { BankAccountSettingsComponent } from './bank-account-settings/bank-account-settings.component';
 import { finalize } from 'rxjs/operators';
@@ -10,26 +10,31 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
-  public loading = true;
-  public bankAccounts: any[];
+  public loading = false;
+  public bankAccounts = [
+    {
+            "account_id": 1,
+            "account_name": 'Nubank',
+            "balance": 1250.00
+    }
+  ];
 
   constructor(
     private modalCtlr: ModalController,
     private _bankAccountService: BankAccountService,
-    private menu: MenuController
   ) {}
 
   ngOnInit() {
-    this._getBanckAccounts();
+    // this._getBanckAccounts();
   }
 
-  private _getBanckAccounts() {
-    this._bankAccountService.getBankAccounts()
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(response => {
-        this.bankAccounts = response;
-      });
-  }
+  // private _getBanckAccounts() {
+  //   this._bankAccountService.getBankAccounts()
+  //     .pipe(finalize(() => (this.loading = false)))
+  //     .subscribe(response => {
+  //       this.bankAccounts = response;
+  //     });
+  // }
 
   public async showModalBankAccount(bankAccount?: any) {
     const accountSettingsModal =  await this.modalCtlr.create({
@@ -40,7 +45,7 @@ export class Tab3Page implements OnInit {
     const dataEmitted = (await accountSettingsModal.onDidDismiss()).data;
     if (!!dataEmitted) {
       this.loading = true
-      this._getBanckAccounts();
+      // this._getBanckAccounts();
     }
 
   }

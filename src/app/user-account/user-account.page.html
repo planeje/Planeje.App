@@ -1,1 +1,18 @@
-<p>Conta de usuário</p>
+<ion-toolbar>
+    <ion-title>Conta de usuário</ion-title>
+  </ion-toolbar>
+
+<ion-content class="settings">
+  <div class="photo">
+    <ion-thumbnail>
+      <ion-img></ion-img>
+    </ion-thumbnail>
+  </div>
+  <h3>Nome do usuário</h3>
+  <ion-item lines="full">
+    <ion-label>Email</ion-label>
+    <ion-input type="email" disabled>email@email.com</ion-input>
+  </ion-item>
+  <ion-button color="tertiary" (click)="showModalUserSetting()">Editar</ion-button>
+<app-menu></app-menu>
+</ion-content>

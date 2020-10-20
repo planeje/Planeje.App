@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./activities.page.scss'],
 })
 export class ActivitiesPage implements OnInit {
-  details:boolean
+  details:boolean;
   constructor() {
 
    }
@@ -14,11 +14,13 @@ export class ActivitiesPage implements OnInit {
   ngOnInit() {
 
   }
-  public  showDetails(): void {
-    this.details = true
-    console.log('era pra aparecer')
-  }  public  closeDetails(): void {
-    this.details = false
-    console.log('era pra fechar')
+  
+  public show(){
+    if(!this.details){
+      this.details = true;
+    }
+    else {
+      this.details = false;
+    }
   }
 }
