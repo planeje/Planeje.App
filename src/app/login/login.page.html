@@ -4,15 +4,15 @@
   </ion-toolbar>
 
 <ion-content>
-  <form>
+  <form [formGroup]="loginForm">
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
-      <ion-input type="text" placeholder="Digite seu email" required></ion-input>
+      <ion-input type="text" placeholder="Digite seu email" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
-      <ion-input type="password" placeholder="Digite sua senha" required></ion-input>
+      <ion-input type="password" placeholder="Digite sua senha" formControlName="password"></ion-input>
     </ion-item>
     <ion-row>
       <ion-col>
@@ -22,7 +22,7 @@
 
     <ion-row class="botaoEntrar">
       <ion-col>
-        <ion-button [routerLink]="['/tabs']" type="submit" color="tertiary" >Entrar</ion-button>
+        <ion-button [disabled]="loginForm.invalid" (click)="loginUser(loginForm.value)" type="submit" color="tertiary" >Entrar</ion-button>
       </ion-col>
     </ion-row>    
 
