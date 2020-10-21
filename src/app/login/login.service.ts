@@ -17,13 +17,17 @@ export class LoginService {
             take(1),
             map(response => {
                 localStorage.setItem('apiToken', JSON.stringify(response.token));
-                return response.token;
+                return response.token
             })
         );
     }
 
     public getApiToken(): string {
-        const token = localStorage.getItem('apiToken');
+        const token = JSON.parse(localStorage.getItem('apiToken'));
         return token ? token : null;
+    }
+
+    public logout(): void {
+        localStorage.removeItem('apiToken');
     }
 }

@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ModalTabComponent } from './modal-tab/modal-tab.component';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
+import { httpInterceptorProviders } from './interceptors';
 
 
 
@@ -10,6 +11,14 @@ import { RouterModule } from '@angular/router';
   imports: [
     RouterModule
   ],
-  exports: [MenuComponent]
+  exports: [MenuComponent],
+  providers: [httpInterceptorProviders]
 })
-export class UsualModule { }
+export class UsualModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: UsualModule,
+      providers: [httpInterceptorProviders]
+    };
+  }
+}

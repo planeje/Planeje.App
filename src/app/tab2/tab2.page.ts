@@ -31,8 +31,11 @@ export class Tab2Page implements OnInit {
     this._transactionService.getTransactions()
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(response => {
+        console.log('response', response);
         this.transactions = response;
         this.loading = false;
+      }, err => {
+        console.log('err', err);
       });
   }
 
