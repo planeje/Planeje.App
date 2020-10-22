@@ -21,4 +21,9 @@ export class UserAccountService {
     return this._http.put<User>(`${environment.API_URL}/users/${userId}`, data)
     .pipe(take(1));
   }
+
+  public changePassword(userId: number, data: { password: string }): Observable<void> {
+    return this._http.put<void>(`${environment.API_URL}/users/${userId}/changePassword`, data)
+      .pipe(take(1));
+  }
 }

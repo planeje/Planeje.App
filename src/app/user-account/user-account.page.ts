@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
 import { User } from '../models/user.model';
@@ -13,9 +13,12 @@ import { UserAccountService } from './user-account.service';
 })
 export class UserAccountPage implements OnInit {
   public user: User;
+  public isEditingPassword = false;
+  public editPasswordForm: FormGroup;
   constructor(
     private _modalCtlr: ModalController,
-    private _userAccountService: UserAccountService
+    private _userAccountService: UserAccountService,
+    private _fb: FormBuilder
   ) { }
 
   async ngOnInit() {
@@ -26,6 +29,26 @@ export class UserAccountPage implements OnInit {
       }, err => {
         console.log(err);
       });
+
+    this.editPasswordForm = this._buildEditPasswordForm();
+  }
+
+  private _buildEditPasswordForm(): FormGroup {
+    return this._fb.group({
+      password: new FormControl('', Validators.required)
+    });
+  }
+
+  public togglePasswordEdit() {
+    this.isEditingPassword = !this.isEditingPassword;
+  }
+
+  public savePassword(formValue: { password: string }) {
+    this._userAccountService.changePassword(this.user.id, formValue).subscribe(() => {
+      this.isEditingPassword = false;
+    }, err => {
+      console.log('err,', err);
+    })
   }
 
   public async showModalUserSetting(user: User) {
@@ -38,5 +61,9 @@ export class UserAccountPage implements OnInit {
     if (!!dataEmitted) {
       this.user = dataEmitted.data;
     }
+  }
+
+  public get passwordCtrl(): AbstractControl {
+    return this.editPasswordForm.get('password');
   }
 }
