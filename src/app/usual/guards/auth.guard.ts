@@ -16,8 +16,11 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
       const token = this._loginService.getApiToken();
+      if(next.routeConfig.path === 'token')
+        return true;
+
+
       if(!token) {
-        console.log('false');
         this._router.navigate(['login']);
         return false;
       } else {

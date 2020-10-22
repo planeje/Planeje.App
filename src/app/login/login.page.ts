@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 
 @Component({
@@ -15,8 +15,7 @@ export class LoginPage implements OnInit {
   constructor(
     private _loginService: LoginService,
     private _fb: FormBuilder,
-    private _router: Router,
-    private _route: ActivatedRoute
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -25,14 +24,14 @@ export class LoginPage implements OnInit {
 
   private _buildForm(): FormGroup {
     return this._fb.group({
-      email: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required)
     });
   }
 
   public loginUser(formValue: { email: string, password: string }): void {
     this._loginService.authenticate(formValue.email, formValue.password)
-      .subscribe(response => {
+      .subscribe(() => {
         this._router.navigate(['tabs/tab2']);
     })
   }
