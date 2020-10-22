@@ -19,6 +19,9 @@ export class AuthGuard implements CanActivate {
       if(next.routeConfig.path === 'token')
         return true;
 
+      if(next.routeConfig.path === 'forgot-password')
+        return true;
+
 
       if(!token) {
         this._router.navigate(['login']);

@@ -26,7 +26,7 @@ export class ForgotPasswordPage implements OnInit {
     });
   }
 
-  public sendToken(formValue: any) {
+  public sendToken(formValue: any): void {
     this._forgotPasswrodService.sendEmailToken(formValue).subscribe(() => {
       this._router.navigate(['token']);
     }, err => {
