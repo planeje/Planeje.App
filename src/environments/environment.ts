@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://planeje-api.herokuapp.com/api'
+  API_URL: 'https://planeje-api.herokuapp.com'
 };
 
 /*
