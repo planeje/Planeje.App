@@ -11,15 +11,16 @@ export class LoginService {
     constructor(private _http: HttpClient) {}
 
     public authenticate(email: string, password: string): Observable<string> {
-        return this._http.post<any>(`${environment.API_URL}/users/authenticate`,
-            { email, password }
-        ).pipe(
-            take(1),
-            map(response => {
-                localStorage.setItem('apiToken', JSON.stringify(response.token));
-                return response.token
-            })
-        );
+      return this._http.post<any>(`${environment.API_URL}/users/authenticate`,
+        { email, password }
+      ).pipe(
+        take(1),
+        map(response => {
+          localStorage.setItem('userId', JSON.stringify(response.user.id)),
+          localStorage.setItem('apiToken', JSON.stringify(response.token));
+          return response.token
+        })
+      );
     }
 
     public getApiToken(): string {

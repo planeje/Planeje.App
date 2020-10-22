@@ -1,1 +1,38 @@
-<p>Conta de usuário</p>
+<!-- <ion-toolbar>
+  <ion-title>Conta de usuário</ion-title>
+</ion-toolbar>
+
+<ion-content class="settings">
+
+    <h3>Nome do usuário</h3>
+    <ion-item lines="full">
+      <span>{{ user.email }}</span>
+    </ion-item>
+    <ion-button color="tertiary" (click)="showModalUserSetting()">Editar</ion-button>
+  <app-menu></app-menu>
+</ion-content> -->
+
+<ion-toolbar>
+  <ion-title>Conta de usuário</ion-title>
+</ion-toolbar>
+
+<ion-content class="settings">
+  <ng-container *ngIf="!user; else userRef"></ng-container>
+  <ng-template #userRef>
+    <h3>Seus dados</h3>
+    <ion-item>
+      <ion-label slot="start">
+        {{ user.name }}
+      </ion-label>
+      <ion-icon name="person" size="small" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label slot="start">
+        {{ user.email }}
+      </ion-label>
+      <ion-icon name="mail" size="small" slot="end"></ion-icon>
+    </ion-item>
+  </ng-template>
+<ion-button color="tertiary" (click)="showModalUserSetting(user)">Editar</ion-button>
+<app-menu></app-menu>
+</ion-content>
