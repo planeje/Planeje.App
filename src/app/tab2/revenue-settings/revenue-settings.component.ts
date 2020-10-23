@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Actions } from 'src/app/models/actions.enum';
 import { FormBuilder, FormGroup, FormControl, AbstractControl } from '@angular/forms';
-import { TransactionType } from 'src/app/models/transactionType.enum';
 import { ModalController } from '@ionic/angular';
 import { TransactionService } from '../transaction.service';
 import { BankAccountService } from 'src/app/tab3/bank-account.service';
+import { Actions } from 'src/app/usual/models/actions.enum';
+import { TransactionType } from 'src/app/usual/models/transactionType.enum';
 
 @Component({
   selector: 'app-revenue-settings',
@@ -30,7 +30,7 @@ export class RevenueSettingsComponent implements OnInit {
   ngOnInit() {
     this.form = this._buildForm()
     this._banckAccountService.getBankAccounts().subscribe(response => {
-      this.bankAccounts = response;
+      // this.bankAccounts = response;
     });
 
     if(!!this.data) {

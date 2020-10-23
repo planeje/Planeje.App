@@ -3,39 +3,47 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { BankAccount } from '../usual/models/bank-account.model';
+import { StorageService } from '../usual/storage.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BankAccountService {
-    constructor(private _http: HttpClient) {}
+  constructor(
+    private _http: HttpClient,
+    private _storageService: StorageService
+  ) {}
 
-    public getBankAccounts(): Observable<any> {
-        return this._http.get<any>(`${environment.API_URL}/bankAccounts`).pipe(
-            map(response => !!!response ? [] : response),
-            take(1)
-        );
-    }
+  public getBankAccounts(): Observable<BankAccount[]> {
+    const userId = this._storageService.getUserId();
+    return this._http.get<BankAccount[]>(`${environment.API_URL}/user/${userId}/bankAccounts`).pipe(
+      map(response => !!!response ? [] : response),
+      take(1)
+    );
+  }
 
-    public createBankAccount(bankAccount: any): Observable<any> {
-        return this._http.post<any>(`${environment.API_URL}/bankAccounts`, bankAccount)
-            .pipe(
-                take(1)
-            );
-    }
+  public createBankAccount(bankAccount: BankAccount): Observable<BankAccount> {
+    const userId = this._storageService.getUserId();
+    return this._http.post<BankAccount>(`${environment.API_URL}/user/${userId}/bankAccounts`, bankAccount)
+      .pipe(
+        take(1)
+      );
+  }
 
-    public editBankAccount(bankAccount: any): Observable<any> {
-        const id = bankAccount.accountId;
-        return this._http.put(`${environment.API_URL}/bankAccounts/${id}`, bankAccount)
-            .pipe(
-                take(1)
-            );
-    }
+  public editBankAccount(bankAccount: BankAccount): Observable<any> {
+    const id = bankAccount.id;
+    const userId = this._storageService.getUserId();
+    return this._http.put(`${environment.API_URL}/bankAccounts/${id}`, bankAccount)
+      .pipe(
+        take(1)
+      );
+  }
 
-    public deleteBankAccount(id: number): Observable<any> {
-        return this._http.delete(`${environment.API_URL}/bankAccounts/${id}`)
-            .pipe(
-                take(1)
-            );
-    }
+  public deleteBankAccount(id: number): Observable<void> {
+    return this._http.delete<void>(`${environment.API_URL}/bankAccounts/${id}`)
+      .pipe(
+        take(1)
+      );
+  }
 }

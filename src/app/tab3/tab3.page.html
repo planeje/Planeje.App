@@ -1,21 +1,18 @@
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Contas Bancárias</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <app-menu></app-menu>
+<ion-toolbar>
+  <ion-title>Contas bancárias</ion-title>
+</ion-toolbar>
+
+<ion-content>
   <ng-conainer *ngIf="loading; else accountsList">
     <div class="spinner-container">
       <ion-spinner name="crescent"></ion-spinner>
     </div>
   </ng-conainer>
   <ng-template #accountsList>
-    <ion-list>
       <ion-item-group>
         <ion-item *ngFor="let item of bankAccounts">
           <ion-label class="label-info" pisition="stacked">
-            <span>{{ item.account_name }}</span>
+            <span>{{ item.accountName }}</span>
             <span>R$ {{ item.balance }}</span>
           </ion-label>
           <ion-fab horizontal="end">
@@ -26,26 +23,18 @@
               <ion-fab-button (click)="showModalBankAccount(item)" color="light">
                 <ion-icon name="create-outline"></ion-icon>
               </ion-fab-button>
-              <ion-fab-button (click)="deleteBankAccount(item.account_id)" color="light">
+              <ion-fab-button (click)="deleteBankAccount(item.id)" color="light">
                   <ion-icon name="trash-outline"></ion-icon>
               </ion-fab-button>
             </ion-fab-list>
           </ion-fab>
         </ion-item>
-      </ion-item-group> 
-    </ion-list>
+      </ion-item-group>
   </ng-template>
-
-
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="warning"> 
-      <ion-icon name="add-outline"></ion-icon>
+    <ion-fab-button color="success" (click)="showModalBankAccount()">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
-    <ion-fab-button class="botaoFab" color="success" (click)="showModalBankAccount()">
-      <ion-icon name="add-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-    </ion-fab>
-
+  </ion-fab>
+  <app-menu></app-menu>
 </ion-content>

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Actions } from 'src/app/models/actions.enum';
 import { ModalController } from '@ionic/angular';
+import { Actions } from 'src/app/usual/models/actions.enum';
+import { BankAccount } from 'src/app/usual/models/bank-account.model';
 import { BankAccountService } from '../bank-account.service';
-import { Action } from 'rxjs/internal/scheduler/Action';
 
 @Component({
   selector: 'app-bank-account-settings',
@@ -11,7 +11,7 @@ import { Action } from 'rxjs/internal/scheduler/Action';
   styleUrls: ['./bank-account-settings.component.scss'],
 })
 export class BankAccountSettingsComponent implements OnInit {
-  @Input() data: any;
+  @Input() data: BankAccount;
 
   public readonly actionsType = Actions;
   public form: FormGroup;
@@ -35,27 +35,27 @@ export class BankAccountSettingsComponent implements OnInit {
 
   private _buildForm(): FormGroup {
     return this._fb.group({
-      accountId: new FormControl(null),
+      id: new FormControl(null),
       accountName: new FormControl(''),
       balance: new FormControl(null)
     });
   }
 
-  private _setFormValue(bankAccount: any): void {
+  private _setFormValue(bankAccount: BankAccount): void {
     this.form.patchValue({
-      accountId: bankAccount.account_id,
-      accountName: bankAccount.account_name,
+      id: bankAccount.id,
+      accountName: bankAccount.accountName,
       balance: bankAccount.balance
     });
   }
 
-  private _createAccount(bankAccount: any): void {
+  private _createAccount(bankAccount: BankAccount): void {
     this._bankAccountService.createBankAccount(bankAccount).subscribe(response => {
       this._modalCtrl.dismiss({ action: Actions.NEW });
     })
   }
 
-  private _editAccount(bankAccount: any): void {
+  private _editAccount(bankAccount: BankAccount): void {
     this._bankAccountService.editBankAccount(bankAccount).subscribe(response => {
       this._modalCtrl.dismiss({ action: Actions.EDIT });
     })

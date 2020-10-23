@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ModalTabComponent } from '../usual/modal-tab/modal-tab.component';
 import { CategoryService } from './category.service';
 import { CategorySettingsComponent } from './category-settings/category-settings.component';
-import { Actions } from '../models/actions.enum';
 import { finalize } from 'rxjs/operators';
 
 
