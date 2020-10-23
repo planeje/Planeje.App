@@ -11,6 +11,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class Tab3Page implements OnInit {
   public loading = false;
+  public clickButton = true;
   public bankAccounts = [
     {
             "account_id": 1,
@@ -55,5 +56,13 @@ export class Tab3Page implements OnInit {
       const index = this.bankAccounts.findIndex(el => el.account_id === id);
       this.bankAccounts.splice(index, 1);
     });
+  }
+  public show(){
+    if(!this.clickButton){
+      this.clickButton = true;
+    }
+    else {
+      this.clickButton = false;
+    }
   }
 }

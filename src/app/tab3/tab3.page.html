@@ -16,9 +16,11 @@
         <ion-item *ngFor="let item of bankAccounts">
           <ion-label class="label-info" pisition="stacked">
             <span>{{ item.account_name }}</span>
-            <span>R$ {{ item.balance }}</span>
+            <ng-container *ngIf="clickButton">
+              <span>R$ {{ item.balance }}</span>
+            </ng-container>
           </ion-label>
-          <ion-fab horizontal="end">
+          <ion-fab horizontal="end" (click)="show()">
             <ion-fab-button class="buttonItem" color="transparent">
               <ion-icon name="ellipsis-vertical-outline"></ion-icon>
             </ion-fab-button>
