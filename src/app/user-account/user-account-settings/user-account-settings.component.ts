@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
-import { User } from 'src/app/models/user.model';
+import { User } from 'src/app/usual/models/user.model';
 import { UserAccountService } from '../user-account.service';
 
 @Component({

@@ -3,6 +3,7 @@ import { ModalController, MenuController } from '@ionic/angular';
 import { BankAccountService } from './bank-account.service';
 import { BankAccountSettingsComponent } from './bank-account-settings/bank-account-settings.component';
 import { finalize } from 'rxjs/operators';
+import { BankAccount } from '../usual/models/bank-account.model';
 
 @Component({
   selector: 'app-tab3',
@@ -11,7 +12,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class Tab3Page implements OnInit {
   public loading = true;
-  public bankAccounts: any[];
+  public bankAccounts: BankAccount[];
 
   constructor(
     private modalCtlr: ModalController,
@@ -31,7 +32,7 @@ export class Tab3Page implements OnInit {
       });
   }
 
-  public async showModalBankAccount(bankAccount?: any) {
+  public async showModalBankAccount(bankAccount?: BankAccount) {
     const accountSettingsModal =  await this.modalCtlr.create({
       component: BankAccountSettingsComponent,
       componentProps: { data: bankAccount }
@@ -47,8 +48,10 @@ export class Tab3Page implements OnInit {
 
   public deleteBankAccount(id: number): void {
     this._bankAccountService.deleteBankAccount(id).subscribe(() => {
-      const index = this.bankAccounts.findIndex(el => el.account_id === id);
+      const index = this.bankAccounts.findIndex(el => el.id === id);
       this.bankAccounts.splice(index, 1);
+    }, err => {
+      console.log(err);
     });
   }
 }
