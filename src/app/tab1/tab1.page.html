@@ -17,7 +17,7 @@
         <ion-item *ngFor="let item of categories">
           <ion-label class="label-info" pisition="stacked">
             <ion-icon name="ellipse-outline" [ngStyle]="{'color': item.color }"></ion-icon>
-            <span>{{ item.category_name }}</span>
+            <span>{{ item.name }}</span>
           </ion-label>
             <ion-fab horizontal="end" slot="end">
               <ion-fab-button class="buttonItem" color="transparent">
@@ -25,30 +25,30 @@
               </ion-fab-button>
               <ion-fab-list class="buttonFabList" side="start">
                 <ion-fab-button  color="transparent">
-                   <ion-item-option  type="button" (click)="showModalCategory(item)"> 
+                   <ion-item-option  type="button" (click)="showModalCategory(item)">
                     <ion-icon name="create-outline"></ion-icon>
-                  </ion-item-option> 
+                  </ion-item-option>
                 </ion-fab-button>
                 <ion-fab-button  color="transparent">
-                   <ion-item-option  type="button" (click)="deleteCategory(item.category_id)">
+                   <ion-item-option  type="button" (click)="deleteCategory(item.id)">
                     <ion-icon name="trash-outline"></ion-icon>
-                   </ion-item-option> 
-                </ion-fab-button>                
+                   </ion-item-option>
+                </ion-fab-button>
                 <ion-fab-button  color="transparent">
                    <ion-item-option  type="button" (click)="showModalMeta()">
                     <ion-icon name="eye-outline"></ion-icon>
-                   </ion-item-option> 
+                   </ion-item-option>
                 </ion-fab-button>
               </ion-fab-list>
             </ion-fab>
         </ion-item>
-      </ion-item-group> 
+      </ion-item-group>
     </ion-list>
   </ng-template>
 
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="warning"> 
+    <ion-fab-button color="warning">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">

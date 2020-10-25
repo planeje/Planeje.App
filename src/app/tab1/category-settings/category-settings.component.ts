@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CategoryService } from '../category.service';
 import { finalize } from 'rxjs/operators';
 import { Actions } from 'src/app/usual/models/actions.enum';
-
+import { Category } from 'src/app/usual/models/category.model';
 
 @Component({
   selector: 'app-category-settings',
@@ -12,7 +12,7 @@ import { Actions } from 'src/app/usual/models/actions.enum';
   styleUrls: ['./category-settings.component.scss'],
 })
 export class CategorySettingsComponent implements OnInit {
-  @Input() data: any;
+  @Input() data: Category;
 
   public readonly actionsType = Actions;
   public form: FormGroup;
@@ -26,6 +26,7 @@ export class CategorySettingsComponent implements OnInit {
 
   ngOnInit() {
     this.form = this._buildForm();
+    console.log('data', this.data);
     if(!!this.data) {
       this.action = Actions.EDIT
       this._setFormValues(this.data);
@@ -36,24 +37,26 @@ export class CategorySettingsComponent implements OnInit {
 
   private _buildForm(): FormGroup {
     return this._fb.group({
-      categoryId: new FormControl(null),
-      categoryName: new FormControl('')
+      id: new FormControl(null),
+      name: new FormControl('', Validators.required),
+      color: new FormControl('', Validators.required)
     });
   }
 
-  private _setFormValues(category: any): void {
+  private _setFormValues(category: Category): void {
     this.form.patchValue({
-      categoryId: category.category_id,
-      categoryName: category.category_name
+      id: category.id,
+      name: category.name,
+      color: category.color
     });
   }
 
-  private createCategory(category: any): void {
+  private createCategory(category: Category): void {
     this._categoryService.createCategory(category)
       .pipe(finalize(() => this.close()))
       .subscribe(response => {
         this._modalCtrl.dismiss({ action: Actions.NEW });
-      });;
+      });
   }
 
   private _editCategory(category: any): void {
