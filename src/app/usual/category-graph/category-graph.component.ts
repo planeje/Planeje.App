@@ -42,7 +42,6 @@ export class CategoryGraphComponent implements OnInit{
   constructor() {
   }
   ngOnInit(){
-    console.log(this.barChartColors)
     }
   }
   

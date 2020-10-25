@@ -5,6 +5,7 @@ import { CategoryService } from './category.service';
 import { CategorySettingsComponent } from './category-settings/category-settings.component';
 import { Actions } from '../models/actions.enum';
 import { finalize } from 'rxjs/operators';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
 
 
 @Component({
@@ -66,5 +67,12 @@ export class Tab1Page implements OnInit {
       const index = this.categories.findIndex(el => el.category_id === id);
       this.categories.splice(index, 1);
     });
+  }
+
+  public async showModalMeta(){
+    const categoryMeta = await this.modalCtlr.create({
+      component: CategoryDetailsComponent,
+    })
+    categoryMeta.present();
   }
 }
