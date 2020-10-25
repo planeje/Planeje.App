@@ -10,6 +10,7 @@ import { CategorySettingsComponent } from './category-settings/category-settings
 import { HttpClientModule } from '@angular/common/http';
 import { UsualModule } from '../usual/usual.module';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
+import { CategoryGraphComponent } from '../usual/category-graph/category-graph.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { CategoryDetailsComponent } from './category-details/category-details.co
   declarations: [
     Tab1Page,
     CategorySettingsComponent,
-    CategoryDetailsComponent
+    CategoryDetailsComponent,
   ]
 })
 export class Tab1PageModule {}

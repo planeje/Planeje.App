@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ModalTabComponent } from './modal-tab/modal-tab.component';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
-import { CategoryGraphComponent } from './category-graph/category-graph.component';
+import { httpInterceptorProviders } from './interceptors';
 import { CommonModule } from '@angular/common';
+import { CategoryGraphComponent } from './category-graph/category-graph.component';
 import { ChartsModule } from 'ng2-charts';
+
 
 
 @NgModule({
@@ -12,6 +14,14 @@ import { ChartsModule } from 'ng2-charts';
   imports: [
     RouterModule,CommonModule,ChartsModule
   ],
-  exports: [MenuComponent, CategoryGraphComponent]
+  exports: [MenuComponent, CategoryGraphComponent],
+  providers: [httpInterceptorProviders]
 })
-export class UsualModule { }
+export class UsualModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: UsualModule,
+      providers: [httpInterceptorProviders]
+    };
+  }
+}

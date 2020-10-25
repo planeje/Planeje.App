@@ -9,17 +9,26 @@
   </ion-toolbar>
 
 <ion-content>
-  <form>
+    <form [formGroup]="form">
+      <ion-item lines="full">
+        <ion-label position="floating"></ion-label>
+        <ion-input formControlName="token" placeholder="Insira o token" ></ion-input>
+      </ion-item>
+  
+      <ion-item lines="full">
+        <ion-label position="floating"></ion-label>
+        <ion-input formControlName="email" placeholder="Confirme o seu email" ></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating"></ion-label>
+        <ion-input formControlName="password" type="password" placeholder="Digite a nova senha" ></ion-input>
+      </ion-item>
+  
+      <ion-row class="botaoToken">
+        <ion-col>
+          <ion-button type="submit" color="tertiary" [disabled]="form.invalid" (click)="resetPassword(form.value)">Recuperar</ion-button>
+        </ion-col>
+      </ion-row>    
+    </form>
 
-    <ion-item lines="full">
-      <ion-label position="floating"></ion-label>
-      <ion-input type="text" placeholder="Insira o token" required></ion-input>
-    </ion-item>
-
-    <ion-row class="botaoToken">
-      <ion-col>
-        <ion-button type="submit" color="tertiary" >Recuperar</ion-button>
-      </ion-col>
-    </ion-row>    
-  </form>
 </ion-content>

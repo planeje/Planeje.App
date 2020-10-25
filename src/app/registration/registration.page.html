@@ -4,36 +4,31 @@
   </ion-button>
 </ion-buttons>
 
-  <ion-toolbar>
-    <ion-title>Realizar cadastro</ion-title>
-  </ion-toolbar>
+<ion-toolbar>
+  <ion-title>Realizar cadastro</ion-title>
+</ion-toolbar>
 
 <ion-content>
-  <form>
+  <form [formGroup]="form">
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
-      <ion-input type="text" placeholder="Seu nome" required></ion-input>
+      <ion-input formControlName="name" placeholder="Seu nome"></ion-input>
     </ion-item>
 
 
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
-      <ion-input type="text" placeholder="Seu email" required></ion-input>
+      <ion-input formControlName="email" type="email" placeholder="Seu email" required></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
-      <ion-input type="password" placeholder="Senha" required></ion-input>
-    </ion-item>
-
-    <ion-item lines="full">
-      <ion-label position="floating"></ion-label>
-      <ion-input type="password" placeholder="Confirmar senha" required></ion-input>
+      <ion-input formControlName="password" type="password" placeholder="Senha" required></ion-input>
     </ion-item>
 
     <ion-row class="botaoRegistrar">
       <ion-col>
-        <ion-button type="submit" color="tertiary">Inscrever</ion-button>
+        <ion-button type="submit" color="tertiary" (click)="createUser(form.value)" [disabled]="form.invalid">Inscrever</ion-button>
       </ion-col>
     </ion-row>
   </form>

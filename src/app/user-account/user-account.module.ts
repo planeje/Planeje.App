@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -8,6 +8,7 @@ import { UserAccountPageRoutingModule } from './user-account-routing.module';
 
 import { UserAccountPage } from './user-account.page';
 import { UsualModule } from '../usual/usual.module';
+import { UserAccountSettingsComponent } from './user-account-settings/user-account-settings.component';
 
 @NgModule({
   imports: [
@@ -15,8 +16,12 @@ import { UsualModule } from '../usual/usual.module';
     FormsModule,
     IonicModule,
     UserAccountPageRoutingModule,
-    UsualModule
+    UsualModule,
+    ReactiveFormsModule
   ],
-  declarations: [UserAccountPage]
+  declarations: [
+    UserAccountPage,
+    UserAccountSettingsComponent
+  ]
 })
 export class UserAccountPageModule {}

@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { Actions } from 'src/app/models/actions.enum';
 import { CategoryService } from '../category.service';
 import { finalize } from 'rxjs/operators';
+import { Actions } from 'src/app/usual/models/actions.enum';
+
 
 @Component({
   selector: 'app-category-settings',

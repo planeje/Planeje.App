@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { BankAccountService } from './bank-account.service';
 import { BankAccountSettingsComponent } from './bank-account-settings/bank-account-settings.component';
 import { finalize } from 'rxjs/operators';
+import { BankAccount } from '../usual/models/bank-account.model';
 
 @Component({
   selector: 'app-tab3',
@@ -10,15 +11,8 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
-  public loading = false;
-  public clickButton = true;
-  public bankAccounts = [
-    {
-            "account_id": 1,
-            "account_name": 'Nubank',
-            "balance": 1250.00
-    }
-  ];
+  public loading = true;
+  public bankAccounts: BankAccount[];
 
   constructor(
     private modalCtlr: ModalController,
@@ -26,18 +20,18 @@ export class Tab3Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this._getBanckAccounts();
+    this._getBanckAccounts();
   }
 
-  // private _getBanckAccounts() {
-  //   this._bankAccountService.getBankAccounts()
-  //     .pipe(finalize(() => (this.loading = false)))
-  //     .subscribe(response => {
-  //       this.bankAccounts = response;
-  //     });
-  // }
+  private _getBanckAccounts() {
+    this._bankAccountService.getBankAccounts()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe(response => {
+        this.bankAccounts = response;
+      });
+  }
 
-  public async showModalBankAccount(bankAccount?: any) {
+  public async showModalBankAccount(bankAccount?: BankAccount) {
     const accountSettingsModal =  await this.modalCtlr.create({
       component: BankAccountSettingsComponent,
       componentProps: { data: bankAccount }
@@ -46,23 +40,17 @@ export class Tab3Page implements OnInit {
     const dataEmitted = (await accountSettingsModal.onDidDismiss()).data;
     if (!!dataEmitted) {
       this.loading = true
-      // this._getBanckAccounts();
+      this._getBanckAccounts();
     }
 
   }
 
   public deleteBankAccount(id: number): void {
     this._bankAccountService.deleteBankAccount(id).subscribe(() => {
-      const index = this.bankAccounts.findIndex(el => el.account_id === id);
+      const index = this.bankAccounts.findIndex(el => el.id === id);
       this.bankAccounts.splice(index, 1);
+    }, err => {
+      console.log(err);
     });
-  }
-  public show(){
-    if(!this.clickButton){
-      this.clickButton = true;
-    }
-    else {
-      this.clickButton = false;
-    }
   }
 }

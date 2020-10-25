@@ -1,0 +1,24 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+
+import { UserAccountSettingsComponent } from './user-account-settings.component';
+
+describe('UserAccountSettingsComponent', () => {
+  let component: UserAccountSettingsComponent;
+  let fixture: ComponentFixture<UserAccountSettingsComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ UserAccountSettingsComponent ],
+      imports: [IonicModule.forRoot()]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(UserAccountSettingsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

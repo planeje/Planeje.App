@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { TransactionType } from '../models/transactionType.enum';
 import { TransactionService } from './transaction.service';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
-// import { Actions } from '../models/actions.enum';
 import { RevenueSettingsComponent } from './revenue-settings/revenue-settings.component';
-import { finalize } from 'rxjs/operators';
+import { TransactionType } from '../usual/models/transactionType.enum';
 
 @Component({
   selector: 'app-tab2',
