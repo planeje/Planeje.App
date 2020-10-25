@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, MenuController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { BankAccountService } from './bank-account.service';
 import { BankAccountSettingsComponent } from './bank-account-settings/bank-account-settings.component';
 import { finalize } from 'rxjs/operators';
@@ -17,7 +17,6 @@ export class Tab3Page implements OnInit {
   constructor(
     private modalCtlr: ModalController,
     private _bankAccountService: BankAccountService,
-    private menu: MenuController
   ) {}
 
   ngOnInit() {

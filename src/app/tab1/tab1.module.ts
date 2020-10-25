@@ -9,6 +9,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { CategorySettingsComponent } from './category-settings/category-settings.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UsualModule } from '../usual/usual.module';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
+import { CategoryGraphComponent } from '../usual/category-graph/category-graph.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,8 @@ import { UsualModule } from '../usual/usual.module';
   ],
   declarations: [
     Tab1Page,
-    CategorySettingsComponent
+    CategorySettingsComponent,
+    CategoryDetailsComponent,
   ]
 })
 export class Tab1PageModule {}

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ActivitiesPageRoutingModule } from './activities-routing.module';
 
 import { ActivitiesPage } from './activities.page';
+import { UsualModule } from '../usual/usual.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ActivitiesPageRoutingModule
+    ActivitiesPageRoutingModule,
+    UsualModule
   ],
   declarations: [ActivitiesPage]
 })

@@ -5,8 +5,7 @@
       <ion-title size="large">Transações</ion-title>
     </ion-toolbar>
   </ion-header>
-  <!-- <app-menu (click)="openMenu()"></app-menu> -->
-  <app-menu></app-menu>
+  
   
 
 
@@ -21,7 +20,7 @@
         <ion-item *ngFor="let item of transactions">
           <div class="label-info">
             <div class="category">
-              <ion-note style="color: blue;" slot="start">
+              <ion-note [ngStyle]="{'color': item.color }" slot="start">
                 {{ item.category_id }}
               </ion-note>
               <ion-note slot="start">
@@ -29,7 +28,7 @@
               </ion-note>
             </div>
             <span>{{ item.description }}</span>
-            <ion-note class="value" position="stacked" color="danger">
+            <ion-note [ngStyle]="{'color': item.transaction_color }" class="value" position="stacked">
               {{ item.transaction_value }}
             </ion-note>
           </div >
@@ -72,4 +71,5 @@
   </ion-fab-button>
   </ion-fab-list>
   </ion-fab>
+  <app-menu></app-menu>
 </ion-content>

@@ -4,17 +4,19 @@
       <ion-title size="large">Categorias</ion-title>
     </ion-toolbar>
   </ion-header>
-  <app-menu></app-menu>
-  <ng-conainer *ngIf="loading; else categoriesList">
+
+  <ng-container *ngIf="loading; else categoriesList">
     <div class="spinner-container">
       <ion-spinner name="crescent"></ion-spinner>
     </div>
-  </ng-conainer>
+  </ng-container>
   <ng-template #categoriesList>
+        <app-category-graph></app-category-graph>
     <ion-list>
       <ion-item-group>
         <ion-item *ngFor="let item of categories">
           <ion-label class="label-info" pisition="stacked">
+            <ion-icon name="ellipse-outline" [ngStyle]="{'color': item.color }"></ion-icon>
             <span>{{ item.category_name }}</span>
           </ion-label>
             <ion-fab horizontal="end" slot="end">
@@ -30,6 +32,11 @@
                 <ion-fab-button  color="transparent">
                    <ion-item-option  type="button" (click)="deleteCategory(item.category_id)">
                     <ion-icon name="trash-outline"></ion-icon>
+                   </ion-item-option> 
+                </ion-fab-button>                
+                <ion-fab-button  color="transparent">
+                   <ion-item-option  type="button" (click)="showModalMeta()">
+                    <ion-icon name="eye-outline"></ion-icon>
                    </ion-item-option> 
                 </ion-fab-button>
               </ion-fab-list>
@@ -50,5 +57,5 @@
       </ion-fab-button>
     </ion-fab-list>
     </ion-fab>
-
+    <app-menu></app-menu>
 </ion-content>

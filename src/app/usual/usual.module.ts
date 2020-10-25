@@ -3,15 +3,18 @@ import { ModalTabComponent } from './modal-tab/modal-tab.component';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { httpInterceptorProviders } from './interceptors';
+import { CommonModule } from '@angular/common';
+import { CategoryGraphComponent } from './category-graph/category-graph.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 
 @NgModule({
-  declarations: [ModalTabComponent, MenuComponent],
+  declarations: [ModalTabComponent, MenuComponent, CategoryGraphComponent],
   imports: [
-    RouterModule
+    RouterModule,CommonModule,ChartsModule
   ],
-  exports: [MenuComponent],
+  exports: [MenuComponent, CategoryGraphComponent],
   providers: [httpInterceptorProviders]
 })
 export class UsualModule {

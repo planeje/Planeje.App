@@ -5,6 +5,7 @@ import { CategoryService } from '../category.service';
 import { finalize } from 'rxjs/operators';
 import { Actions } from 'src/app/usual/models/actions.enum';
 
+
 @Component({
   selector: 'app-category-settings',
   templateUrl: './category-settings.component.html',

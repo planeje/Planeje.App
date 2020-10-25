@@ -3,11 +3,11 @@
 </ion-toolbar>
 
 <ion-content>
-  <ng-conainer *ngIf="loading; else accountsList">
+  <ng-container *ngIf="loading; else accountsList">
     <div class="spinner-container">
       <ion-spinner name="crescent"></ion-spinner>
     </div>
-  </ng-conainer>
+  </ng-container>
   <ng-template #accountsList>
       <ion-item-group>
         <ion-item *ngFor="let item of bankAccounts">
@@ -15,7 +15,7 @@
             <span>{{ item.accountName }}</span>
             <span>R$ {{ item.balance }}</span>
           </ion-label>
-          <ion-fab horizontal="end">
+          <ion-fab horizontal="end" (click)="show()">
             <ion-fab-button class="buttonItem" color="transparent">
               <ion-icon name="ellipsis-vertical-outline"></ion-icon>
             </ion-fab-button>
