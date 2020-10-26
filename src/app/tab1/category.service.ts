@@ -21,7 +21,8 @@ export class CategoryService {
   }
 
   public createCategory(category: Category): Observable<Category> {
-    return this._http.post<Category>(`${environment.API_URL}/categories`, category).pipe(take(1));
+    const userId = this._storageService.getUserId();
+    return this._http.post<Category>(`${environment.API_URL}/user/${userId}/categories`, category).pipe(take(1));
   }
 
   public editCategory(category: Category): Observable<Category> {

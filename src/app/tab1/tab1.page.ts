@@ -14,7 +14,7 @@ import { Category } from '../usual/models/category.model';
 
 })
 export class Tab1Page implements OnInit {
-  public loading = false;
+  public loading = true;
   public categories: Category[];
 
   constructor(
