@@ -67,7 +67,7 @@ export class RevenueSettingsComponent implements OnInit {
   }
 
   public save(formValue: any) {
-    this._transactionService.createExpense(formValue).subscribe(response => {
+    this._transactionService.createTransaction(formValue).subscribe(response => {
       this._modalCtrl.dismiss({ action: Actions.EDIT, expense: formValue });
     })
   }
