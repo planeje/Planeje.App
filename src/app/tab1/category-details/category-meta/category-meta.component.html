@@ -1,22 +1,28 @@
 <ion-toolbar>
-  <ion-title>Cadastrar Meta / Editar </ion-title>
-    <ion-buttons slot="start">
-      <ion-button  (click)="close()">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+  <ion-title>
+    {{ (action === actionsType.EDIT ? 'Editar' : 'Nova') + ' Meta' }}
+  </ion-title>
+  <ion-buttons slot="start">
+    <ion-button  (click)="close()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
 </ion-toolbar>
 
 <ion-content>
   <form [formGroup]="form">
     <ion-item>
+      <ion-label position="stacked">Descrição</ion-label>
+      <ion-input formControlName="description"></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label position="stacked">Valor da Meta</ion-label>
-      <ion-input formControlName=""></ion-input>
+      <ion-input formControlName="value"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Data de vencimento</ion-label>
-      <ion-input formControlName=""></ion-input>
+      <ion-datetime formControlName="goalDueDate" displayFormat="DD/MM/YYYY"></ion-datetime>
     </ion-item>
-    <ion-button class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
+    <ion-button class="botaoModal" size="block" color="success" (click)="onSave(form.value)">Salvar</ion-button>
   </form>
 </ion-content>

@@ -6,15 +6,27 @@ import { httpInterceptorProviders } from './interceptors';
 import { CommonModule } from '@angular/common';
 import { CategoryGraphComponent } from './category-graph/category-graph.component';
 import { ChartsModule } from 'ng2-charts';
+import { DateFilter } from './pipes/date-filter.pipe';
 
 
 
 @NgModule({
-  declarations: [ModalTabComponent, MenuComponent, CategoryGraphComponent],
-  imports: [
-    RouterModule,CommonModule,ChartsModule
+  declarations: [
+    ModalTabComponent,
+    MenuComponent,
+    CategoryGraphComponent,
+    DateFilter
   ],
-  exports: [MenuComponent, CategoryGraphComponent],
+  imports: [
+    RouterModule,
+    CommonModule,
+    ChartsModule
+  ],
+  exports: [
+    MenuComponent,
+    CategoryGraphComponent,
+    DateFilter
+  ],
   providers: [httpInterceptorProviders]
 })
 export class UsualModule {

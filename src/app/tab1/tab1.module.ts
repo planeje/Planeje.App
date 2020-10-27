@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UsualModule } from '../usual/usual.module';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { CategoryGraphComponent } from '../usual/category-graph/category-graph.component';
+import { CategoryMetaComponent } from './category-details/category-meta/category-meta.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { CategoryGraphComponent } from '../usual/category-graph/category-graph.c
     Tab1Page,
     CategorySettingsComponent,
     CategoryDetailsComponent,
+    CategoryMetaComponent
   ]
 })
 export class Tab1PageModule {}

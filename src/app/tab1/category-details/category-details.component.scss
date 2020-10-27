@@ -1,3 +1,16 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: {
+      top: 20px;
+      bottom: 20px;
+  }
+}
+
+ion-text h3 {
+  padding: 0 10px;
+}
+
 .details {
-    font-size: smaller;
+  font-size: smaller;
 }

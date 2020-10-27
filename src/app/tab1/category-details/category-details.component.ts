@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { finalize } from 'rxjs/operators';
+import { SpendingGoal } from 'src/app/usual/models/spending-goal.model';
 import { CategoryMetaComponent } from './category-meta/category-meta.component';
+import { SpendingGoalService } from './spending-goal.service';
 
 @Component({
   selector: 'app-category-details',
@@ -8,28 +11,57 @@ import { CategoryMetaComponent } from './category-meta/category-meta.component';
   styleUrls: ['./category-details.component.scss'],
 })
 export class CategoryDetailsComponent implements OnInit {
-  details:boolean;
+  @Input() categoryId: number;
 
-  constructor(private _modalCtrl: ModalController) { }
+  public detailGoalId: number;
+  public goals: SpendingGoal[];
+  public loading = true;
 
-  ngOnInit() {}
+  constructor(
+    private _modalCtrl: ModalController,
+    private _spendingGoalService: SpendingGoalService
+  ) { }
+
+  ngOnInit() {
+    this._getGoals();
+  }
+
+  private _getGoals(): void {
+    this._spendingGoalService.getGoals(this.categoryId)
+      .pipe(
+        finalize(() => this.loading = false)
+      )
+      .subscribe(response => {
+        this.goals = response;
+      });
+  }
 
   public close(): void {
     this._modalCtrl.dismiss();
   }
-  public show(): void{
-    if(!this.details){
-      this.details = true;
-    }
-    else {
-      this.details = false;
-    }
+  public showDetails(goalId: number): void {
+    this.detailGoalId === goalId
+    ? this.detailGoalId = null
+    : this.detailGoalId = goalId;
   }
-  public async showModalMeta(){
+
+  public isOpen(goalId): boolean {
+    return this.detailGoalId === goalId
+    ? true
+    : false;
+  }
+
+  public async showModalMeta(goal: SpendingGoal) {
     const categoryMetaModal =  await this._modalCtrl.create({
-      component: CategoryMetaComponent}
-    );
+      component: CategoryMetaComponent,
+      componentProps: { data: goal, categoryId: this.categoryId }
+    });
     categoryMetaModal.present();
-    this.close()
-}
+    const dataEmitted = (await categoryMetaModal.onDidDismiss()).data;
+    if (!!dataEmitted) {
+      this.loading = true
+      this._getGoals();
+    }
+    // this.close()
+  }
 }
