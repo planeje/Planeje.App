@@ -1,5 +1,5 @@
 <ion-toolbar>
-  <ion-title>Contas bancárias</ion-title>
+  <ion-title>Categorias</ion-title>
 </ion-toolbar>
 
 <ion-content>
@@ -33,7 +33,7 @@
                    </ion-item-option>
                 </ion-fab-button>
                 <ion-fab-button  color="transparent">
-                   <ion-item-option  type="button" (click)="showModalMeta()">
+                   <ion-item-option  type="button" (click)="showModalMeta(item.id)">
                     <ion-icon name="eye-outline"></ion-icon>
                    </ion-item-option>
                 </ion-fab-button>

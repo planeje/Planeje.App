@@ -54,10 +54,11 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  public async showModalMeta(){
+  public async showModalMeta(categoryId: number){
     const categoryMeta = await this.modalCtlr.create({
       component: CategoryDetailsComponent,
-    })
+      componentProps: { categoryId }
+    });
     categoryMeta.present();
   }
 }
