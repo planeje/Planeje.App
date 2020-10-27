@@ -75,7 +75,7 @@ export class ExpenseSettingsComponent implements OnInit {
   }
 
   public _createExpense(formValue: any): void {
-    this._transactionService.createExpense(formValue).subscribe(response => {
+    this._transactionService.createTransaction(formValue).subscribe(response => {
       this._modalCtrl.dismiss({ action: Actions.EDIT, expense: formValue });
     })
   }

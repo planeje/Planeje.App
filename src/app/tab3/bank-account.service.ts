@@ -31,10 +31,9 @@ export class BankAccountService {
       );
   }
 
-  public editBankAccount(bankAccount: BankAccount): Observable<any> {
+  public editBankAccount(bankAccount: BankAccount): Observable<BankAccount> {
     const id = bankAccount.id;
-    const userId = this._storageService.getUserId();
-    return this._http.put(`${environment.API_URL}/bankAccounts/${id}`, bankAccount)
+    return this._http.put<BankAccount>(`${environment.API_URL}/bankAccounts/${id}`, bankAccount)
       .pipe(
         take(1)
       );
