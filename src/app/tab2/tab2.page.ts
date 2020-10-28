@@ -4,8 +4,12 @@ import { TransactionService } from './transaction.service';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
 import { RevenueSettingsComponent } from './revenue-settings/revenue-settings.component';
 import { TransactionType } from '../usual/models/transactionType.enum';
-import { finalize } from 'rxjs/operators';
+import {  finalize } from 'rxjs/operators';
 import { Transaction } from '../usual/models/transaction.model';
+import { CategoryService } from '../tab1/category.service';
+import { Category } from '../usual/models/category.model';
+import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import * as dayjs from 'dayjs'
 
 @Component({
   selector: 'app-tab2',
@@ -16,19 +20,47 @@ export class Tab2Page implements OnInit {
 
   public loading = false;
   public transactions: Transaction[];
+  public categories: Category[];
+
+  //filtro
+  public filterForm: FormGroup;
+  public startDate = dayjs();
+  public endDate = dayjs();
   
+  
+
+
 
   constructor(
     private modalCtlr: ModalController,
     private _transactionService: TransactionService,
+    private _categoryService: CategoryService,
+    private _fb: FormBuilder
   ) {}
 
   ngOnInit() {
-    this._getTransactions();
+
+    this.filterForm = this._buildFilterForm(this.startDate, this.endDate);
+    this.filterForm.valueChanges.subscribe(response => {
+      this._getTransactions(response)
+    })
+    this._getTransactions(this.filterForm.value);
+    this._categoryService.getCategories().subscribe(response => {
+      this.categories = response;
+    });
+    
   }
 
-  private _getTransactions() {
-    this._transactionService.getTransactions()
+  private _buildFilterForm(dataInicial: dayjs.Dayjs, dataFinal: dayjs.Dayjs){
+    return this._fb.group({
+      dataInicial: new FormControl(dataInicial),
+      dataFinal: new FormControl(dataFinal),
+      categoryId: new FormControl(null)
+    })
+  }
+
+  private _getTransactions(data) {
+    this._transactionService.getTransactions(data)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(response => {
         this.transactions = response;
@@ -45,7 +77,7 @@ export class Tab2Page implements OnInit {
     const dataEmitted = (await expenseModal.onDidDismiss()).data;
     if (!!dataEmitted) {
       this.loading = true;
-      this._getTransactions();
+      this._getTransactions(this.filterForm.value);
     }
   }
 
@@ -58,12 +90,12 @@ export class Tab2Page implements OnInit {
     const dataEmitted = (await revenueModal.onDidDismiss()).data;
     if (!!dataEmitted) {
       this.loading = true;
-      this._getTransactions();
+      this._getTransactions(this.filterForm.value);
     }
   }
 
   public editTransaction(transaction: any) {
-    transaction.transaction_type === TransactionType.EXPENSE
+    transaction.transactionType === TransactionType.EXPENSE
       ? this.showModalExpense(transaction)
       : this.showModalRevenue(transaction);
   }
@@ -74,5 +106,11 @@ export class Tab2Page implements OnInit {
       const index = this.transactions.findIndex(el => el.id === id);
       this.transactions.splice(index, 1);
     });
+  }
+  public get dataInicialCtrl(): AbstractControl{
+    return this.filterForm.get('dataInicial');
+  }  
+  public get dataFinalCtrl(): AbstractControl{
+    return this.filterForm.get('dataFinal');
   }
 }

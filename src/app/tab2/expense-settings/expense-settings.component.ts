@@ -36,7 +36,7 @@ export class ExpenseSettingsComponent implements OnInit {
     });
 
     this._banckAccountService.getBankAccounts().subscribe(response => {
-      // this.bankAccounts = response;
+      this.bankAccounts = response;
     });
 
     if(!!this.data) {
@@ -54,7 +54,7 @@ export class ExpenseSettingsComponent implements OnInit {
       recurrent: new FormControl(false),
       transactionValue: new FormControl(null),
       categoryId: new FormControl(null),
-      bankId: new FormControl(null),
+      accountId: new FormControl(null),
       transactionDate: new FormControl(new Date()),
       transactionDueDate: new FormControl(new Date()),
       transactionType: new FormControl(TransactionType.EXPENSE),
@@ -63,14 +63,14 @@ export class ExpenseSettingsComponent implements OnInit {
 
   private _setFormValue(expense: any): void {
     this.form.patchValue({
-      transactionId: expense.transaction_id,
+      transactionId: expense.transactionId,
       description: expense.description,
       recurrent: expense.recurrent,
-      transactionValue: expense.transaction_value,
-      categoryId: expense.category_id,
-      bankId: expense.bank_id,
-      transactionDate: expense.transaction_date,
-      transactionDueDate: expense.transaction_due_date
+      transactionValue: expense.transactionValue,
+      categoryId: expense.categoryId,
+      accountId: expense.accountId,
+      transactionDate: expense.transactionDate,
+      transactionDueDate: expense.transactionDueDate
     });
   }
 
@@ -83,7 +83,7 @@ export class ExpenseSettingsComponent implements OnInit {
   private _editExpense(formValue: any): void {
     console.log(formValue);
     this._transactionService.editTransaction(formValue).subscribe(response => {
-      this._modalCtrl.dismiss({ action: Actions.EDIT, expense: formValue });
+      this._modalCtrl.dismiss({ action: Actions.EDIT});
     });
   }
 

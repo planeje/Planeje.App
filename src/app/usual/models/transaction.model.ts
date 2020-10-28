@@ -1,3 +1,5 @@
+import { TransactionType } from './transactionType.enum';
+
 export interface Transaction {
     id: number;
     description: string,
@@ -5,4 +7,5 @@ export interface Transaction {
     transactionValue: number,
     transactionDate: Date,
     transactionDueDate: Date,
+    transactionType: TransactionType,
   }

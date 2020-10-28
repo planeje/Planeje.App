@@ -5,9 +5,26 @@
       <ion-title size="large">Transações</ion-title>
     </ion-toolbar>
   </ion-header>
-  
-  
-
+  <div class="filtro">
+    <ion-item >
+      <ion-label>período</ion-label>
+        <ion-datetime [formControl]="dataInicialCtrl"  value="1" min="2020" max="2040"
+        [dayShortNames]="customDayShortNames"
+        displayFormat="MM/YYYY"
+        monthShortNames="jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez"></ion-datetime>
+        <ion-datetime [formControl]="dataFinalCtrl" value="2" min="2020" max="2040"
+        [dayShortNames]="customDayShortNames"
+        displayFormat="MM/YYYY"
+        monthShortNames="jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez"></ion-datetime>
+    </ion-item>
+    <form [formGroup]="filterForm">
+      <ion-select formControlName="categoryId" placeholder="Filtrar por Categoria">
+        <ng-container *ngFor="let item of transactions">
+          <ion-select-option *ngIf = "item.transactionType === 0" [value]="item.id">{{ item.category.name }}</ion-select-option>
+        </ng-container>      
+      </ion-select> 
+    </form>
+  </div>
 
   <ng-container *ngIf="loading; else transactionList" >
     <div class="spinner-container">
@@ -17,19 +34,19 @@
   <ng-template #transactionList>
     <ion-list>
       <ion-item-group>
-        <ion-item *ngFor="let item of transactions">
+        <ion-item *ngFor="let item of transactions" >
           <div class="label-info">
             <div class="category">
-              <ion-note [ngStyle]="{'color': item.color }" slot="start">
-                {{ item.category_id }}
+              <ion-note *ngIf = "item.transactionType === 0" [ngStyle]="{'color': item.category.color }" slot="start">
+                {{ item.category.name }}
               </ion-note>
               <ion-note slot="start">
-                {{ item.transaction_date | date:'dd/MM/yy' }}
+                {{ item.transactionDate | date:'dd/MM/yy' }}
               </ion-note>
             </div>
             <span>{{ item.description }}</span>
-            <ion-note [ngStyle]="{'color': item.transaction_color }" class="value" position="stacked">
-              {{ item.transaction_value }}
+            <ion-note [ngClass]="item.transactionType === 1 ? 'receita' : 'despesa' "class="value" position="stacked">
+              {{ item.transactionValue }}
             </ion-note>
           </div >
           <ion-fab horizontal="end" slot="end">
@@ -43,7 +60,7 @@
                 </ion-item-option> 
               </ion-fab-button>
               <ion-fab-button  color="transparent">
-                <ion-item-option  type="button" (click)="deleteTransaction(item.transaction_id)">
+                <ion-item-option  type="button" (click)="deleteTransaction(item.id)">
                   <ion-icon name="trash-outline"></ion-icon>
                 </ion-item-option> 
               </ion-fab-button>
