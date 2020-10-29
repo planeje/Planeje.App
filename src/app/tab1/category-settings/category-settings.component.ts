@@ -26,7 +26,6 @@ export class CategorySettingsComponent implements OnInit {
 
   ngOnInit() {
     this.form = this._buildForm();
-    console.log('data', this.data);
     if(!!this.data) {
       this.action = Actions.EDIT
       this._setFormValues(this.data);

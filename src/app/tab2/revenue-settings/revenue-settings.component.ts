@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { TransactionService } from '../transaction.service';
 import { BankAccountService } from 'src/app/tab3/bank-account.service';
@@ -43,14 +43,14 @@ export class RevenueSettingsComponent implements OnInit {
 
   private _buildForm(): FormGroup {
     return this._fb.group({
-      transactionId: new FormControl(null),
-      description: new FormControl(''),
-      recurrent: new FormControl(false),
-      transactionValue: new FormControl(null),
-      bankId: new FormControl(null),
-      transactionDate: new FormControl(new Date()),
-      transactionDueDate: new FormControl(new Date().toJSON()),
-      transactionType: new FormControl(TransactionType.REVENUE),
+      transactionId: new FormControl(null, Validators.required),
+      description: new FormControl('', Validators.required),
+      recurrent: new FormControl(false, Validators.required),
+      transactionValue: new FormControl(null, Validators.required),
+      bankId: new FormControl(null, Validators.required),
+      transactionDate: new FormControl(new Date(), Validators.required),
+      transactionDueDate: new FormControl(new Date().toJSON(), Validators.required),
+      transactionType: new FormControl(TransactionType.REVENUE, Validators.required),
     });
   }
 

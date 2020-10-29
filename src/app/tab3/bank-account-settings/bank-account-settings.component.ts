@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Actions } from 'src/app/usual/models/actions.enum';
 import { BankAccount } from 'src/app/usual/models/bank-account.model';
@@ -36,8 +36,8 @@ export class BankAccountSettingsComponent implements OnInit {
   private _buildForm(): FormGroup {
     return this._fb.group({
       id: new FormControl(null),
-      accountName: new FormControl(''),
-      balance: new FormControl(null)
+      accountName: new FormControl('', Validators.required),
+      balance: new FormControl(null, Validators.required)
     });
   }
 
