@@ -19,6 +19,6 @@
       <ion-label position="stacked">Cor</ion-label>
       <ion-input formControlName="color"></ion-input>
     </ion-item>
-    <ion-button class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
+    <ion-button [disabled]="form.invalid" class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
   </form>
 </ion-content>
