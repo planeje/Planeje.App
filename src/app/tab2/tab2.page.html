@@ -1,28 +1,31 @@
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    
-    <ion-toolbar>
-      <ion-title size="large">Transações</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-toolbar>
+  <ion-title size="large">Transações</ion-title>
+</ion-toolbar>
+<ion-content>
   <div class="filtro">
-    <ion-item >
-      <ion-label>período</ion-label>
-        <ion-datetime [formControl]="dataInicialCtrl"  value="1" min="2020" max="2040"
-        [dayShortNames]="customDayShortNames"
-        displayFormat="MM/YYYY"
-        monthShortNames="jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez"></ion-datetime>
-        <ion-datetime [formControl]="dataFinalCtrl" value="2" min="2020" max="2040"
-        [dayShortNames]="customDayShortNames"
-        displayFormat="MM/YYYY"
-        monthShortNames="jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez"></ion-datetime>
-    </ion-item>
     <form [formGroup]="filterForm">
-      <ion-select formControlName="categoryId" placeholder="Filtrar por Categoria">
-        <ng-container *ngFor="let item of transactions">
-          <ion-select-option *ngIf = "item.transactionType === 0" [value]="item.id">{{ item.category.name }}</ion-select-option>
-        </ng-container>      
-      </ion-select> 
+      <ion-item>
+        <ion-label position="fixed">Período</ion-label>
+        <ion-datetime
+          formControlName="dataInicial"
+          [(ngModel)]="startDate"
+          [max]="endDate"
+          displayFormat="DD/MM/YYYY">
+        </ion-datetime>
+        <ion-datetime
+          formControlName="dataFinal"
+          displayFormat="DD/MM/YYYY"
+          [min]="startDate"
+          [(ngModel)]="endDate">
+        </ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="fixed">Categoria</ion-label>
+        <ion-select slot="end" formControlName="categoryId">
+          <ion-select-option [value]="0">Sem Categoria</ion-select-option>
+          <ion-select-option *ngFor="let item of categories" [value]="item.id">{{ item.name }}</ion-select-option>
+        </ion-select>
+      </ion-item>
     </form>
   </div>
 
@@ -34,13 +37,16 @@
   <ng-template #transactionList>
     <ion-list>
       <ion-item-group>
-        <ion-item *ngFor="let item of transactions" >
+        <ion-item *ngFor="let item of transactions">
           <div class="label-info">
             <div class="category">
-              <ion-note *ngIf = "item.transactionType === 0" [ngStyle]="{'color': item.category.color }" slot="start">
+              <ion-note class="small-text" *ngIf = "item.transactionType === 0" [ngStyle]="{'color': item.category.color }" slot="start">
                 {{ item.category.name }}
               </ion-note>
-              <ion-note slot="start">
+              <ion-note class="small-text" slot="start">
+                &nbsp;-
+              </ion-note>
+              <ion-note class="small-text" slot="start">
                 {{ item.transactionDate | date:'dd/MM/yy' }}
               </ion-note>
             </div>
@@ -54,39 +60,39 @@
               <ion-icon name="ellipsis-vertical-outline"></ion-icon>
             </ion-fab-button>
             <ion-fab-list class="buttonFabList" side="start">
-              <ion-fab-button  color="transparent">
-                <ion-item-option  type="button" (click)="editTransaction(item)"> 
+              <ion-fab-button color="light">
+                <ion-item-option (click)="editTransaction(item)">
                   <ion-icon name="create-outline"></ion-icon>
-                </ion-item-option> 
+                </ion-item-option>
               </ion-fab-button>
-              <ion-fab-button  color="transparent">
-                <ion-item-option  type="button" (click)="deleteTransaction(item.id)">
+              <ion-fab-button color="light">
+                <ion-item-option (click)="deleteTransaction(item.id)">
                   <ion-icon name="trash-outline"></ion-icon>
-                </ion-item-option> 
+                </ion-item-option>
               </ion-fab-button>
             </ion-fab-list>
           </ion-fab>
         </ion-item>
-      </ion-item-group> 
+      </ion-item-group>
     </ion-list>
   </ng-template >
 
- 
+
   <!-- Botão que abre o modal -->
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button color="warning"> 
-    <ion-icon name="add-outline"></ion-icon>
-  </ion-fab-button>
-  <ion-fab-list side="top">
-  <ion-fab-button class="botaoFab" color="success" (click)="showModalRevenue()">
-    <ion-icon name="add-outline"></ion-icon>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="warning">
+      <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
-  </ion-fab-list>
-  <ion-fab-list side="start">
-  <ion-fab-button class="botaoFab" color="danger" (click)="showModalExpense()">
-    <ion-icon name="remove-outline"></ion-icon>
-  </ion-fab-button>
-  </ion-fab-list>
+    <ion-fab-list side="top">
+    <ion-fab-button class="botaoFab" color="success" (click)="showModalRevenue()">
+      <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+    <ion-fab-button class="botaoFab" color="danger" (click)="showModalExpense()">
+      <ion-icon name="remove-outline"></ion-icon>
+    </ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
   <app-menu></app-menu>
 </ion-content>

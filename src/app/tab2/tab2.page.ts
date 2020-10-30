@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TransactionService } from './transaction.service';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
@@ -8,58 +8,54 @@ import {  finalize } from 'rxjs/operators';
 import { Transaction } from '../usual/models/transaction.model';
 import { CategoryService } from '../tab1/category.service';
 import { Category } from '../usual/models/category.model';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as dayjs from 'dayjs'
+import { ISODateString } from '@capacitor/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements OnInit {
+export class Tab2Page implements OnInit, OnDestroy {
 
-  public loading = false;
+  private _subscriptionFilter$: Subscription;
+  public loading: boolean;
   public transactions: Transaction[];
   public categories: Category[];
-
-  //filtro
   public filterForm: FormGroup;
-  public startDate = dayjs();
-  public endDate = dayjs();
-  
-  
-
-
+  public startDate = dayjs().toISOString();
+  public endDate = dayjs().toISOString();
 
   constructor(
-    private modalCtlr: ModalController,
+    private _modalCtlr: ModalController,
     private _transactionService: TransactionService,
     private _categoryService: CategoryService,
     private _fb: FormBuilder
   ) {}
 
   ngOnInit() {
-
     this.filterForm = this._buildFilterForm(this.startDate, this.endDate);
-    this.filterForm.valueChanges.subscribe(response => {
+    this._subscriptionFilter$ = this.filterForm.valueChanges.subscribe(response => {
       this._getTransactions(response)
     })
     this._getTransactions(this.filterForm.value);
     this._categoryService.getCategories().subscribe(response => {
       this.categories = response;
     });
-    
   }
 
-  private _buildFilterForm(dataInicial: dayjs.Dayjs, dataFinal: dayjs.Dayjs){
+  private _buildFilterForm(dataInicial: ISODateString, dataFinal: ISODateString){
     return this._fb.group({
       dataInicial: new FormControl(dataInicial),
       dataFinal: new FormControl(dataFinal),
       categoryId: new FormControl(null)
-    })
+    });
   }
 
-  private _getTransactions(data) {
+  private _getTransactions(data: any): void {
+    this.loading = true;
     this._transactionService.getTransactions(data)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(response => {
@@ -68,8 +64,8 @@ export class Tab2Page implements OnInit {
       });
   }
 
-  public async showModalExpense(expense?: any) {
-    const expenseModal = await this.modalCtlr.create({
+  public async showModalExpense(expense?: Transaction): Promise<void> {
+    const expenseModal = await this._modalCtlr.create({
       component: ExpenseSettingsComponent,
       componentProps: { data: expense },
     });
@@ -81,8 +77,8 @@ export class Tab2Page implements OnInit {
     }
   }
 
-  public async showModalRevenue(revenue?: any) {
-    const revenueModal = await this.modalCtlr.create({
+  public async showModalRevenue(revenue?: Transaction) {
+    const revenueModal = await this._modalCtlr.create({
       component: RevenueSettingsComponent,
       componentProps: { data: revenue }
     });
@@ -94,7 +90,7 @@ export class Tab2Page implements OnInit {
     }
   }
 
-  public editTransaction(transaction: any) {
+  public editTransaction(transaction: Transaction): void {
     transaction.transactionType === TransactionType.EXPENSE
       ? this.showModalExpense(transaction)
       : this.showModalRevenue(transaction);
@@ -107,10 +103,16 @@ export class Tab2Page implements OnInit {
       this.transactions.splice(index, 1);
     });
   }
+
   public get dataInicialCtrl(): AbstractControl{
     return this.filterForm.get('dataInicial');
-  }  
+  }
+
   public get dataFinalCtrl(): AbstractControl{
     return this.filterForm.get('dataFinal');
+  }
+
+  ngOnDestroy() {
+    this._subscriptionFilter$.unsubscribe();
   }
 }
