@@ -52,7 +52,7 @@
             </div>
             <span>{{ item.description }}</span>
             <ion-note [ngClass]="item.transactionType === 1 ? 'receita' : 'despesa' "class="value" position="stacked">
-              {{ item.transactionValue }}
+              {{ item.transactionValue | currency }}
             </ion-note>
           </div >
           <ion-fab horizontal="end" slot="end">

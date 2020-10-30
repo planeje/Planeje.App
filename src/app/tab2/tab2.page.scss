@@ -21,6 +21,7 @@ ion-item {
   margin: 10px;
   .small-text {
     font-size: 12px;
+    opacity: 0.8;
   }
   .label-info {
     display: flex;
@@ -31,7 +32,6 @@ ion-item {
   }
 }
 ion-icon {
-  // color: black;
   width: 20px;
   height: 20px;
 }

@@ -5,6 +5,7 @@ import { TransactionService } from '../transaction.service';
 import { BankAccountService } from 'src/app/tab3/bank-account.service';
 import { Actions } from 'src/app/usual/models/actions.enum';
 import { TransactionType } from 'src/app/usual/models/transactionType.enum';
+import { Transaction } from 'src/app/usual/models/transaction.model';
 
 @Component({
   selector: 'app-revenue-settings',
@@ -44,7 +45,7 @@ export class RevenueSettingsComponent implements OnInit {
 
   private _buildRevenueForm(): FormGroup {
     return this._fb.group({
-      transactionId: new FormControl(null, Validators.required),
+      id: new FormControl(null, Validators.required),
       description: new FormControl('', Validators.required),
       recurrent: new FormControl(false, Validators.required),
       transactionValue: new FormControl(null, Validators.required),
@@ -55,9 +56,9 @@ export class RevenueSettingsComponent implements OnInit {
     });
   }
 
-  private _setFormValue(revenue: any) {
+  private _setFormValue(revenue: Transaction): void {
     this.form.patchValue({
-      transactionId: revenue.transactionId,
+      id: revenue.id,
       description: revenue.description,
       recurrent: revenue.recurrent,
       transactionValue: revenue.transactionValue,
@@ -68,7 +69,7 @@ export class RevenueSettingsComponent implements OnInit {
   }
 
 
-  public _createRevenue(formValue: any) {
+  public _createRevenue(formValue: any): void {
     this._transactionService.createTransaction(formValue).subscribe(response => {
       this._modalCtrl.dismiss({ action: Actions.EDIT});
     })
@@ -86,7 +87,7 @@ export class RevenueSettingsComponent implements OnInit {
     : this._editRevenue(formValue);
   }
 
-  public closeModal(){
+  public closeModal(): void {
     this._modalCtrl.dismiss();
   }
 }
