@@ -43,11 +43,11 @@ export class RevenueSettingsComponent implements OnInit {
 
   private _buildForm(): FormGroup {
     return this._fb.group({
-      transactionId: new FormControl(null, Validators.required),
+      transactionId: new FormControl(null),
       description: new FormControl('', Validators.required),
       recurrent: new FormControl(false, Validators.required),
       transactionValue: new FormControl(null, Validators.required),
-      bankId: new FormControl(null, Validators.required),
+      bankId: new FormControl(null),
       transactionDate: new FormControl(new Date(), Validators.required),
       transactionDueDate: new FormControl(new Date().toJSON(), Validators.required),
       transactionType: new FormControl(TransactionType.REVENUE, Validators.required),
