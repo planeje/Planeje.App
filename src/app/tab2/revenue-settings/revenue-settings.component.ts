@@ -5,6 +5,7 @@ import { TransactionService } from '../transaction.service';
 import { BankAccountService } from 'src/app/tab3/bank-account.service';
 import { Actions } from 'src/app/usual/models/actions.enum';
 import { TransactionType } from 'src/app/usual/models/transactionType.enum';
+import { Transaction } from 'src/app/usual/models/transaction.model';
 
 @Component({
   selector: 'app-revenue-settings',
@@ -18,6 +19,7 @@ export class RevenueSettingsComponent implements OnInit {
   public readonly typeActions = Actions;
   public action: Actions;
   public form: FormGroup;
+  public categories: any[];
   public bankAccounts: any[];
 
   constructor(
@@ -28,9 +30,9 @@ export class RevenueSettingsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.form = this._buildForm()
+    this.form = this._buildRevenueForm()
     this._banckAccountService.getBankAccounts().subscribe(response => {
-      // this.bankAccounts = response;
+      this.bankAccounts = response;
     });
 
     if(!!this.data) {
@@ -41,9 +43,9 @@ export class RevenueSettingsComponent implements OnInit {
     }
   }
 
-  private _buildForm(): FormGroup {
+  private _buildRevenueForm(): FormGroup {
     return this._fb.group({
-      transactionId: new FormControl(null),
+      id: new FormControl(null, Validators.required),
       description: new FormControl('', Validators.required),
       recurrent: new FormControl(false, Validators.required),
       transactionValue: new FormControl(null, Validators.required),
@@ -54,30 +56,38 @@ export class RevenueSettingsComponent implements OnInit {
     });
   }
 
-  private _setFormValue(revenue: any) {
+  private _setFormValue(revenue: Transaction): void {
     this.form.patchValue({
-      ransactionId: revenue.transaction_id,
+      id: revenue.id,
       description: revenue.description,
       recurrent: revenue.recurrent,
-      transactionValue: revenue.transaction_value,
-      bankId: revenue.bank_id,
-      transactionDate: revenue.transaction_date,
-      transactionDueDate: revenue.transaction_due_date
+      transactionValue: revenue.transactionValue,
+      accountId: revenue.accountId,
+      transactionDate: revenue.transactionDate,
+      transactionDueDate: revenue.transactionDueDate
     });
   }
 
-  public save(formValue: any) {
+
+  public _createRevenue(formValue: any): void {
     this._transactionService.createTransaction(formValue).subscribe(response => {
-      this._modalCtrl.dismiss({ action: Actions.EDIT, expense: formValue });
+      this._modalCtrl.dismiss({ action: Actions.EDIT});
     })
   }
+  private _editRevenue(formValue: any): void {
+    console.log(formValue);
+    this._transactionService.editTransaction(formValue).subscribe(response => {
+      this._modalCtrl.dismiss({ action: Actions.EDIT});
+    });
+  }
 
-  public closeModal(){
+  public save(formValue: any): void {
+    this.action === Actions.NEW
+    ? this._createRevenue(formValue)
+    : this._editRevenue(formValue);
+  }
+
+  public closeModal(): void {
     this._modalCtrl.dismiss();
   }
-
-  public get transactionDueDateCtrl(): AbstractControl {
-    return this.form.get('transactionDueDate');
-  }
-
 }

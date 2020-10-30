@@ -15,9 +15,9 @@ export class TransactionService {
         private _storageService: StorageService
         ) {}
 
-    public getTransactions(): Observable<Transaction[]> {
+    public getTransactions(data:any): Observable<Transaction[]> {
         const userId = this._storageService.getUserId();
-    return this._http.get<Transaction[]>(`${environment.API_URL}/user/${userId}/transactions`).pipe(
+    return this._http.get<Transaction[]>(`${environment.API_URL}/user/${userId}/transactions?categoryId=${data.categoryId}&dataInicial=${data.dataInicial}&dataFinal=${data.dataFinal}`).pipe(
       map(response => !!!response ? [] : response),
       take(1)
     );
@@ -25,10 +25,11 @@ export class TransactionService {
 
 
     public createTransaction(transaction: Transaction): Observable<Transaction> {
-        return this._http.post<Transaction>(`${environment.API_URL}/transactions`, transaction).pipe(
+      const userId = this._storageService.getUserId();
+        return this._http.post<Transaction>(`${environment.API_URL}/user/${userId}/transactions`, transaction).pipe(
             take(1)
         );
-    }
+    } 
 
     public deleteTransaction(id: number): Observable<void> {
         return this._http.delete<void>(`${environment.API_URL}/transactions/${id}`)

@@ -1,48 +1,65 @@
 ion-title {
-    text-align: left;
+  text-align: left;
 }
 
 ion-item-option {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .spinner-container {
-    display: flex;
-    justify-content: center;
-    padding: {
-        top: 20px;
-        bottom: 20px;
-    }
+  display: flex;
+  justify-content: center;
+  padding: {
+    top: 20px;
+    bottom: 20px;
+  }
 }
-
+ion-list {
+  margin-top: 30px;
+}
 ion-item {
-    margin: 10px;
-    .label-info {
-        display: flex;
-        flex-direction: column;
-        > * {
-            margin-bottom: 4px;
-        }
+  margin: 10px;
+  .small-text {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+  .label-info {
+    display: flex;
+    flex-direction: column;
+    > * {
+      margin-bottom: 4px;
     }
+  }
 }
 ion-icon {
-    color: black;;
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 .buttonItem{
-    height: 20px;
-    width: 20px;
+  height: 20px;
+  width: 20px;
 }
 .value {
  padding-top: 3px;
 }
 
 .botaoFab {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 .buttonFabList {
-    margin-top: -20px;
-    margin-right: 32px;
+  margin-top: -20px;
+  margin-right: 32px;
+}
+ .receita {
+  color: green;
+ }
+ .despesa {
+  color: red;
+ }
+
+ ion-select {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
 }

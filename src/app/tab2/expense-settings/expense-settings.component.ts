@@ -6,6 +6,7 @@ import { CategoryService } from 'src/app/tab1/category.service';
 import { BankAccountService } from 'src/app/tab3/bank-account.service';
 import { Actions } from 'src/app/usual/models/actions.enum';
 import { TransactionType } from 'src/app/usual/models/transactionType.enum';
+import { Transaction } from 'src/app/usual/models/transaction.model';
 
 @Component({
   selector: 'app-expense-settings',
@@ -36,7 +37,7 @@ export class ExpenseSettingsComponent implements OnInit {
     });
 
     this._banckAccountService.getBankAccounts().subscribe(response => {
-      // this.bankAccounts = response;
+      this.bankAccounts = response;
     });
 
     if(!!this.data) {
@@ -49,7 +50,7 @@ export class ExpenseSettingsComponent implements OnInit {
 
   private _buildExpenseForm(): FormGroup {
     return this._fb.group({
-      transactionId: new FormControl(null),
+      id: new FormControl(null),
       description: new FormControl('', Validators.required),
       recurrent: new FormControl(false, Validators.required),
       transactionValue: new FormControl(null, Validators.required),
@@ -61,33 +62,33 @@ export class ExpenseSettingsComponent implements OnInit {
     });
   }
 
-  private _setFormValue(expense: any): void {
+  private _setFormValue(expense: Transaction): void {
     this.form.patchValue({
-      transactionId: expense.transaction_id,
+      id: expense.id,
       description: expense.description,
       recurrent: expense.recurrent,
-      transactionValue: expense.transaction_value,
-      categoryId: expense.category_id,
-      bankId: expense.bank_id,
-      transactionDate: expense.transaction_date,
-      transactionDueDate: expense.transaction_due_date
+      transactionValue: expense.transactionValue,
+      categoryId: expense.categoryId,
+      accountId: expense.accountId,
+      transactionDate: expense.transactionDate,
+      transactionDueDate: expense.transactionDueDate
     });
   }
 
-  public _createExpense(formValue: any): void {
+  public _createExpense(formValue: Transaction): void {
     this._transactionService.createTransaction(formValue).subscribe(response => {
       this._modalCtrl.dismiss({ action: Actions.EDIT, expense: formValue });
     })
   }
 
-  private _editExpense(formValue: any): void {
+  private _editExpense(formValue: Transaction): void {
     console.log(formValue);
     this._transactionService.editTransaction(formValue).subscribe(response => {
-      this._modalCtrl.dismiss({ action: Actions.EDIT, expense: formValue });
+      this._modalCtrl.dismiss({ action: Actions.EDIT});
     });
   }
 
-  public save(formValue: any): void {
+  public save(formValue: Transaction): void {
     this.action === Actions.NEW
     ? this._createExpense(formValue)
     : this._editExpense(formValue);
