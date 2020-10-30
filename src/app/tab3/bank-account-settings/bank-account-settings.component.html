@@ -18,7 +18,7 @@
       <ion-label position="stacked">Saldo</ion-label>
       <ion-input formControlName="balance" placeholder="R$"></ion-input>
     </ion-item>
-    <ion-button class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
+    <ion-button [disabled]="form.invalid" class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
   </form>
 </ion-content>
 

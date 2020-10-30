@@ -28,6 +28,6 @@
       <ion-label position="stacked">Data da entrada</ion-label>
       <ion-datetime formControlName="transactionDueDate" displayFormat="DD/MM/YYYY"></ion-datetime>
     </ion-item>
-    <ion-button class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
+    <ion-button [disabled]="form.invalid" class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
   </form>
 </ion-content>

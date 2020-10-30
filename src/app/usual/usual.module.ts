@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { CategoryGraphComponent } from './category-graph/category-graph.component';
 import { ChartsModule } from 'ng2-charts';
 import { DateFilter } from './pipes/date-filter.pipe';
+import { OnlynumberDirective } from './ripple.directive';
 
 
 
@@ -15,7 +16,8 @@ import { DateFilter } from './pipes/date-filter.pipe';
     ModalTabComponent,
     MenuComponent,
     CategoryGraphComponent,
-    DateFilter
+    DateFilter,
+    OnlynumberDirective
   ],
   imports: [
     RouterModule,
@@ -25,7 +27,8 @@ import { DateFilter } from './pipes/date-filter.pipe';
   exports: [
     MenuComponent,
     CategoryGraphComponent,
-    DateFilter
+    DateFilter,
+    OnlynumberDirective
   ],
   providers: [httpInterceptorProviders]
 })

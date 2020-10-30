@@ -23,6 +23,6 @@
       <ion-label position="stacked">Data de vencimento</ion-label>
       <ion-datetime formControlName="goalDueDate" displayFormat="DD/MM/YYYY"></ion-datetime>
     </ion-item>
-    <ion-button class="botaoModal" size="block" color="success" (click)="onSave(form.value)">Salvar</ion-button>
+    <ion-button [disabled]="form.invalid" class="botaoModal" size="block" color="success" (click)="onSave(form.value)">Salvar</ion-button>
   </form>
 </ion-content>
