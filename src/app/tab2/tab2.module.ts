@@ -24,7 +24,7 @@ import { UsualModule } from '../usual/usual.module';
   declarations: [
     Tab2Page,
     ExpenseSettingsComponent,
-    RevenueSettingsComponent
+    RevenueSettingsComponent,
   ]
 })
 export class Tab2PageModule {}
