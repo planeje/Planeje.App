@@ -50,15 +50,15 @@
             <ion-row>
               <ion-col>
                 <p>Meta</p>
-                <p>R$ {{ item.value }}</p>
+                <p>R$ {{ item.value | currency }}</p>
               </ion-col>
               <ion-col>
                 <p>Valor disponível</p>
-                <p> R$ 50,00</p>
+                <p> {{ item.valueAvaible | currency }}</p>
               </ion-col>
               <ion-col>
                 <p>Valor Gasto</p>
-                <p>R$ 300,00</p>
+                <p>{{ (item.value - item.valueAvaible) | currency }}</p>
               </ion-col>
             </ion-row>
           </ng-container>

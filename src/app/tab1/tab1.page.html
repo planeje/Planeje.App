@@ -1,5 +1,5 @@
 <ion-toolbar>
-  <ion-title>Categorias</ion-title>
+  <ion-title size="large">Categorias</ion-title>
 </ion-toolbar>
 
 <ion-content>
@@ -9,7 +9,7 @@
     </div>
   </ng-container>
   <ng-template #categoriesList>
-    <app-category-graph></app-category-graph>
+    <app-category-graph [categories]="categories"></app-category-graph>
     <ion-list>
       <ion-item-group>
         <ion-item *ngFor="let item of categories">

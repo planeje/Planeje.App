@@ -55,7 +55,7 @@ export class ExpenseSettingsComponent implements OnInit {
       recurrent: new FormControl(false, Validators.required),
       transactionValue: new FormControl(null, Validators.required),
       categoryId: new FormControl(null),
-      bankId: new FormControl(null),
+      accountId: new FormControl(null),
       transactionDate: new FormControl(new Date(), Validators.required),
       transactionDueDate: new FormControl(new Date(), Validators.required),
       transactionType: new FormControl(TransactionType.EXPENSE),
