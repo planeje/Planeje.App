@@ -67,7 +67,7 @@ export class CategoryGraphComponent implements OnInit{
     if (!!this.categoriesGraph) {
       this.barChartData = this.categoriesGraph.map(c => {
         const { name } = c;
-        const columnValue = c.spendigGoal.value - c.spendigGoal.valueAvaible
+        const columnValue = (c.spendigGoal?.value - c.spendigGoal?.valueAvaible) || 0
         return { data: [columnValue], label: name }
       });
       this.barChartColors = this.categoriesGraph.map(c => c.color[0]);
