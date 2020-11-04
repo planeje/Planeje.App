@@ -17,6 +17,9 @@
     <ion-text>
       <h3>Meta atual</h3>
     </ion-text>
+    <ion-text color="medium" *ngIf="(goals | dateFilter:'greater').length === 0" >
+      <p class="text-center">Nenhuma meta em em vigência cadastrada.</p>
+    </ion-text>
     <ion-card *ngFor="let item of goals | dateFilter:'greater'" (click)="showDetails(item.id)">
       <ion-card-header>
         <ion-card-title>
@@ -66,7 +69,7 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-text>
+    <ion-text *ngIf="(goals | dateFilter:'smaller').length > 0">
       <h3>Metas passadas</h3>
     </ion-text>
     <ion-card *ngFor="let item of goals | dateFilter:'smaller'" (click)="showDetails(item.id)">
@@ -99,15 +102,15 @@
             <ion-row>
               <ion-col>
                 <p>Meta</p>
-                <p>R$ {{ item.value }}</p>
+                <p>{{ item.value | currency }}</p>
               </ion-col>
               <ion-col>
                 <p>Valor disponível</p>
-                <p> R$ 50,00</p>
+                <p>{{ item.valueAvaible | currency }}</p>
               </ion-col>
               <ion-col>
                 <p>Valor Gasto</p>
-                <p>R$ 300,00</p>
+                <p>{{ (item.value - item.valueAvaible) | currency }}</p>
               </ion-col>
             </ion-row>
           </ng-container>

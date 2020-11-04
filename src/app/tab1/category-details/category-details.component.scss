@@ -7,7 +7,11 @@
   }
 }
 
-ion-text h3 {
+.text-center {
+  text-align: center;
+}
+
+ion-text h3, ion-text p {
   padding: 0 10px;
 }
 
