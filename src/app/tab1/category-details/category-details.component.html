@@ -21,22 +21,27 @@
       <p class="text-center">Nenhuma meta em em vigência cadastrada.</p>
     </ion-text>
     <ion-card *ngFor="let item of goals | dateFilter:'greater'" (click)="showDetails(item.id)">
-      <ion-card-header>
-        <ion-card-title>
-          {{ item.description }}
-          <ion-button fill="clear" (click)="showModalMeta(item)">
-            <ion-icon name="create-outline"></ion-icon>
-          </ion-button>
-        </ion-card-title>
-      </ion-card-header>
+      <ion-item>
+        <ion-text slot="start">
+          <p>{{ item.description }}</p>
+        </ion-text>
+        <ion-button slot="end" fill="clear" (click)="showModalMeta(item)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
       <ion-card-content>
         <ion-grid>
-          <ion-row class="default">
+          <ion-row class="ion-align-items-center">
             <ion-col>
               Até {{ item.goalDueDate | date: 'dd/MM/yy' }}
             </ion-col>
             <ion-col size="4">
-              <ion-progress-bar value="0.6"></ion-progress-bar>
+              <ion-progress-bar
+                [color]="
+                calcGoalProgress((item.value-item.valueAvaible), item.value) < 1
+                ? 'success'
+                : 'danger'"
+                [value]="calcGoalProgress((item.value-item.valueAvaible), item.value)"></ion-progress-bar>
             </ion-col>
           </ion-row>
           <ng-container *ngIf="isOpen(item.id)">
@@ -73,11 +78,14 @@
       <h3>Metas passadas</h3>
     </ion-text>
     <ion-card *ngFor="let item of goals | dateFilter:'smaller'" (click)="showDetails(item.id)">
-      <ion-card-header>
-        <ion-card-title>
-          {{ item.description }}
-        </ion-card-title>
-      </ion-card-header>
+      <ion-item>
+        <ion-text slot="start">
+          <p>{{ item.description }}</p>
+        </ion-text>
+        <ion-button slot="end" fill="clear" (click)="showModalMeta(item)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
       <ion-card-content>
         <ion-grid>
           <ion-row class="default">
@@ -85,7 +93,12 @@
               Até {{ item.goalDueDate | date: 'dd/MM/yy' }}
             </ion-col>
             <ion-col size="4">
-              <ion-progress-bar value="0.6"></ion-progress-bar>
+              <ion-progress-bar
+                [color]="
+                calcGoalProgress((item.value-item.valueAvaible), item.value) < 1
+                ? 'success'
+                : 'danger'"
+                [value]="calcGoalProgress((item.value-item.valueAvaible), item.value)"></ion-progress-bar>
             </ion-col>
           </ion-row>
           <ng-container *ngIf="isOpen(item.id)">

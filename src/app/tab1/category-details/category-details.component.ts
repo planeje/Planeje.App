@@ -67,6 +67,9 @@ export class CategoryDetailsComponent implements OnInit {
       this.loading = true
       this._getGoals();
     }
-    // this.close()
+  }
+
+  public calcGoalProgress(spentValue: number, goalValue: number): number {
+    return ((spentValue*100)/goalValue)/100;
   }
 }
