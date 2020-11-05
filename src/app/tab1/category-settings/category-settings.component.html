@@ -10,14 +10,20 @@
     </ion-title>
   </ion-toolbar>
 
-  <form [formGroup]="form">
+  <form [formGroup]="form" [ngClass]="has-error">
     <ion-item>
       <ion-label position="stacked">Nome</ion-label>
       <ion-input formControlName="name"></ion-input>
+      <div class="error" *ngIf="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)">
+        Campo não pode ser nulo
+      </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Cor</ion-label>
       <ion-input formControlName="color"></ion-input>
+      <div class="error" *ngIf="colorCtrl.invalid && (colorCtrl.dirty || colorCtrl.touched)">
+        Campo não pode ser nulo
+      </div>
     </ion-item>
     <ion-button [disabled]="form.invalid" class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
   </form>

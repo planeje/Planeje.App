@@ -9,14 +9,20 @@
       {{ (action === actionsType.EDIT ? 'Editar' : 'Nova') + ' conta' }}
     </ion-title>
   </ion-toolbar>
-  <form [formGroup]="form">
+  <form [formGroup]="form" [ngClass]="has-error">
     <ion-item>
       <ion-label position="stacked">Nome da conta</ion-label>
       <ion-input formControlName="accountName" placeholder="Digite o nome do banco ou conta"></ion-input>
+      <div class="error" *ngIf="accountNameCtrl.invalid && (accountNameCtrl.dirty || accountNameCtrl.touched)">
+        Campo não pode ser nulo
+      </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Saldo</ion-label>
       <ion-input type="number"[numbersOnly] formControlName="balance" placeholder="R$"></ion-input>
+      <div class="error" *ngIf="balanceCtrl.invalid && (balanceCtrl.dirty || balanceCtrl.touched)">
+        Campo não pode ser nulo
+      </div>
     </ion-item>
     <ion-button [disabled]="form.invalid" class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
   </form>

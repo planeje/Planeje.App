@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Actions } from 'src/app/usual/models/actions.enum';
 import { BankAccount } from 'src/app/usual/models/bank-account.model';
@@ -71,4 +71,10 @@ export class BankAccountSettingsComponent implements OnInit {
     this._modalCtrl.dismiss();
   }
 
+  public get accountNameCtrl(): AbstractControl {
+    return this.form.get('accountName');
+  }  
+  public get balanceCtrl(): AbstractControl {
+    return this.form.get('balance');
+  }
 }

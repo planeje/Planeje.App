@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 
@@ -35,5 +35,10 @@ export class LoginPage implements OnInit {
         this._router.navigate(['tabs/tab2']);
     })
   }
-
+  public get emailCtrl(): AbstractControl {
+    return this.loginForm.get('email');
+  }  
+  public get passwordCtrl(): AbstractControl {
+    return this.loginForm.get('password');
+  }
 }

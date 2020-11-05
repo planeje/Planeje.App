@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { CategoryService } from '../category.service';
 import { finalize } from 'rxjs/operators';
 import { Actions } from 'src/app/usual/models/actions.enum';
@@ -75,5 +75,10 @@ export class CategorySettingsComponent implements OnInit {
     ? this._editCategory(formValue)
     : this.createCategory(formValue);
   }
-
+  public get nameCtrl(): AbstractControl {
+    return this.form.get('name');
+  }  
+  public get colorCtrl(): AbstractControl {
+    return this.form.get('color');
+  }
 }

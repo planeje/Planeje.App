@@ -90,4 +90,17 @@ export class RevenueSettingsComponent implements OnInit {
   public closeModal(): void {
     this._modalCtrl.dismiss();
   }
+
+  public get descriptionCtrl(): AbstractControl {
+    return this.form.get('description');
+  }  
+  public get transactionValueCtrl(): AbstractControl {
+    return this.form.get('transactionValue');
+  }  
+  public get accountIdCtrl(): AbstractControl {
+    return this.form.get('accountId');
+  }  
+  public get transactionDueDateCtrl(): AbstractControl {
+    return this.form.get('transactionDueDate');
+  }
 }

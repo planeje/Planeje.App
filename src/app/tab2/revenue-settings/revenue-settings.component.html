@@ -9,24 +9,36 @@
 
 <ion-content>
   
-  <form [formGroup]="form">
+  <form [formGroup]="form" [ngClass] = "has-error">
     <ion-item>
       <ion-label position="stacked">Descrição</ion-label>
       <ion-input formControlName="description"></ion-input>
+      <div class="error" *ngIf="descriptionCtrl.invalid && (descriptionCtrl.dirty || descriptionCtrl.touched)">
+        Campo não pode ser nulo
+      </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Valor da receita</ion-label>
       <ion-input type="number"[numbersOnly] formControlName="transactionValue"></ion-input>
+      <div class="error" *ngIf="transactionValueCtrl.invalid && (transactionValueCtrl.dirty || transactionValueCtrl.touched)">
+        Campo não pode ser nulo
+      </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Conta bancária</ion-label>
       <ion-select formControlName="accountId" placeholder="Selecione uma conta">
         <ion-select-option *ngFor="let item of bankAccounts" [value]="item.id">{{ item.accountName }}</ion-select-option>
       </ion-select>
+      <div class="error" *ngIf="accountIdCtrl.invalid && (accountIdCtrl.dirty || accountIdCtrl.touched)">
+        Campo não pode ser nulo
+      </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Data da entrada</ion-label>
       <ion-datetime formControlName="transactionDueDate" displayFormat="DD/MM/YYYY"></ion-datetime>
+      <div class="error" *ngIf="transactionDueDateCtrl.invalid && (transactionDueDateCtrl.dirty || transactionDueDateCtrl.touched)">
+        Campo não pode ser nulo
+      </div>
     </ion-item>
     <ion-button [disabled]="form.invalid" class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
   </form>
