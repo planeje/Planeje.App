@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { TransactionService } from '../transaction.service';
 import { CategoryService } from 'src/app/tab1/category.service';
@@ -97,5 +97,19 @@ export class ExpenseSettingsComponent implements OnInit {
   public closeModal(): void {
     this._modalCtrl.dismiss();
   }
-
+  public get descriptionCtrl(): AbstractControl {
+    return this.form.get('description');
+  }  
+  public get transactionValueCtrl(): AbstractControl {
+    return this.form.get('transactionValue');
+  }  
+  public get categoryIdCtrl(): AbstractControl {
+    return this.form.get('categoryId');
+  }  
+  public get accountIdCtrl(): AbstractControl {
+    return this.form.get('accountId');
+  }  
+  public get transactionDueDateCtrl(): AbstractControl {
+    return this.form.get('transactionDueDate');
+  }
 }

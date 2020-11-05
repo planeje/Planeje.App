@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Actions } from 'src/app/usual/models/actions.enum';
 import { SpendingGoal } from 'src/app/usual/models/spending-goal.model';
@@ -71,5 +71,14 @@ export class CategoryMetaComponent implements OnInit {
 
   public close(): void {
     this._modalCtrl.dismiss();
+  }
+  public get descriptionCtrl(): AbstractControl {
+    return this.form.get('description');
+  }  
+  public get valueCtrl(): AbstractControl {
+    return this.form.get('value');
+  }  
+  public get goalDueDateCtrl(): AbstractControl {
+    return this.form.get('goalDueDate');
   }
 }
