@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import * as dayjs from 'dayjs';
 import { finalize } from 'rxjs/operators';
 import { SpendingGoal } from 'src/app/usual/models/spending-goal.model';
 import { CategoryMetaComponent } from './category-meta/category-meta.component';
@@ -15,6 +16,7 @@ export class CategoryDetailsComponent implements OnInit {
 
   public detailGoalId: number;
   public goals: SpendingGoal[];
+  public hasCurrentGoal: boolean;
   public loading = true;
 
   constructor(
@@ -26,14 +28,17 @@ export class CategoryDetailsComponent implements OnInit {
     this._getGoals();
   }
 
-  private _getGoals(): void {
-    this._spendingGoalService.getGoals(this.categoryId)
-      .pipe(
-        finalize(() => this.loading = false)
-      )
-      .subscribe(response => {
-        this.goals = response;
-      });
+  private async _getGoals(): Promise<void> {
+    this.loading = true;
+    this.goals = await this._spendingGoalService.getGoals(this.categoryId)
+    .toPromise();
+    this.loading = false;
+
+    this.goals.filter(g => {
+      const currentDate = dayjs();
+      dayjs(g.goalDueDate).isAfter(currentDate);
+      this.hasCurrentGoal = true;
+    });
   }
 
   public close(): void {
@@ -62,6 +67,9 @@ export class CategoryDetailsComponent implements OnInit {
       this.loading = true
       this._getGoals();
     }
-    // this.close()
+  }
+
+  public calcGoalProgress(spentValue: number, goalValue: number): number {
+    return ((spentValue*100)/goalValue)/100;
   }
 }
