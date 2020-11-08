@@ -20,7 +20,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Cor</ion-label>
-      <ion-input formControlName="color"></ion-input>
+      <input formControlName="color" [value]="color1" [(ngModel)]="color" [(colorPicker)]="color" [style.background]="color"/>
       <div class="error" *ngIf="colorCtrl.invalid && (colorCtrl.dirty || colorCtrl.touched)">
         Campo não pode ser nulo
       </div>
