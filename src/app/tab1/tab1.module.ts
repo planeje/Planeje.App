@@ -10,8 +10,8 @@ import { CategorySettingsComponent } from './category-settings/category-settings
 import { HttpClientModule } from '@angular/common/http';
 import { UsualModule } from '../usual/usual.module';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
-import { CategoryGraphComponent } from '../usual/category-graph/category-graph.component';
 import { CategoryMetaComponent } from './category-details/category-meta/category-meta.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   imports: [
@@ -22,13 +22,14 @@ import { CategoryMetaComponent } from './category-details/category-meta/category
     ReactiveFormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    UsualModule
+    UsualModule,
+    ColorPickerModule
   ],
   declarations: [
     Tab1Page,
     CategorySettingsComponent,
     CategoryDetailsComponent,
-    CategoryMetaComponent
+    CategoryMetaComponent,
   ]
 })
 export class Tab1PageModule {}
