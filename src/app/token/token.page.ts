@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { ForgotPasswordService } from '../forgot-password/forgotPassword.service';
 
 @Component({
@@ -10,6 +11,8 @@ import { ForgotPasswordService } from '../forgot-password/forgotPassword.service
 })
 export class TokenPage implements OnInit {
   public form: FormGroup;
+  public loading = false;
+
   constructor(
     private _fb: FormBuilder,
     private _forgotPasswordService: ForgotPasswordService,
@@ -29,7 +32,16 @@ export class TokenPage implements OnInit {
   }
 
   public resetPassword(formValue: { email: string, token: string, password: string }): void{
-    this._forgotPasswordService.resetPassword(formValue).subscribe(() => {
+    this.loading = true;
+    this.form.disable();
+    this._forgotPasswordService.resetPassword(formValue)
+    .pipe(
+      finalize(() => {
+        this.loading = false;
+        this.form.enable();
+      })
+    )
+    .subscribe(() => {
       this._router.navigate(['login']);
     }, err => {
       console.log('err', err);

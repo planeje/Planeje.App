@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { ForgotPasswordService } from './forgotPassword.service';
 
 @Component({
@@ -10,6 +11,8 @@ import { ForgotPasswordService } from './forgotPassword.service';
 })
 export class ForgotPasswordPage implements OnInit {
   public form: FormGroup;
+  public loading = false;
+
   constructor(
     private _fb: FormBuilder,
     private _forgotPasswrodService: ForgotPasswordService,
@@ -27,7 +30,16 @@ export class ForgotPasswordPage implements OnInit {
   }
 
   public sendToken(formValue: any): void {
-    this._forgotPasswrodService.sendEmailToken(formValue).subscribe(() => {
+    this.loading = true;
+    this.form.disable();
+    this._forgotPasswrodService.sendEmailToken(formValue)
+    .pipe(
+      finalize(() => {
+        this.loading = false;
+        this.form.enable();
+      })
+    )
+    .subscribe(() => {
       this._router.navigate(['token']);
     }, err => {
       console.log(err);

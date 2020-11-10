@@ -28,7 +28,14 @@
 
     <ion-row class="botaoRegistrar">
       <ion-col>
-        <ion-button type="submit" color="tertiary" (click)="createUser(form.value)" [disabled]="form.invalid">Inscrever</ion-button>
+        <ng-container *ngIf="!loading; else loadingRef">
+          <ion-button type="submit" color="tertiary" (click)="createUser(form.value)" [disabled]="form.invalid">Inscrever</ion-button>
+        </ng-container>
+        <ng-template #loadingRef>
+          <div class="spinner-container">
+            <ion-spinner name="crescent"></ion-spinner>
+          </div>
+        </ng-template>
       </ion-col>
     </ion-row>
   </form>
