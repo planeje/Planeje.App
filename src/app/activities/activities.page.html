@@ -15,17 +15,23 @@
       <p class="text-center">Nenhuma atividade registrada.</p>
     </ng-container>
     <ng-template #listRef>
-      <ion-list>
+      <ion-list *ngFor="let item of activities">
         <ion-card>
           <ion-item-group>
             <ion-item>
               <ion-grid>
                 <ion-row class="default">
-                  <ion-col>
-                    Ação
+                  <ion-col *ngIf="item.action === 'I'">
+                    Criou
+                  </ion-col>
+                  <ion-col *ngIf="item.action === 'D'">
+                    Deletou
+                  </ion-col>
+                  <ion-col *ngIf="item.action === 'U'">
+                    Alterou
                   </ion-col>
                   <ion-col size="5">
-                    31/12/1999 - 4h20
+                    {{ item.createdAt }}
                   </ion-col>
                   <ion-col size="2" (click)="show()">
                     <ng-container *ngIf="!details">
@@ -42,9 +48,11 @@
                 </ion-row>
                 <ion-row class="details">
                   <ng-container *ngIf="details">
-                    <ion-col><p style="color: darkgray; text-align: left;">Transação</p> <p> Descrição da Transação</p></ion-col>
-                    <ion-col>Valor <p> R$ 3,00</p></ion-col>
-                    <ion-col><p style="color: darkgray; text-align: left;">Data da transação</p><p> 01/01/2000</p></ion-col>
+                    <ion-col *ngIf="item.table === 'Transactions'"><p style="color: darkgray; text-align: left;">Transação</p></ion-col>
+                    <ion-col *ngIf="item.table === 'BankAccount'"><p style="color: darkgray; text-align: left;">Conta Bancária</p></ion-col>
+                    <ion-col *ngIf="item.table === 'Categories'"><p style="color: darkgray; text-align: left;">Categoria</p></ion-col>
+                    <!-- <ion-col>Valor <p> R$ 3,00</p></ion-col> -->
+                    <ion-col><p style="color: darkgray; text-align: left;">Data</p><p> {{ item.updatedAt }}</p></ion-col>
                   </ng-container>
                 </ion-row>
               </ion-grid>
