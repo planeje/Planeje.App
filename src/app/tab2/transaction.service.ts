@@ -10,13 +10,13 @@ import { StorageService } from '../usual/storage.service';
     providedIn:'root'
 })
 export class TransactionService {
-    constructor(
-        private _http: HttpClient,
-        private _storageService: StorageService
-        ) {}
+  constructor(
+    private _http: HttpClient,
+    private _storageService: StorageService
+  ) {}
 
-    public getTransactions(data:any): Observable<Transaction[]> {
-        const userId = this._storageService.getUserId();
+  public getTransactions(data:any): Observable<Transaction[]> {
+    const userId = this._storageService.getUserId();
     return this._http.get<Transaction[]>(`${environment.API_URL}/user/${userId}/transactions?categoryId=${data.categoryId}&dataInicial=${data.dataInicial}&dataFinal=${data.dataFinal}`).pipe(
       map(response => !!!response ? [] : response),
       take(1)
@@ -24,26 +24,26 @@ export class TransactionService {
   }
 
 
-    public createTransaction(transaction: Transaction): Observable<Transaction> {
-      const userId = this._storageService.getUserId();
-        return this._http.post<Transaction>(`${environment.API_URL}/user/${userId}/transactions`, transaction).pipe(
-            take(1)
-        );
-    } 
-
-    public deleteTransaction(id: number): Observable<void> {
-        return this._http.delete<void>(`${environment.API_URL}/transactions/${id}`)
+  public createTransaction(transaction: Transaction): Observable<Transaction> {
+    const userId = this._storageService.getUserId();
+    return this._http.post<Transaction>(`${environment.API_URL}/user/${userId}/transactions`, transaction)
       .pipe(
         take(1)
       );
   }
-    
-    public editTransaction(transaction: Transaction): Observable<Transaction> {
-        const id = transaction.id;
-        return this._http.put<Transaction>(`${environment.API_URL}/transactions/${id}`, transaction)
-          .pipe(
-            take(1)
-          );
-      }
-      
+
+  public deleteTransaction(id: number): Observable<void> {
+    return this._http.delete<void>(`${environment.API_URL}/transactions/${id}`)
+      .pipe(
+        take(1)
+      );
+  }
+
+  public editTransaction(transaction: Transaction): Observable<Transaction> {
+    const id = transaction.id;
+    return this._http.put<Transaction>(`${environment.API_URL}/transactions/${id}`, transaction)
+      .pipe(
+        take(1)
+      );
+  }
 }

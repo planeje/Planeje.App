@@ -38,46 +38,51 @@
     </div>
   </ng-container>
   <ng-template #transactionList>
-    <ion-list>
-      <ion-item-group>
-        <ion-item *ngFor="let item of transactions">
-          <div class="label-info">
-            <div class="category">
-              <ion-note class="small-text" *ngIf = "item.transactionType === 0" [ngStyle]="{'color': item.category.color }" slot="start">
-                {{ item.category.name }}
+    <ng-container *ngIf="!!!transactions; else listRef" >
+      <p class="text-center">Nenhuma transação cadastrada no período.</p>
+    </ng-container>
+    <ng-template #listRef>
+      <ion-list>
+        <ion-item-group>
+          <ion-item *ngFor="let item of transactions">
+            <div class="label-info">
+              <div class="category">
+                <ion-note class="small-text" *ngIf = "item.transactionType === 0" [ngStyle]="{'color': item.category.color }" slot="start">
+                  {{ item.category.name }}
+                </ion-note>
+                <ion-note class="small-text" slot="start">
+                  &nbsp;-
+                </ion-note>
+                <ion-note class="small-text" slot="start">
+                  {{ item.transactionDate | date:'dd/MM/yy' }}
+                </ion-note>
+              </div>
+              <span>{{ item.description }}</span>
+              <ion-note [ngClass]="item.transactionType === 1 ? 'receita' : 'despesa' "class="value" position="stacked">
+                {{ item.transactionValue | currency }}
               </ion-note>
-              <ion-note class="small-text" slot="start">
-                &nbsp;-
-              </ion-note>
-              <ion-note class="small-text" slot="start">
-                {{ item.transactionDate | date:'dd/MM/yy' }}
-              </ion-note>
-            </div>
-            <span>{{ item.description }}</span>
-            <ion-note [ngClass]="item.transactionType === 1 ? 'receita' : 'despesa' "class="value" position="stacked">
-              {{ item.transactionValue | currency }}
-            </ion-note>
-          </div >
-          <ion-fab horizontal="end" slot="end">
-            <ion-fab-button class="buttonItem" color="transparent">
-              <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-list class="buttonFabList" side="start">
-              <ion-fab-button color="light">
-                <ion-item-option (click)="editTransaction(item)">
-                  <ion-icon name="create-outline"></ion-icon>
-                </ion-item-option>
+            </div >
+            <ion-fab horizontal="end" slot="end">
+              <ion-fab-button class="buttonItem" color="transparent">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
               </ion-fab-button>
-              <ion-fab-button color="light">
-                <ion-item-option (click)="deleteTransaction(item.id)">
-                  <ion-icon name="trash-outline"></ion-icon>
-                </ion-item-option>
-              </ion-fab-button>
-            </ion-fab-list>
-          </ion-fab>
-        </ion-item>
-      </ion-item-group>
-    </ion-list>
+              <ion-fab-list class="buttonFabList" side="start">
+                <ion-fab-button color="light">
+                  <ion-item-option (click)="editTransaction(item)">
+                    <ion-icon name="create-outline"></ion-icon>
+                  </ion-item-option>
+                </ion-fab-button>
+                <ion-fab-button color="light">
+                  <ion-item-option (click)="deleteTransaction(item.id)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </ion-item-option>
+                </ion-fab-button>
+              </ion-fab-list>
+            </ion-fab>
+          </ion-item>
+        </ion-item-group>
+      </ion-list>
+    </ng-template>
   </ng-template >
 
 

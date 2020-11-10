@@ -12,6 +12,10 @@
     </div>
   </ng-container>
   <ng-template #accountsList>
+    <ng-container *ngIf="!!!bankAccounts; else listRef" >
+      <p class="text-center">Nenhuma conta bancária cadastrada.</p>
+    </ng-container>
+    <ng-template #listRef>
       <ion-item-group>
         <ion-item *ngFor="let item of bankAccounts">
           <ion-label class="label-info" pisition="stacked">
@@ -33,6 +37,7 @@
           </ion-fab>
         </ion-item>
       </ion-item-group>
+    </ng-template>
   </ng-template>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="success" (click)="showModalBankAccount()">

@@ -26,7 +26,7 @@ export class Tab1Page implements OnInit {
     this._getCategories();
   }
 
-  private _getCategories() {
+  private _getCategories(): void {
     this._categoryService.getCategories()
     .pipe(finalize(() => (this.loading = false)))
     .subscribe(response => {
@@ -34,7 +34,7 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  public async showModalCategory(category?: any) {
+  public async showModalCategory(category?: any): Promise<void> {
     const categorySettingsModal = await this.modalCtlr.create({
       component: CategorySettingsComponent,
       componentProps: { data:  category }
@@ -47,14 +47,14 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  public deleteCategory(id: number) {
+  public deleteCategory(id: number): void {
     this._categoryService.deleteCategory(id).subscribe(() => {
       const index = this.categories.findIndex(el => el.id === id);
       this.categories.splice(index, 1);
     });
   }
 
-  public async showModalMeta(categoryId: number){
+  public async showModalMeta(categoryId: number): Promise<void> {
     const categoryMeta = await this.modalCtlr.create({
       component: CategoryDetailsComponent,
       componentProps: { categoryId }
