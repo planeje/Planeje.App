@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { ForgotPasswordService } from '../forgot-password/forgotPassword.service';
@@ -50,5 +50,14 @@ export class TokenPage implements OnInit {
 
   public back(): void {
     history.back();
+  }
+  public get emailCtrl(): AbstractControl {
+    return this.form.get('email');
+  }  
+  public get tokenCtrl(): AbstractControl {
+    return this.form.get('token');
+  }
+  public get passwordCtrl(): AbstractControl {
+    return this.form.get('password');
   }
 }
