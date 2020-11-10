@@ -8,11 +8,8 @@
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
       <ion-input type="text" placeholder="Digite seu email" formControlName="email"></ion-input>
-      <div class="error" *ngIf="emailCtrl.hasError('email') && (emailCtrl.dirty || emailCtrl.touched)">
-        Campo não pode ser nulo
-      </div>
       <div class="error" *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)">
-        Email inválido
+        Campo não pode ser nulo / Email inválido
       </div>
     </ion-item>
 
