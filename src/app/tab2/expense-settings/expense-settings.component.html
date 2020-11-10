@@ -5,13 +5,10 @@
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-</ion-toolbar  >
+</ion-toolbar>
 
 <ion-content>
-  
   <form [formGroup]="form">
-    
-    
     <ion-item>
       <ion-label position="stacked">Descrição</ion-label>
       <ion-input formControlName="description"></ion-input>
@@ -45,6 +42,21 @@
         Campo não pode ser nulo
       </div>
     </ion-item>
-    <ion-button [disabled]="form.invalid" class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
+    <ng-container *ngIf="!loading; else loadingRef" >
+      <ion-button
+        [disabled]="form.invalid"
+        class="botaoModal"
+        size="block"
+        color="success"
+        (click)="save(form.value)"
+      >
+        Salvar
+      </ion-button>
+    </ng-container>
+    <ng-template #loadingRef>
+      <div class="spinner-container">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+    </ng-template>
   </form>
 </ion-content>

@@ -1,7 +1,7 @@
 <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button color="dark" type="button" auto-hide="false"></ion-menu-button>
-    </ion-buttons>
+  <ion-buttons slot="start">
+    <ion-menu-button color="dark" type="button" auto-hide="false"></ion-menu-button>
+  </ion-buttons>
   <ion-title>Categorias</ion-title>
 </ion-toolbar>
 <ion-content>
@@ -11,7 +11,7 @@
     </div>
   </ng-container>
   <ng-template #categoriesList>
-    <ng-container>
+    <ng-container *ngIf="!!!categories; else listRef" >
       <p class="text-center">Nenhuma categoria cadastrada.</p>
     </ng-container>
     <ng-template #listRef>
@@ -23,28 +23,28 @@
               <ion-icon name="ellipse-outline" [ngStyle]="{'color': item.color }"></ion-icon>
               <span>{{ item.name }}</span>
             </ion-label>
-              <ion-fab horizontal="end" slot="end">
-                <ion-fab-button class="buttonItem" color="transparent">
-                  <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+            <ion-fab horizontal="end" slot="end">
+              <ion-fab-button class="buttonItem" color="transparent">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-list class="buttonFabList" side="start">
+                <ion-fab-button  color="transparent">
+                    <ion-item-option  type="button" (click)="showModalCategory(item)">
+                    <ion-icon name="create-outline"></ion-icon>
+                  </ion-item-option>
                 </ion-fab-button>
-                <ion-fab-list class="buttonFabList" side="start">
-                  <ion-fab-button  color="transparent">
-                     <ion-item-option  type="button" (click)="showModalCategory(item)">
-                      <ion-icon name="create-outline"></ion-icon>
+                <ion-fab-button  color="transparent">
+                    <ion-item-option  type="button" (click)="deleteCategory(item.id)">
+                    <ion-icon name="trash-outline"></ion-icon>
                     </ion-item-option>
-                  </ion-fab-button>
-                  <ion-fab-button  color="transparent">
-                     <ion-item-option  type="button" (click)="deleteCategory(item.id)">
-                      <ion-icon name="trash-outline"></ion-icon>
-                     </ion-item-option>
-                  </ion-fab-button>
-                  <ion-fab-button  color="transparent">
-                     <ion-item-option  type="button" (click)="showModalMeta(item.id)">
-                      <ion-icon name="eye-outline"></ion-icon>
-                     </ion-item-option>
-                  </ion-fab-button>
-                </ion-fab-list>
-              </ion-fab>
+                </ion-fab-button>
+                <ion-fab-button  color="transparent">
+                    <ion-item-option  type="button" (click)="showModalMeta(item.id)">
+                    <ion-icon name="eye-outline"></ion-icon>
+                    </ion-item-option>
+                </ion-fab-button>
+              </ion-fab-list>
+            </ion-fab>
           </ion-item>
         </ion-item-group>
       </ion-list>

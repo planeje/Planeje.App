@@ -17,11 +17,21 @@
       <ion-label position="floating"></ion-label>
       <ion-input placeholder="Digite seu nome" disabled formControlName="email"></ion-input>
     </ion-item>
-    <ion-button
-      class="botaoModal"
-      size="block"
-      color="success"
-      [disabled]="form.invalid || !changed"
-      (click)="save(form.value)">Salvar</ion-button>
+    <ng-container *ngIf="!loading; else loadingRef" >
+      <ion-button
+        class="botaoModal"
+        size="block"
+        color="success"
+        [disabled]="form.invalid || !changed"
+        (click)="save(form.value)"
+      >
+        Salvar
+      </ion-button>
+    </ng-container>
+    <ng-template #loadingRef>
+      <div class="spinner-container">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+    </ng-template>
   </form>
 </ion-content>

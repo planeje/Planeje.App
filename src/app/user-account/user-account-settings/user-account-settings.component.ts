@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { take } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { User } from 'src/app/usual/models/user.model';
 import { UserAccountService } from '../user-account.service';
 
@@ -14,6 +14,8 @@ export class UserAccountSettingsComponent implements OnInit {
   @Input() data: User;
   public form: FormGroup;
   public changed = false;
+  public loading = false;
+
   constructor(
     private _modalCtrl: ModalController,
     private _fb: FormBuilder,
@@ -30,11 +32,19 @@ export class UserAccountSettingsComponent implements OnInit {
     return this._fb.group({
       email: new FormControl(data.email, Validators.email),
       name: new FormControl(data.name, Validators.required)
-    })
+    });
   }
 
   public save(formValue: User): void {
+    this.loading = true;
+    this.form.disable();
     this._userAccountService.updateUserInfo(this.data.id, formValue)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.form.enable();
+        })
+      )
       .subscribe(response => {
         this._modalCtrl.dismiss({ data: response });
       }, err => {

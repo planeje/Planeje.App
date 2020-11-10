@@ -7,6 +7,7 @@ import { BankAccountService } from 'src/app/tab3/bank-account.service';
 import { Actions } from 'src/app/usual/models/actions.enum';
 import { TransactionType } from 'src/app/usual/models/transactionType.enum';
 import { Transaction } from 'src/app/usual/models/transaction.model';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-expense-settings',
@@ -21,6 +22,7 @@ export class ExpenseSettingsComponent implements OnInit {
   public form: FormGroup;
   public categories: any[];
   public bankAccounts: any[];
+  public loading = false;
 
   constructor(
     private _fb: FormBuilder,
@@ -54,8 +56,8 @@ export class ExpenseSettingsComponent implements OnInit {
       description: new FormControl('', Validators.required),
       recurrent: new FormControl(false, Validators.required),
       transactionValue: new FormControl(null, Validators.required),
-      categoryId: new FormControl(null),
-      accountId: new FormControl(null),
+      categoryId: new FormControl(null, Validators.required),
+      accountId: new FormControl(null, Validators.required),
       transactionDate: new FormControl(new Date(), Validators.required),
       transactionDueDate: new FormControl(new Date(), Validators.required),
       transactionType: new FormControl(TransactionType.EXPENSE),
@@ -76,19 +78,34 @@ export class ExpenseSettingsComponent implements OnInit {
   }
 
   public _createExpense(formValue: Transaction): void {
-    this._transactionService.createTransaction(formValue).subscribe(response => {
-      this._modalCtrl.dismiss({ action: Actions.EDIT, expense: formValue });
-    })
+    this._transactionService.createTransaction(formValue)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.form.enable();
+        })
+      )
+      .subscribe(response => {
+        this._modalCtrl.dismiss({ action: Actions.EDIT, expense: formValue });
+      });
   }
 
   private _editExpense(formValue: Transaction): void {
-    console.log(formValue);
-    this._transactionService.editTransaction(formValue).subscribe(response => {
-      this._modalCtrl.dismiss({ action: Actions.EDIT});
-    });
+    this._transactionService.editTransaction(formValue)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.form.enable();
+        })
+      )
+      .subscribe(response => {
+        this._modalCtrl.dismiss({ action: Actions.EDIT});
+      });
   }
 
   public save(formValue: Transaction): void {
+    this.loading = true;
+    this.form.disable();
     this.action === Actions.NEW
     ? this._createExpense(formValue)
     : this._editExpense(formValue);
@@ -99,16 +116,20 @@ export class ExpenseSettingsComponent implements OnInit {
   }
   public get descriptionCtrl(): AbstractControl {
     return this.form.get('description');
-  }  
+  }
+
   public get transactionValueCtrl(): AbstractControl {
     return this.form.get('transactionValue');
-  }  
+  }
+
   public get categoryIdCtrl(): AbstractControl {
     return this.form.get('categoryId');
-  }  
+  }
+
   public get accountIdCtrl(): AbstractControl {
     return this.form.get('accountId');
-  }  
+  }
+
   public get transactionDueDateCtrl(): AbstractControl {
     return this.form.get('transactionDueDate');
   }
