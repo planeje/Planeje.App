@@ -51,6 +51,7 @@ export class RevenueSettingsComponent implements OnInit {
       description: new FormControl('', Validators.required),
       recurrent: new FormControl(false, Validators.required),
       transactionValue: new FormControl(null, Validators.required),
+      categoryId: new FormControl(null),
       accountId: new FormControl(null, Validators.required),
       transactionDate: new FormControl(new Date(), Validators.required),
       transactionDueDate: new FormControl(new Date().toJSON(), Validators.required),
