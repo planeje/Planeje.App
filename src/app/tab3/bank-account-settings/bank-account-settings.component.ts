@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { finalize } from 'rxjs/operators';
 import { Actions } from 'src/app/usual/models/actions.enum';
 import { BankAccount } from 'src/app/usual/models/bank-account.model';
 import { BankAccountService } from '../bank-account.service';
@@ -16,6 +17,7 @@ export class BankAccountSettingsComponent implements OnInit {
   public readonly actionsType = Actions;
   public form: FormGroup;
   public action: Actions;
+  public loading = false;
 
   constructor(
     private _modalCtrl: ModalController,
@@ -50,18 +52,34 @@ export class BankAccountSettingsComponent implements OnInit {
   }
 
   private _createAccount(bankAccount: BankAccount): void {
-    this._bankAccountService.createBankAccount(bankAccount).subscribe(response => {
+    this._bankAccountService.createBankAccount(bankAccount)
+    .pipe(
+      finalize(() => {
+        this.loading = false;
+        this.form.enable();
+      })
+    )
+    .subscribe(response => {
       this._modalCtrl.dismiss({ action: Actions.NEW });
     })
   }
 
   private _editAccount(bankAccount: BankAccount): void {
-    this._bankAccountService.editBankAccount(bankAccount).subscribe(response => {
+    this._bankAccountService.editBankAccount(bankAccount)
+    .pipe(
+      finalize(() => {
+        this.loading = false;
+        this.form.enable();
+      })
+    )
+    .subscribe(response => {
       this._modalCtrl.dismiss({ action: Actions.EDIT });
     })
   }
 
   public save(formValue: any): void {
+    this.loading = true;
+    this.form.disable();
     this.action === Actions.EDIT
     ? this._editAccount(formValue)
     : this._createAccount(formValue);
@@ -73,7 +91,8 @@ export class BankAccountSettingsComponent implements OnInit {
 
   public get accountNameCtrl(): AbstractControl {
     return this.form.get('accountName');
-  }  
+  }
+
   public get balanceCtrl(): AbstractControl {
     return this.form.get('balance');
   }

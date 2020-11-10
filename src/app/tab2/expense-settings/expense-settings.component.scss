@@ -1,4 +1,13 @@
 .error {
-    font-size: 12px;
-    color: red;
+  font-size: 12px;
+  color: red;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: {
+    top: 20px;
+    bottom: 20px;
+  }
 }

@@ -17,6 +17,7 @@ export class CategorySettingsComponent implements OnInit {
   public readonly actionsType = Actions;
   public form: FormGroup;
   public action: Actions;
+  public loading = false;
 
   constructor(
     private _modalCtrl: ModalController,
@@ -52,7 +53,11 @@ export class CategorySettingsComponent implements OnInit {
 
   private createCategory(category: Category): void {
     this._categoryService.createCategory(category)
-      .pipe(finalize(() => this.close()))
+      .pipe(finalize(() => {
+        this.loading = false;
+        this.form.enable();
+        this.close();
+      }))
       .subscribe(response => {
         this._modalCtrl.dismiss({ action: Actions.NEW });
       });
@@ -60,7 +65,11 @@ export class CategorySettingsComponent implements OnInit {
 
   private _editCategory(category: any): void {
     this._categoryService.editCategory(category)
-      .pipe(finalize(() => this.close()))
+      .pipe(finalize(() => {
+        this.loading = false;
+        this.form.enable();
+        this.close();
+      }))
       .subscribe(response => {
         this._modalCtrl.dismiss({ action: Actions.EDIT });
       });
@@ -71,13 +80,17 @@ export class CategorySettingsComponent implements OnInit {
   }
 
   public save(formValue: any) {
+    this.loading = true;
+    this.form.disable();
     this.action === Actions.EDIT
     ? this._editCategory(formValue)
     : this.createCategory(formValue);
   }
+
   public get nameCtrl(): AbstractControl {
     return this.form.get('name');
-  }  
+  }
+
   public get colorCtrl(): AbstractControl {
     return this.form.get('color');
   }

@@ -1,6 +1,6 @@
 <ion-content>
   <ion-toolbar>
-    <ion-buttons slot="secondary">
+    <ion-buttons slot="start">
       <ion-button (click)="close()">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
@@ -19,12 +19,26 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Saldo</ion-label>
-      <ion-input type="number"[numbersOnly] formControlName="balance" placeholder="R$"></ion-input>
+      <ion-input type="number" [numbersOnly] formControlName="balance" placeholder="R$"></ion-input>
       <div class="error" *ngIf="balanceCtrl.invalid && (balanceCtrl.dirty || balanceCtrl.touched)">
         Campo não pode ser nulo
       </div>
     </ion-item>
-    <ion-button [disabled]="form.invalid" class="botaoModal" size="block" color="success" (click)="save(form.value)">Salvar</ion-button>
+    <ng-container *ngIf="!loading; else loadingRef" >
+      <ion-button
+        [disabled]="form.invalid"
+        class="botaoModal"
+        size="block" color="success"
+        (click)="save(form.value)"
+      >
+        Salvar
+      </ion-button>
+    </ng-container>
+    <ng-template #loadingRef>
+      <div class="spinner-container">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+    </ng-template>
   </form>
 </ion-content>
 

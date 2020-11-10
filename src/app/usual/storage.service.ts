@@ -9,4 +9,8 @@ export class StorageService {
   public getUserId(): number {
     return JSON.parse(localStorage.getItem('userId'));
   }
+
+  public removeApiToken(): void {
+    localStorage.removeItem('apiToken');
+  }
 }

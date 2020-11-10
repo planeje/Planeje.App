@@ -7,7 +7,11 @@
 </ion-toolbar>
 
 <ion-content class="settings">
-  <ng-container *ngIf="!user; else userRef"></ng-container>
+  <ng-container *ngIf="!user; else userRef">
+    <div class="spinner-container">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+  </ng-container>
   <ng-template #userRef>
     <h3>Seus dados</h3>
     <ion-item>
@@ -24,15 +28,32 @@
     </ion-item>
     <ion-item *ngIf="isEditingPassword">
       <ion-input class="newPass" placeholder="Digite a nova senha" type="password" [formControl]="passwordCtrl"></ion-input>
-      <ion-button
-        fill="clear"
-        shape="round"
-        slot="end"
-        (click)="savePassword(editPasswordForm.value)">
-          <ion-icon name="checkmark" size="small" slot="icon-only"></ion-icon>
-      </ion-button>
+      <ng-container *ngIf="!loadingChangePassword; else loadingPassword" >
+        <ion-button
+          fill="clear"
+          shape="round"
+          slot="end"
+          (click)="savePassword(editPasswordForm.value)">
+            <ion-icon name="checkmark" size="small" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ng-container>
+      <ng-template #loadingPassword>
+        <ion-spinner slot="end" name="crescent"></ion-spinner>
+      </ng-template>
     </ion-item>
   </ng-template>
-  <ion-button color="tertiary" (click)="showModalUserSetting(user)">Editar</ion-button>
-  <ion-button color="tertiary" (click)="togglePasswordEdit()">Alterar senha</ion-button>
+  <ion-button
+    [disabled]="loadingChangePassword"
+    color="tertiary"
+    (click)="showModalUserSetting(user)"
+  >
+    Editar
+  </ion-button>
+  <ion-button
+    [disabled]="loadingChangePassword"
+    color="tertiary"
+    (click)="togglePasswordEdit()"
+  >
+    Alterar senha
+  </ion-button>
 </ion-content>

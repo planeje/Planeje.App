@@ -1,19 +1,22 @@
 .settings  {
-    text-align: center;
+  text-align: center;
 }
 
 .photo {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
+
 h3 {
-    margin-top: 2em;
+  margin-top: 2em;
 }
 ion-input {
-    color: black;
-    font-size: 30px;
-}ion-label {
-    color: gainsboro;
+  color: black;
+  font-size: 30px;
+}
+
+ion-label {
+  color: gainsboro;
 }
 
 h3 {
@@ -26,5 +29,14 @@ ion-label {
 }
 
 .newPass {
-    font-size: 16px;
+  font-size: 16px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: {
+    top: 20px;
+    bottom: 20px;
+  }
 }

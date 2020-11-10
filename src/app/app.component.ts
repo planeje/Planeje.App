@@ -4,6 +4,7 @@ import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { StorageService } from './usual/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -12,26 +13,30 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private menu: MenuController,
-    private _router: Router
+    private _platform: Platform,
+    private _splashScreen: SplashScreen,
+    private _statusBar: StatusBar,
+    private _menu: MenuController,
+    private _router: Router,
+    private _storageService: StorageService
   ) {
     this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+  initializeApp(): void {
+    this._platform.ready().then(() => {
+      this._statusBar.styleDefault();
+      this._splashScreen.hide();
     });
   }
+
   public logout(): void {
-    this.menu.close()
-    this._router.navigate(['/']);
+    this._storageService.removeApiToken();
+    this._menu.close();
+    this._router.navigate(['/login']);
   }
+
   public dismiss(): void {
-    this.menu.close()
+    this._menu.close()
   }
 }

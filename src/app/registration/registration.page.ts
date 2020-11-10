@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { User } from '../usual/models/user.model';
 import { RegistrationService } from './registration.service';
 
@@ -11,6 +12,7 @@ import { RegistrationService } from './registration.service';
 })
 export class RegistrationPage implements OnInit {
   public form: FormGroup;
+  public loading = false;
 
   constructor(
     private _fb: FormBuilder,
@@ -31,7 +33,16 @@ export class RegistrationPage implements OnInit {
   }
 
   public createUser(formValue: User): void {
-    this._registrationService.createUser(formValue).subscribe(() => {
+    this.loading = true;
+    this.form.disable();
+    this._registrationService.createUser(formValue)
+    .pipe(
+      finalize(() => {
+        this.loading = false;
+        this.form.enable();
+      })
+    )
+    .subscribe(() => {
       this._router.navigate(['login']);
     }, err => {
       console.log('err', err);

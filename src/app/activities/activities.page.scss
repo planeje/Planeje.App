@@ -1,9 +1,23 @@
-.default {
-    font-size: small;
-    margin-bottom: 10px;
-    align-items: center;
+.text-center {
+  text-align: center;
 }
+
+.default {
+  font-size: small;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
 .details {
-    font-size: smaller;
-    align-items: center;
+  font-size: smaller;
+  align-items: center;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: {
+    top: 20px;
+    bottom: 20px;
+  }
 }

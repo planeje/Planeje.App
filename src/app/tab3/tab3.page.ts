@@ -23,7 +23,7 @@ export class Tab3Page implements OnInit {
     this._getBanckAccounts();
   }
 
-  private _getBanckAccounts() {
+  private _getBanckAccounts(): void {
     this._bankAccountService.getBankAccounts()
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(response => {
@@ -31,7 +31,7 @@ export class Tab3Page implements OnInit {
       });
   }
 
-  public async showModalBankAccount(bankAccount?: BankAccount) {
+  public async showModalBankAccount(bankAccount?: BankAccount): Promise<void> {
     const accountSettingsModal =  await this.modalCtlr.create({
       component: BankAccountSettingsComponent,
       componentProps: { data: bankAccount }

@@ -18,11 +18,9 @@ export class ActivitiesService {
 
   public getActivities(): Observable<Activities[]> {
     const userId = this._storageService.getUserId();
-    console.log(userId)
-  return this._http.get<Activities[]>(`${environment.API_URL}/user/${userId}/logs`).pipe(
-  map(response => !!!response ? [] : response),
-  take(1),
-  );
-}
-
+    return this._http.get<Activities[]>(`${environment.API_URL}/user/${userId}/logs`).pipe(
+        map(response => !!!response ? [] : response),
+        take(1),
+      );
+  }
 }

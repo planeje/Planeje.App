@@ -31,9 +31,22 @@
 
     <ion-row class="botaoEntrar">
       <ion-col>
-        <ion-button [disabled]="loginForm.invalid" (click)="loginUser(loginForm.value)" type="submit" color="tertiary" >Entrar</ion-button>
+        <ng-container *ngIf="!loading; else loadingRef">
+          <ion-button [disabled]="loginForm.invalid"
+            (click)="loginUser(loginForm.value)"
+            type="submit"
+            color="tertiary"
+          >
+            Entrar
+          </ion-button>
+        </ng-container>
+        <ng-template #loadingRef>
+          <div class="spinner-container">
+            <ion-spinner name="crescent"></ion-spinner>
+          </div>
+        </ng-template>
       </ion-col>
-    </ion-row>    
+    </ion-row>
 
 
 
