@@ -1,18 +1,8 @@
-<!-- <ion-toolbar>
-  <ion-title>Conta de usuário</ion-title>
-</ion-toolbar>
-
-<ion-content class="settings">
-
-    <h3>Nome do usuário</h3>
-    <ion-item lines="full">
-      <span>{{ user.email }}</span>
-    </ion-item>
-    <ion-button color="tertiary" (click)="showModalUserSetting()">Editar</ion-button>
-  <app-menu></app-menu>
-</ion-content> -->
 
 <ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-menu-button color="dark" type="button" auto-hide="false"></ion-menu-button>
+  </ion-buttons>
   <ion-title>Conta de usuário</ion-title>
 </ion-toolbar>
 
@@ -33,8 +23,7 @@
       <ion-icon name="mail" size="small" slot="end"></ion-icon>
     </ion-item>
     <ion-item *ngIf="isEditingPassword">
-      <ion-label></ion-label>
-      <ion-input placeholder="Digite a nova senha" type="password" [formControl]="passwordCtrl"></ion-input>
+      <ion-input class="newPass" placeholder="Digite a nova senha" type="password" [formControl]="passwordCtrl"></ion-input>
       <ion-button
         fill="clear"
         shape="round"
@@ -46,5 +35,4 @@
   </ng-template>
   <ion-button color="tertiary" (click)="showModalUserSetting(user)">Editar</ion-button>
   <ion-button color="tertiary" (click)="togglePasswordEdit()">Alterar senha</ion-button>
-<app-menu></app-menu>
 </ion-content>

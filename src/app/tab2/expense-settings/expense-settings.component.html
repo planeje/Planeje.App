@@ -31,18 +31,12 @@
       <ion-select formControlName="categoryId" placeholder="Selecione uma categoria">
         <ion-select-option *ngFor="let item of categories" [value]="item.id">{{ item.name }}</ion-select-option>
       </ion-select>
-      <div class="error" *ngIf="categoryIdCtrl.invalid && (categoryIdCtrl.dirty || categoryIdCtrl.touched)">
-        Campo não pode ser nulo
-      </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Conta bancária</ion-label>
       <ion-select formControlName="accountId" placeholder="Selecione uma conta">
         <ion-select-option *ngFor="let item of bankAccounts" [value]="item.id">{{ item.accountName }}</ion-select-option>
       </ion-select>
-      <div class="error" *ngIf="accountIdCtrl.invalid && (accountIdCtrl.dirty ||accountIdCtrl.touched)">
-        Campo não pode ser nulo
-      </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Data de vencimento</ion-label>
