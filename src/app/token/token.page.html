@@ -8,19 +8,28 @@
 </ion-toolbar>
 
 <ion-content>
-  <form [formGroup]="form">
+  <form [formGroup]="form" [ngClass]="has Error">
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
       <ion-input formControlName="token" placeholder="Insira o token" ></ion-input>
+      <div class="error" *ngIf="tokenCtrl.invalid && (tokenCtrl.dirty || tokenCtrl.touched)">
+        Campo não pode ser nulo
+      </div>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
       <ion-input formControlName="email" placeholder="Confirme o seu email" ></ion-input>
+      <div class="error" *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)">
+        Campo não pode ser nulo / Email inválido
+      </div>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
       <ion-input formControlName="password" type="password" placeholder="Digite a nova senha" ></ion-input>
+            <div class="error" *ngIf="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)">
+        Campo não pode ser nulo
+      </div>
     </ion-item>
 
     <ion-row class="botaoToken">
