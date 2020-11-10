@@ -1,6 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ModalTabComponent } from './modal-tab/modal-tab.component';
-import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { httpInterceptorProviders } from './interceptors';
 import { CommonModule } from '@angular/common';
@@ -14,7 +13,6 @@ import { OnlynumberDirective } from './ripple.directive';
 @NgModule({
   declarations: [
     ModalTabComponent,
-    MenuComponent,
     CategoryGraphComponent,
     DateFilter,
     OnlynumberDirective
@@ -25,7 +23,6 @@ import { OnlynumberDirective } from './ripple.directive';
     ChartsModule
   ],
   exports: [
-    MenuComponent,
     CategoryGraphComponent,
     DateFilter,
     OnlynumberDirective

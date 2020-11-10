@@ -28,7 +28,7 @@ export class UserAccountSettingsComponent implements OnInit {
 
   private _buildForm(data: User): FormGroup {
     return this._fb.group({
-      email: new FormControl(data.email, [Validators.required, Validators.email]),
+      email: new FormControl(data.email, Validators.email),
       name: new FormControl(data.name, Validators.required)
     })
   }
