@@ -50,7 +50,7 @@
                 <ion-note class="small-text" *ngIf = "item.transactionType === 0" [ngStyle]="{'color': item.category.color }" slot="start">
                   {{ item.category.name }}
                 </ion-note>
-                <ion-note class="small-text" slot="start">
+                <ion-note class="small-text" slot="start" *ngIf = "item.transactionType === 0">
                   &nbsp;-
                 </ion-note>
                 <ion-note class="small-text" slot="start">

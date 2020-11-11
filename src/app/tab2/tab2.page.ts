@@ -25,8 +25,8 @@ export class Tab2Page implements OnInit, OnDestroy {
   public transactions: Transaction[];
   public categories: Category[];
   public filterForm: FormGroup;
-  public startDate = dayjs().toISOString();
-  public endDate = dayjs().toISOString();
+  public startDate = dayjs().startOf('month').toISOString();
+  public endDate = dayjs().endOf('month').toISOString();
 
   constructor(
     private _modalCtlr: ModalController,
@@ -54,8 +54,16 @@ export class Tab2Page implements OnInit, OnDestroy {
     });
   }
 
-  private _getTransactions(data: any): void {
+  private _getTransactions(data: { categoryId?: number, dataInicial: dayjs.Dayjs, dataFinal: dayjs.Dayjs }): void {
     this.loading = true;
+    data.dataInicial = dayjs(data.dataInicial)
+    .hour(0)
+    .minute(0)
+    .second(0);
+    data.dataFinal = dayjs(data.dataFinal)
+    .hour(23)
+    .minute(59)
+    .second(59);
     this._transactionService.getTransactions(data)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(response => {
