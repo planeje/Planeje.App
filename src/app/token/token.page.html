@@ -4,38 +4,43 @@
   </ion-button>
 </ion-buttons>
 <ion-toolbar>
-  <ion-title>Insira o token</ion-title>
+  <ion-title>Cadastrar nova senha</ion-title>
 </ion-toolbar>
 
 <ion-content>
-  <form [formGroup]="form" [ngClass]="has Error">
+  <form [formGroup]="form">
     <ion-item lines="full">
-      <ion-label position="floating"></ion-label>
-      <ion-input formControlName="token" placeholder="Insira o token" ></ion-input>
-      <div class="error" *ngIf="tokenCtrl.invalid && (tokenCtrl.dirty || tokenCtrl.touched)">
-        Campo não pode ser nulo
+      <ion-label position="floating">Insira o token enviado no seu email</ion-label>
+      <ion-input formControlName="token" placeholder="Insira o token"></ion-input>
+      <div class="error" *ngIf="tokenCtrl.hasError('required') && (tokenCtrl.dirty || tokenCtrl.touched)">
+        Campo obrigatório
       </div>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
       <ion-input formControlName="email" placeholder="Confirme o seu email" ></ion-input>
-      <div class="error" *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)">
-        Campo não pode ser nulo / Email inválido
+      <div class="error" *ngIf="emailCtrl.hasError('required') && (emailCtrl.dirty || emailCtrl.touched)">
+        Campo obrigatório / Email inválido
+      </div>
+      <div class="error" *ngIf="emailCtrl.hasError('email')">
+        Email inválido
       </div>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating"></ion-label>
       <ion-input formControlName="password" type="password" placeholder="Digite a nova senha" ></ion-input>
-            <div class="error" *ngIf="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)">
-        Campo não pode ser nulo
+      <div class="error" *ngIf="passwordCtrl.hasError('required') && (passwordCtrl.dirty || passwordCtrl.touched)">
+        Campo obrigatório
       </div>
     </ion-item>
 
     <ion-row class="botaoToken">
       <ion-col>
         <ng-container *ngIf="!loading; else loadingRef" >
-          <ion-button type="submit" color="tertiary" [disabled]="form.invalid" (click)="resetPassword(form.value)">Recuperar</ion-button>
+          <ion-button type="submit" color="tertiary" [disabled]="form.invalid" (click)="resetPassword(form.value)">
+            Salvar nova senha
+          </ion-button>
         </ng-container>
         <ng-template #loadingRef>
           <div class="spinner-container">

@@ -1,6 +1,8 @@
+import { ErrorEnum, IRequestError } from './../usual/models/request-error.model';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { finalize } from 'rxjs/operators';
 import { ForgotPasswordService } from './forgotPassword.service';
 
@@ -16,7 +18,8 @@ export class ForgotPasswordPage implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _forgotPasswrodService: ForgotPasswordService,
-    private _router: Router
+    private _router: Router,
+    private _toastController: ToastController
     ) { }
 
   ngOnInit() {
@@ -41,15 +44,23 @@ export class ForgotPasswordPage implements OnInit {
     )
     .subscribe(() => {
       this._router.navigate(['token']);
-    }, err => {
-      console.log(err);
+    }, async (err: IRequestError) => {
+      const toastMessage = err.error.error === ErrorEnum.USER_NOT_FOUND
+      ? 'Usuário não encontrado. Verifique se o email foi digitado corretamente.'
+      : 'Ocorreu um erro. Tente novamente mais tarde.'
+
+      const toast = await this._toastController.create({
+        message: toastMessage,
+        duration: 3000
+      });
+      toast.present();
     });
   }
 
   public back(): void {
     history.back();
   }
-  
+
   public get emailCtrl(): AbstractControl {
     return this.form.get('email');
   }
