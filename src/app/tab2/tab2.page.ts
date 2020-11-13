@@ -73,7 +73,7 @@ export class Tab2Page implements OnInit, OnDestroy {
     ).subscribe(response => {
       this.transactions = response;
     }, err => {
-      console.log('err', err);
+      this.transactions = [];
     });
   }
 
