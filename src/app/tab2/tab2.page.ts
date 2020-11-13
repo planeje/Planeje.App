@@ -27,6 +27,7 @@ export class Tab2Page implements OnInit, OnDestroy {
   public filterForm: FormGroup;
   public startDate = dayjs().startOf('month').toISOString();
   public endDate = dayjs().endOf('month').toISOString();
+  public transactionsBalance = 0;
 
   constructor(
     private _modalCtlr: ModalController,
@@ -35,14 +36,14 @@ export class Tab2Page implements OnInit, OnDestroy {
     private _fb: FormBuilder
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.filterForm = this._buildFilterForm(this.startDate, this.endDate);
-    this._subscriptionFilter$ = this.filterForm.valueChanges.subscribe(response => {
-      this._getTransactions(response)
-    })
-    this._getTransactions(this.filterForm.value);
+    await this._getTransactions(this.filterForm.value);
     this._categoryService.getCategories().subscribe(response => {
       this.categories = response;
+    });
+    this._subscriptionFilter$ = this.filterForm.valueChanges.subscribe(response => {
+      this._getTransactions(response);
     });
   }
 
@@ -54,7 +55,7 @@ export class Tab2Page implements OnInit, OnDestroy {
     });
   }
 
-  private _getTransactions(data: { categoryId?: number, dataInicial: dayjs.Dayjs, dataFinal: dayjs.Dayjs }): void {
+  private async _getTransactions(data: { categoryId?: number, dataInicial: dayjs.Dayjs, dataFinal: dayjs.Dayjs }): Promise<void> {
     this.loading = true;
     data.dataInicial = dayjs(data.dataInicial)
     .hour(0)
@@ -64,12 +65,29 @@ export class Tab2Page implements OnInit, OnDestroy {
     .hour(23)
     .minute(59)
     .second(59);
-    this._transactionService.getTransactions(data)
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(response => {
-        this.transactions = response;
+    this._transactionService.getTransactions(data).pipe(
+      finalize(() => {
         this.loading = false;
+        this._calcBalance(this.transactions);
+      })
+    ).subscribe(response => {
+      this.transactions = response;
+    }, err => {
+      console.log('err', err);
+    });
+  }
+
+  private _calcBalance(transactions: Transaction[]) {
+    this.transactionsBalance = 0;
+    if (transactions.length > 0) {
+      transactions.map(item => {
+        if(item.transactionType === TransactionType.EXPENSE) {
+          this.transactionsBalance -= item.transactionValue;
+        } else {
+          this.transactionsBalance += item.transactionValue;
+        }
       });
+    }
   }
 
   public async showModalExpense(expense?: Transaction): Promise<void> {

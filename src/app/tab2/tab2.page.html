@@ -3,6 +3,9 @@
     <ion-menu-button color="dark" type="button" auto-hide="false"></ion-menu-button>
   </ion-buttons>
   <ion-title>Transações</ion-title>
+  <ion-text slot="end" style="padding: 16px;">
+    {{ transactionsBalance | currency }}
+  </ion-text>
 </ion-toolbar>
 <ion-content>
   <div class="filtro">
