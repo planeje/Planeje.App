@@ -14,22 +14,22 @@
     <ion-item>
       <ion-label position="stacked">Descrição</ion-label>
       <ion-input formControlName="description"></ion-input>
-      <div class="error" *ngIf="descriptionCtrl.invalid && (descriptionCtrl.dirty || descriptionCtrl.touched)">
-        Campo não pode ser nulo
+      <div class="error" *ngIf="descriptionCtrl.hasError('required') && (descriptionCtrl.dirty || descriptionCtrl.touched)">
+        Campo obrigatório.
       </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Valor da Meta</ion-label>
-      <ion-input type="number"[numbersOnly] formControlName="value"></ion-input>
-      <div class="error" *ngIf="valueCtrl.invalid && (valueCtrl.dirty || valueCtrl.touched)">
-        Campo não pode ser nulo
+      <ion-input type="number" [numbersOnly] formControlName="value"></ion-input>
+      <div class="error" *ngIf="valueCtrl.hasError('required') && (valueCtrl.dirty || valueCtrl.touched)">
+        Campo obrigatório.
       </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Data de vencimento</ion-label>
-      <ion-datetime formControlName="goalDueDate" displayFormat="DD/MM/YYYY"></ion-datetime>
-      <div class="error" *ngIf="goalDueDateCtrl.invalid && (goalDueDateCtrl.dirty || goalDueDateCtrl.touched)">
-        Campo não pode ser nulo
+      <ion-datetime formControlName="goalDueDate" [min]="currentDate" displayFormat="DD/MM/YYYY"></ion-datetime>
+      <div class="error" *ngIf="goalDueDateCtrl.hasError('required') && (goalDueDateCtrl.dirty || goalDueDateCtrl.touched)">
+        Campo obrigatório.
       </div>
     </ion-item>
     <ion-button [disabled]="form.invalid" class="botaoModal" size="block" color="success" (click)="onSave(form.value)">Salvar</ion-button>

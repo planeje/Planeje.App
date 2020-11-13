@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import * as dayjs from 'dayjs';
 import { Actions } from 'src/app/usual/models/actions.enum';
 import { SpendingGoal } from 'src/app/usual/models/spending-goal.model';
 import { SpendingGoalService } from '../spending-goal.service';
@@ -17,6 +18,7 @@ export class CategoryMetaComponent implements OnInit {
   public form: FormGroup;
   public action: Actions;
   public actionsType = Actions;
+  public currentDate = dayjs().startOf('day').add(1, 'day').toISOString();
   constructor(
     private _modalCtrl: ModalController,
     private _fb: FormBuilder,
@@ -63,7 +65,7 @@ export class CategoryMetaComponent implements OnInit {
     });
   }
 
-  public onSave(formValue: SpendingGoal) {
+  public onSave(formValue: SpendingGoal): void {
     this.action === this.actionsType.EDIT
     ? this._editGoal(formValue)
     : this._createGoal(formValue)
@@ -72,12 +74,14 @@ export class CategoryMetaComponent implements OnInit {
   public close(): void {
     this._modalCtrl.dismiss();
   }
+
   public get descriptionCtrl(): AbstractControl {
     return this.form.get('description');
-  }  
+  }
   public get valueCtrl(): AbstractControl {
     return this.form.get('value');
-  }  
+  }
+
   public get goalDueDateCtrl(): AbstractControl {
     return this.form.get('goalDueDate');
   }

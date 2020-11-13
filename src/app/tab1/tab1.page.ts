@@ -6,7 +6,6 @@ import { finalize } from 'rxjs/operators';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { Category } from '../usual/models/category.model';
 
-
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
