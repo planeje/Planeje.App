@@ -14,20 +14,17 @@
     <ion-item>
       <ion-label position="stacked">Descrição</ion-label>
       <ion-input formControlName="description"></ion-input>
-      <div class="error" *ngIf="descriptionCtrl.hasError('required') && (descriptionCtrl.dirty || descriptionCtrl.touched)">
-        Campo obrigatório.
-      </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Valor da Meta</ion-label>
-      <ion-input type="number" [numbersOnly] formControlName="value"></ion-input>
+      <ion-input type="number" formControlName="value"></ion-input>
       <div class="error" *ngIf="valueCtrl.hasError('required') && (valueCtrl.dirty || valueCtrl.touched)">
         Campo obrigatório.
       </div>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Data de vencimento</ion-label>
-      <ion-datetime formControlName="goalDueDate" [min]="currentDate" displayFormat="DD/MM/YYYY"></ion-datetime>
+      <ion-datetime cancelText='Cancelar' doneText='Salvar' formControlName="goalDueDate" [min]="currentDate" displayFormat="DD/MM/YYYY"></ion-datetime>
       <div class="error" *ngIf="goalDueDateCtrl.hasError('required') && (goalDueDateCtrl.dirty || goalDueDateCtrl.touched)">
         Campo obrigatório.
       </div>

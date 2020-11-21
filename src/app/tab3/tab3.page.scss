@@ -39,9 +39,17 @@ ion-icon {
 }
 
 .buttonFabList {
-  margin-top: -20px;
-  margin-right: 32px;
+  margin-right: 30px;
+  margin-top: 15px;
 }
 ion-list {
   padding-bottom: 9vh;
+}
+
+.options {
+  padding-top: 4vh;
+}
+
+.accountName{
+  font-size: 20px;
 }
