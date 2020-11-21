@@ -51,6 +51,7 @@ export class Tab1Page implements OnInit {
       const index = this.categories.findIndex(el => el.id === id);
       this.categories.splice(index, 1);
     });
+    this.softRefresh();
   }
 
   public async showModalMeta(categoryId: number): Promise<void> {
@@ -59,5 +60,20 @@ export class Tab1Page implements OnInit {
       componentProps: { categoryId }
     });
     categoryMeta.present();
+  }
+  doRefresh(event) {
+    this.loading = true
+
+    setTimeout(() => {
+      this.loading = false
+      event.target.complete();
+    }, 2000);
+  }  
+  softRefresh() {
+    this.loading = true
+
+    setTimeout(() => {
+      this.loading = false
+    }, 800);
   }
 }

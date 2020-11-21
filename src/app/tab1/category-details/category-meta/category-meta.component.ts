@@ -38,7 +38,7 @@ export class CategoryMetaComponent implements OnInit {
   private _buildForm(): FormGroup {
     return this._fb.group({
       id: new FormControl(null),
-      description: new FormControl('', Validators.required),
+      description: new FormControl(''),
       goalDueDate: new FormControl('', Validators.required),
       value: new FormControl(null, Validators.required)
     });

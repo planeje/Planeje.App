@@ -12,6 +12,7 @@ import { BankAccount } from '../usual/models/bank-account.model';
 })
 export class Tab3Page implements OnInit {
   public loading = true;
+  public isOpen = true;
   public bankAccounts: BankAccount[];
 
   constructor(
@@ -53,4 +54,14 @@ export class Tab3Page implements OnInit {
       console.log(err);
     });
   }
+
+  doRefresh(event) {
+    this.loading = true
+
+    setTimeout(() => {
+      this.loading = false
+      event.target.complete();
+    }, 2000);
+  }
 }
+

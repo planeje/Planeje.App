@@ -24,20 +24,13 @@ export class CategoryGraphComponent implements OnInit{
       yAxes: [{
         ticks: {
           beginAtZero: true,
-          max : 500,
+          max : 1000,
         }
       }]
     }
   };
   public categoriesGraph: CategoriesGraph[];
-  // =  [
-  // {  category_id: 500, category_name: 'Lazer', color: [{ backgroundColor: 'blue'}]} ,
-  // {  category_id: 400, category_name: 'Casa',color: [{ backgroundColor: 'red'}]},
-  // {  category_id: 300, category_name: 'Despesas fixas', color: [{ backgroundColor: 'green'}]},
-  // ];
 
-  // Recebe ao nome das categorias
-  // public barChartLabels: Label = this.categories.map(c => c.category_name)
   // Tipo do gráfico
   public barChartType: ChartType = 'bar';
   // Se mostra a legenda

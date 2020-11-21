@@ -141,4 +141,12 @@ export class Tab2Page implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._subscriptionFilter$.unsubscribe();
   }
+  doRefresh(event) {
+    this.loading = true
+
+    setTimeout(() => {
+      this.loading = false
+      event.target.complete();
+    }, 2000);
+  }
 }

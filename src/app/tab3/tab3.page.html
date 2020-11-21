@@ -6,6 +6,8 @@
 </ion-toolbar>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  </ion-refresher>
   <ng-container *ngIf="loading; else accountsList">
     <div class="spinner-container">
       <ion-spinner name="crescent"></ion-spinner>
@@ -18,17 +20,17 @@
     <ng-template #listRef>
       <ion-item-group>
         <ion-item *ngFor="let item of bankAccounts">
-          <ion-label class="label-info" pisition="stacked">
-            <span>{{ item.accountName }}</span>
-            <span>R$ {{ item.balance }}</span>
+          <ion-label class="label-info" position="stacked">
+            <span class="accountName">{{ item.accountName }}</span>
+            <span>{{ item.balance | currency }}</span>
           </ion-label>
-          <ion-fab horizontal="end" (click)="show()">
+          <ion-fab class="options" horizontal="end">
             <ion-fab-button class="buttonItem" color="transparent">
-              <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+              <ion-icon class="optionsButton1" name="ellipsis-vertical-outline"></ion-icon>
             </ion-fab-button>
             <ion-fab-list class="buttonFabList" side="start">
               <ion-fab-button (click)="showModalBankAccount(item)" color="light">
-                <ion-icon name="create-outline"></ion-icon>
+                <ion-icon class="optionsButton" name="create-outline"></ion-icon>
               </ion-fab-button>
               <ion-fab-button (click)="deleteBankAccount(item.id)" color="light">
                   <ion-icon name="trash-outline"></ion-icon>

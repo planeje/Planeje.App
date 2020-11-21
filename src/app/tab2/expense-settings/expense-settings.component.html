@@ -18,7 +18,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Valor da despesa</ion-label>
-      <ion-input type="number"[numbersOnly] formControlName="transactionValue"></ion-input>
+      <ion-input type="number" formControlName="transactionValue"></ion-input>
       <div class="error" *ngIf="transactionValueCtrl.invalid && (transactionValueCtrl.dirty || transactionValueCtrl.touched)">
         Campo não pode ser nulo
       </div>
@@ -37,7 +37,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Data de vencimento</ion-label>
-      <ion-datetime formControlName="transactionDueDate" displayFormat="DD/MM/YYYY"></ion-datetime>
+      <ion-datetime cancelText='Cancelar' doneText='Salvar' formControlName="transactionDueDate" displayFormat="DD/MM/YYYY"></ion-datetime>
       <div class="error" *ngIf="transactionDueDateCtrl.invalid && (transactionDueDateCtrl.dirty || transactionDueDateCtrl.touched)">
         Campo não pode ser nulo
       </div>

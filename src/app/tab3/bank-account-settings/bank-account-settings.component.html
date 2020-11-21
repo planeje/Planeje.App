@@ -19,7 +19,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Saldo</ion-label>
-      <ion-input type="number" [numbersOnly] formControlName="balance" placeholder="R$"></ion-input>
+      <ion-input type="number" formControlName="balance" placeholder="R$"></ion-input>
       <div class="error" *ngIf="balanceCtrl.invalid && (balanceCtrl.dirty || balanceCtrl.touched)">
         Campo não pode ser nulo
       </div>

@@ -11,17 +11,23 @@
   </ion-text>
 </ion-toolbar>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  </ion-refresher>
   <div class="filtro">
     <form [formGroup]="filterForm">
       <ion-item>
         <ion-label position="fixed">Período</ion-label>
         <ion-datetime
+          cancelText='Cancelar' 
+          doneText='Salvar'
           formControlName="dataInicial"
           [(ngModel)]="startDate"
           [max]="endDate"
           displayFormat="DD/MM/YYYY">
         </ion-datetime>
         <ion-datetime
+          cancelText='Cancelar' 
+          doneText='Salvar'
           formControlName="dataFinal"
           displayFormat="DD/MM/YYYY"
           [min]="startDate"
