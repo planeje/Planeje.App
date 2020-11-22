@@ -49,7 +49,7 @@
                 <ion-row class="details">
                   <ng-container *ngIf="details">
                     <ion-col *ngIf="item.table === 'Transactions'"><p class="content-log">Transação</p><p>{{ item.transaction.description }}</p></ion-col>
-                    <ion-col *ngIf="item.table === 'BankAccounts'"><p class="content-log">Conta Bancária</p><p>{{ item.bankAccount.name }}</p></ion-col>
+                    <ion-col *ngIf="item.table === 'BankAccounts'"><p class="content-log">Conta Bancária</p><p>{{ item.bankAccount.accountName }}</p></ion-col>
                     <ion-col *ngIf="item.table === 'Category'"><p class="content-log">Categoria</p><p>{{ item.category?.name || '' }}</p></ion-col>
                     <ion-col *ngIf="item.table ==='Transactions'"><p class="content-log">Valor</p><p>{{ item.transaction.transactionValue }}</p></ion-col>
                     <ion-col><p class="content-log">Data</p><p>{{ item.createdAt | date:'dd/MM/yyyy' }}</p></ion-col>
