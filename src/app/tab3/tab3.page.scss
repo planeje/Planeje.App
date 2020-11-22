@@ -1,10 +1,10 @@
+.text-center {
+  text-align: center;
+}
+
 .botaoFab {
   width: 50px;
   height: 50px;
-}
-
-.text-center {
-  text-align: center;
 }
 
 ion-item-option {
@@ -15,7 +15,7 @@ ion-item {
   .label-info {
     display: flex;
     justify-content: space-between;
-    padding-right: 32px;
+    padding-right: 80px;
   }
 }
 
@@ -34,22 +34,28 @@ ion-icon {
   height: 20px;
 }
 .buttonItem{
-  height: 20px;
+  top: -40px;
+  height: 30px;
   width: 20px;
 }
 
 .buttonFabList {
-  margin-right: 30px;
-  margin-top: 15px;
+  margin: 0px 25px 0px 0px;
+  margin-top: -5px;
+  margin-right: 32px;
 }
+
 ion-list {
   padding-bottom: 9vh;
 }
 
-.options {
-  padding-top: 4vh;
+ion-fab-button {
+  --box-shadow: none;
 }
 
 .accountName{
   font-size: 20px;
+}
+ion-fab-button {
+  --box-shadow: none;
 }

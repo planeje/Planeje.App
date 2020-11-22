@@ -76,4 +76,8 @@ export class Tab1Page implements OnInit {
       this.loading = false
     }, 800);
   }
+
+  hardRefresh() {
+    location.reload();
+  }
 }

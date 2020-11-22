@@ -63,5 +63,9 @@ export class Tab3Page implements OnInit {
       event.target.complete();
     }, 2000);
   }
+
+  hardRefresh() {
+    location.reload();
+  }
 }
 

@@ -2,6 +2,9 @@
   <ion-buttons slot="start">
     <ion-menu-button color="dark" type="button" auto-hide="false"></ion-menu-button>
   </ion-buttons>
+  <ion-buttons slot="end" (click)="hardRefresh()">
+    <ion-button color="dark" type="button"><ion-icon name="refresh-outline"></ion-icon></ion-button>
+  </ion-buttons>
   <ion-title>Contas bancárias</ion-title>
 </ion-toolbar>
 
@@ -24,16 +27,20 @@
             <span class="accountName">{{ item.accountName }}</span>
             <span>{{ item.balance | currency }}</span>
           </ion-label>
-          <ion-fab class="options" horizontal="end">
+          <ion-fab horizontal="end" slot="end">
             <ion-fab-button class="buttonItem" color="transparent">
-              <ion-icon class="optionsButton1" name="ellipsis-vertical-outline"></ion-icon>
+              <ion-icon name="ellipsis-vertical-outline"></ion-icon>
             </ion-fab-button>
             <ion-fab-list class="buttonFabList" side="start">
-              <ion-fab-button (click)="showModalBankAccount(item)" color="light">
-                <ion-icon class="optionsButton" name="create-outline"></ion-icon>
+              <ion-fab-button  color="transparent">
+                  <ion-item-option  type="button" (click)="showModalBankAccount(item)">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-item-option>
               </ion-fab-button>
-              <ion-fab-button (click)="deleteBankAccount(item.id)" color="light">
+              <ion-fab-button  color="transparent">
+                  <ion-item-option type="button" (click)="deleteBankAccount(item.id)">
                   <ion-icon name="trash-outline"></ion-icon>
+                  </ion-item-option>
               </ion-fab-button>
             </ion-fab-list>
           </ion-fab>
