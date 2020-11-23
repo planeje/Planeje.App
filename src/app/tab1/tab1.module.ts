@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UsualModule } from '../usual/usual.module';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { CategoryMetaComponent } from './category-details/category-meta/category-meta.component';
-import { ColorPickerModule } from 'ngx-color-picker';
+import { ColorChromeModule } from 'ngx-color/chrome';
 
 @NgModule({
   imports: [
@@ -23,7 +23,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
     UsualModule,
-    ColorPickerModule
+    ColorChromeModule
   ],
   declarations: [
     Tab1Page,

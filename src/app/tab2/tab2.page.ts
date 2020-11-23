@@ -4,7 +4,7 @@ import { TransactionService } from './transaction.service';
 import { ExpenseSettingsComponent } from './expense-settings/expense-settings.component';
 import { RevenueSettingsComponent } from './revenue-settings/revenue-settings.component';
 import { TransactionType } from '../usual/models/transactionType.enum';
-import {  finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { Transaction } from '../usual/models/transaction.model';
 import { CategoryService } from '../tab1/category.service';
 import { Category } from '../usual/models/category.model';

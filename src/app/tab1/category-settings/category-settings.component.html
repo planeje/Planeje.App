@@ -15,14 +15,35 @@
       <ion-label position="stacked">Nome</ion-label>
       <ion-input formControlName="name"></ion-input>
       <div class="error" *ngIf="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)">
-        Campo não pode ser nulo
+        Campo obrigatório
       </div>
     </ion-item>
     <ion-item>
+      <ion-icon
+        (click)="togglePicker()"
+        horizontal="center"
+        slot="start" name="ellipse"
+        [ngStyle]="{'color': colorCtrl.value }"></ion-icon>
       <ion-label position="stacked">Cor</ion-label>
-      <input formControlName="color" [value]="color1" [(ngModel)]="color" [(colorPicker)]="color" [style.background]="color"/>
+      <input
+        class="color-picker-input"
+        type="text"
+        formControlName="color"
+        (click)="togglePicker()"
+        [dropSpecialCharacters]="false"
+        [specialCharacters]="['#']"
+        [validation]="false"
+        mask="#AAAAAA"
+        style="background: transparent; border: none; outline: none;"
+      />
+      <color-chrome
+        class="color-picker"
+        *ngIf="showPicker"
+        [color]="colorCtrl.value"
+        (onChangeComplete)="changedColor($event)"
+      ></color-chrome>
       <div class="error" *ngIf="colorCtrl.invalid && (colorCtrl.dirty || colorCtrl.touched)">
-        Campo não pode ser nulo
+        Campo obrigatório
       </div>
     </ion-item>
     <ng-container *ngIf="!loading; else loadingRef">
