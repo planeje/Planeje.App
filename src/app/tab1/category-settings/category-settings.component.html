@@ -23,7 +23,8 @@
         (click)="togglePicker()"
         horizontal="center"
         slot="start" name="ellipse"
-        [ngStyle]="{'color': colorCtrl.value }"></ion-icon>
+        [ngStyle]="{'color': colorCtrl.value }"
+        style="cursor: pointer;"></ion-icon>
       <ion-label position="stacked">Cor</ion-label>
       <input
         class="color-picker-input"
@@ -34,7 +35,7 @@
         [specialCharacters]="['#']"
         [validation]="false"
         mask="#AAAAAA"
-        style="background: transparent; border: none; outline: none;"
+        style="background: transparent; border: none; outline: none; cursor: pointer;"
       />
       <color-chrome
         class="color-picker"
