@@ -3,6 +3,17 @@
   color: red;
 }
 
+.color-picker-input {
+  background-attachment: transparent;
+  border: none;
+  outline: none;
+}
+
+.color-picker {
+  position: fixed;
+  top: 170px;
+}
+
 .spinner-container {
   display: flex;
   justify-content: center;

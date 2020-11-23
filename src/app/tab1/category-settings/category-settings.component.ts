@@ -5,6 +5,7 @@ import { CategoryService } from '../category.service';
 import { finalize } from 'rxjs/operators';
 import { Actions } from 'src/app/usual/models/actions.enum';
 import { Category } from 'src/app/usual/models/category.model';
+import { ColorEvent } from 'ngx-color';
 
 @Component({
   selector: 'app-category-settings',
@@ -18,6 +19,7 @@ export class CategorySettingsComponent implements OnInit {
   public form: FormGroup;
   public action: Actions;
   public loading = false;
+  public showPicker = false;
 
   constructor(
     private _modalCtrl: ModalController,
@@ -39,7 +41,7 @@ export class CategorySettingsComponent implements OnInit {
     return this._fb.group({
       id: new FormControl(null),
       name: new FormControl('', Validators.required),
-      color: new FormControl('', Validators.required)
+      color: new FormControl('#3463CE', Validators.required)
     });
   }
 
@@ -73,6 +75,20 @@ export class CategorySettingsComponent implements OnInit {
       .subscribe(response => {
         this._modalCtrl.dismiss({ action: Actions.EDIT });
       });
+  }
+
+  public onFieldBlur(color: string): void {
+    if (!!!color) {
+      this.colorCtrl.setValue('#FFFFFF');
+    }
+  }
+
+  public changedColor(event: ColorEvent): void {
+    this.colorCtrl.setValue(event.color.hex);
+  }
+
+  public togglePicker(): void {
+    this.showPicker = !this.showPicker;
   }
 
   public close(): void {
