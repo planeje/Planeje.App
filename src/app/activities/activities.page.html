@@ -15,8 +15,8 @@
       <p class="text-center">Nenhuma atividade registrada.</p>
     </ng-container>
     <ng-template #listRef>
-      <ion-list *ngFor="let item of activities">
-        <ion-card>
+      <ion-list>
+        <ion-card *ngFor="let item of activities">
           <ion-item-group>
             <ion-item>
               <ion-grid>
@@ -33,21 +33,14 @@
                   <ion-col size="5">
                     {{ item.createdAt | date:'dd/MM/yyyy'}}
                   </ion-col>
-                  <ion-col size="2" (click)="show()">
-                    <ng-container *ngIf="!details">
-                      <ion-button color="light" class="botaoDetails">
-                        <ion-icon name="add-outline"></ion-icon>
-                      </ion-button>
-                    </ng-container>
-                    <ng-container *ngIf="details">
-                      <ion-button color="light" class="botaoDetails">
-                        <ion-icon name="remove-outline"></ion-icon>
-                      </ion-button>
-                    </ng-container>
+                  <ion-col size="2">
+                    <ion-button (click)="$event.stopPropagation(); show(item.id);" color="light" shape="round">
+                      <ion-icon [name]="expandedActivity !== item.id ? 'add-outline' : 'remove-outline'"></ion-icon>
+                    </ion-button>
                   </ion-col>
                 </ion-row>
                 <ion-row class="details">
-                  <ng-container *ngIf="details">
+                  <ng-container *ngIf="expandedActivity === item.id">
                     <ion-col *ngIf="item.table === 'Transactions'"><p class="content-log">Transação</p><p>{{ item.transaction.description }}</p></ion-col>
                     <ion-col *ngIf="item.table === 'BankAccounts'"><p class="content-log">Conta Bancária</p><p>{{ item.bankAccount.accountName }}</p></ion-col>
                     <ion-col *ngIf="item.table === 'Category'"><p class="content-log">Categoria</p><p>{{ item.category?.name || '' }}</p></ion-col>

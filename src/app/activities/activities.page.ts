@@ -9,7 +9,8 @@ import { ActivitiesService } from './activities.service';
   styleUrls: ['./activities.page.scss'],
 })
 export class ActivitiesPage implements OnInit {
-  public details:boolean;
+  public details: boolean;
+  public expandedActivity: number;
   public loading = true;
   public activities: Activities[];
 
@@ -29,12 +30,9 @@ export class ActivitiesPage implements OnInit {
       });
   }
 
-  public show(): void {
-    if(!this.details){
-      this.details = true;
-    }
-    else {
-      this.details = false;
-    }
+  public show(id: number): void {
+    this.expandedActivity === id
+    ? this.expandedActivity = 0
+    : this.expandedActivity = id;
   }
 }
