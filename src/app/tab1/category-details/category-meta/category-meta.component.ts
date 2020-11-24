@@ -19,6 +19,7 @@ export class CategoryMetaComponent implements OnInit {
   public action: Actions;
   public actionsType = Actions;
   public currentDate = dayjs().startOf('day').add(1, 'day').toISOString();
+  public maxDate = dayjs().startOf('day').add(5, 'year').toISOString();
   constructor(
     private _modalCtrl: ModalController,
     private _fb: FormBuilder,

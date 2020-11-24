@@ -27,6 +27,7 @@ export class Tab2Page implements OnInit, OnDestroy {
   public filterForm: FormGroup;
   public startDate = dayjs().startOf('month').toISOString();
   public endDate = dayjs().endOf('month').toISOString();
+  public maxDate = dayjs().startOf('day').add(5, 'year').toISOString();
   public transactionsBalance = 0;
 
   constructor(

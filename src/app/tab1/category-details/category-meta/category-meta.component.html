@@ -24,7 +24,13 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Data de vencimento</ion-label>
-      <ion-datetime cancelText='Cancelar' doneText='Salvar' formControlName="goalDueDate" [min]="currentDate" displayFormat="DD/MM/YYYY"></ion-datetime>
+      <ion-datetime
+        cancelText='Cancelar'
+        doneText='Salvar'
+        formControlName="goalDueDate"
+        [min]="currentDate"
+        [max]="maxDate"
+        displayFormat="DD/MM/YYYY"></ion-datetime>
       <div class="error" *ngIf="goalDueDateCtrl.hasError('required') && (goalDueDateCtrl.dirty || goalDueDateCtrl.touched)">
         Campo obrigatório.
       </div>

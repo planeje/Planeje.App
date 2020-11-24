@@ -18,7 +18,7 @@
       <ion-item>
         <ion-label position="fixed">Período</ion-label>
         <ion-datetime
-          cancelText='Cancelar' 
+          cancelText='Cancelar'
           doneText='Salvar'
           formControlName="dataInicial"
           [(ngModel)]="startDate"
@@ -26,11 +26,12 @@
           displayFormat="DD/MM/YYYY">
         </ion-datetime>
         <ion-datetime
-          cancelText='Cancelar' 
+          cancelText='Cancelar'
           doneText='Salvar'
           formControlName="dataFinal"
           displayFormat="DD/MM/YYYY"
           [min]="startDate"
+          [max]="maxDate"
           [(ngModel)]="endDate">
         </ion-datetime>
       </ion-item>
