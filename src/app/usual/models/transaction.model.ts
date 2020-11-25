@@ -5,7 +5,7 @@ export interface Transaction {
   description: string;
   recurrent: boolean;
   transactionValue: number;
-  transactionDate: Date;
+  createdAt: Date;
   transactionDueDate: Date;
   transactionType: TransactionType;
   accountId: number;

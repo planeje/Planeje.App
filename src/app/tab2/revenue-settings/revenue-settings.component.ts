@@ -53,7 +53,7 @@ export class RevenueSettingsComponent implements OnInit {
       transactionValue: new FormControl(null, Validators.required),
       categoryId: new FormControl(null),
       accountId: new FormControl(null, Validators.required),
-      transactionDate: new FormControl(new Date(), Validators.required),
+      createdAt: new FormControl(new Date(), Validators.required),
       transactionDueDate: new FormControl(new Date().toJSON(), Validators.required),
       transactionType: new FormControl(TransactionType.REVENUE, Validators.required),
     });
@@ -66,7 +66,7 @@ export class RevenueSettingsComponent implements OnInit {
       recurrent: revenue.recurrent,
       transactionValue: revenue.transactionValue,
       accountId: revenue.accountId,
-      transactionDate: revenue.transactionDate,
+      createdAt: revenue.createdAt,
       transactionDueDate: revenue.transactionDueDate
     });
   }

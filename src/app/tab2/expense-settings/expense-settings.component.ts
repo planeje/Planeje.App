@@ -58,7 +58,7 @@ export class ExpenseSettingsComponent implements OnInit {
       transactionValue: new FormControl(null, Validators.required),
       categoryId: new FormControl(null, Validators.required),
       accountId: new FormControl(null, Validators.required),
-      transactionDate: new FormControl(new Date(), Validators.required),
+      createdAt: new FormControl(new Date(), Validators.required),
       transactionDueDate: new FormControl(new Date(), Validators.required),
       transactionType: new FormControl(TransactionType.EXPENSE),
     });
@@ -72,7 +72,7 @@ export class ExpenseSettingsComponent implements OnInit {
       transactionValue: expense.transactionValue,
       categoryId: expense.categoryId,
       accountId: expense.accountId,
-      transactionDate: expense.transactionDate,
+      createdAt: expense.createdAt,
       transactionDueDate: expense.transactionDueDate
     });
   }
