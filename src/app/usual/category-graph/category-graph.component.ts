@@ -8,7 +8,7 @@ type CategoriesGraph = {
   id: number;
   name: string;
   color: Color[];
-  spendigGoal: SpendingGoal;
+  spendingGoal: SpendingGoal;
 }
 
 @Component({
@@ -30,14 +30,9 @@ export class CategoryGraphComponent implements OnInit{
     }
   };
   public categoriesGraph: CategoriesGraph[];
-
-  // Tipo do gráfico
   public barChartType: ChartType = 'bar';
-  // Se mostra a legenda
   public barChartLegend = true;
-    // Valor gasto
   public barChartData: ChartDataSets[];
-  // Recebe as cores das categorias
   public barChartColors: Color[];
   constructor() {
   }
@@ -52,22 +47,35 @@ export class CategoryGraphComponent implements OnInit{
           id: c.id,
           name: c.name,
           color: [{ backgroundColor: c.color }],
-          spendigGoal: c.spendingGoals[0]
+          spendingGoal: c.spendingGoals[0]
         }
       }
     });
-
-    if (!!this.categoriesGraph) {
+    if (this._hasGoal(this.categoriesGraph)) {
       this.barChartData = this.categoriesGraph.map(c => {
         const { name } = c;
-        const columnValue = (c.spendigGoal?.value - c.spendigGoal?.valueAvaible) || 0
+        const columnValue = (c.spendingGoal?.value - c.spendingGoal?.valueAvaible) || 0
         return { data: [columnValue], label: name }
       });
       this.barChartColors = this.categoriesGraph.map(c => c.color[0]);
     } else {
-      this.barChartData = [{ data: [0], label: 'Sem metas atuais' }];
+      this.barChartData = [{ data: [0], label: 'Nenuma meta cadastrada' }];
+    }
+  }
+
+  private _hasGoal(categoriesArr: CategoriesGraph[]): boolean {
+    let spendingGoal: any;
+    categoriesArr.forEach(el => {
+      if(!!!spendingGoal && !!el.spendingGoal) {
+        spendingGoal = el.spendingGoal;
+      }
+    })
+
+    if(!!spendingGoal){
+      return true
     }
 
+    return false;
   }
 }
 
