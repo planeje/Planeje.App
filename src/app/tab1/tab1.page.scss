@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.label-info {
+  display: flex;
+  align-items: center;
+}
+
 .botaoFab {
   width: 50px;
   height: 50px;
@@ -24,7 +29,7 @@ ion-item {
 }
 
 ion-icon {
-  color: black;;
+  color: black;
   width: 20px;
   height: 20px;
 }

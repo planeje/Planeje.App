@@ -21,31 +21,33 @@
       <p class="text-center">Nenhuma conta bancária cadastrada.</p>
     </ng-container>
     <ng-template #listRef>
-      <ion-item-group>
-        <ion-item *ngFor="let item of bankAccounts">
-          <ion-label class="label-info" position="stacked">
-            <span class="accountName">{{ item.accountName }}</span>
-            <span>{{ item.balance | currency }}</span>
-          </ion-label>
-          <ion-fab horizontal="end" slot="end">
-            <ion-fab-button class="buttonItem" color="transparent">
-              <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-list class="buttonFabList" side="start">
-              <ion-fab-button  color="transparent">
-                  <ion-item-option  type="button" (click)="showModalBankAccount(item)">
-                  <ion-icon name="create-outline"></ion-icon>
-                </ion-item-option>
+      <ion-list>
+        <ion-item-group>
+          <ion-item *ngFor="let item of bankAccounts">
+            <ion-label class="label-info">
+              <span class="accountName">{{ item.accountName }}</span>
+              <span>{{ item.balance | currency }}</span>
+            </ion-label>
+            <ion-fab horizontal="end" slot="end">
+              <ion-fab-button class="buttonItem" color="transparent">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
               </ion-fab-button>
-              <ion-fab-button  color="transparent">
-                  <ion-item-option type="button" (click)="deleteBankAccount(item.id)">
-                  <ion-icon name="trash-outline"></ion-icon>
+              <ion-fab-list class="buttonFabList" side="start">
+                <ion-fab-button color="light">
+                    <ion-item-option  type="button" (click)="showModalBankAccount(item)">
+                    <ion-icon name="create-outline"></ion-icon>
                   </ion-item-option>
-              </ion-fab-button>
-            </ion-fab-list>
-          </ion-fab>
-        </ion-item>
-      </ion-item-group>
+                </ion-fab-button>
+                <ion-fab-button color="light">
+                    <ion-item-option type="button" (click)="deleteBankAccount(item.id)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    </ion-item-option>
+                </ion-fab-button>
+              </ion-fab-list>
+            </ion-fab>
+          </ion-item>
+        </ion-item-group>
+      </ion-list>
     </ng-template>
   </ng-template>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

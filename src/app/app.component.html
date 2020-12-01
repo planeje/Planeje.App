@@ -1,27 +1,23 @@
 <ion-app>
-    <ion-menu menuId="fi" class="menu_main" content-id="menu">
-      <!-- <ion-header collapse="condense">
-          <h2>Nome do usuário</h2>
-          <p>Email do usuário</p>
-      </ion-header> -->
-      <ion-content>
-        <ion-item>
-          <ion-icon name="home-outline"></ion-icon>
-          <ion-button color="light" slot="end" [routerLink]="['/tabs/tab2']" (click)="dismiss()">Home</ion-button>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="person-circle-outline"></ion-icon>
-          <ion-button color="light" slot="end" [routerLink]="['/user-account']" (click)="dismiss()">Conta de usuário</ion-button>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="server-outline"></ion-icon>
-          <ion-button color="light" slot="end" [routerLink]="['/activities']" (click)="dismiss()">Registro de atividades</ion-button>
-        </ion-item>
-        <ion-item vertical="bottom" horizontal="end" (click)="logout()">
-          <ion-icon name="log-out-outline"></ion-icon>
-          <ion-button color="light" slot="end">Sair</ion-button>
-        </ion-item>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="menu"></ion-router-outlet>
+  <ion-menu menuId="fi" class="menu_main" content-id="menu">
+    <ion-content>
+      <ion-item [routerLink]="['/tabs/tab2']" (click)="dismiss()">
+        <ion-icon slot="start" name="home-outline"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/user-account']" (click)="dismiss()">
+        <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+        <ion-label>Conta de usuário</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/activities']" (click)="dismiss()">
+        <ion-icon slot="start" name="server-outline"></ion-icon>
+        <ion-label>Registro de atividades</ion-label>
+      </ion-item>
+      <ion-item vertical="bottom" (click)="logout()">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        <ion-label>Sair</ion-label>
+      </ion-item>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="menu"></ion-router-outlet>
 </ion-app>
