@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { TransactionService } from '../transaction.service';
@@ -61,6 +61,7 @@ export class ExpenseSettingsComponent implements OnInit {
       createdAt: new FormControl(new Date(), Validators.required),
       transactionDueDate: new FormControl(new Date(), Validators.required),
       transactionType: new FormControl(TransactionType.EXPENSE),
+      transactionDate: new FormControl(new Date().toJSON(), Validators.required)
     });
   }
 
@@ -114,6 +115,7 @@ export class ExpenseSettingsComponent implements OnInit {
   public closeModal(): void {
     this._modalCtrl.dismiss();
   }
+
   public get descriptionCtrl(): AbstractControl {
     return this.form.get('description');
   }

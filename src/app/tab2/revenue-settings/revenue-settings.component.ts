@@ -56,6 +56,7 @@ export class RevenueSettingsComponent implements OnInit {
       createdAt: new FormControl(new Date(), Validators.required),
       transactionDueDate: new FormControl(new Date().toJSON(), Validators.required),
       transactionType: new FormControl(TransactionType.REVENUE, Validators.required),
+      transactionDate: new FormControl(new Date().toJSON(), Validators.required)
     });
   }
 

@@ -1,7 +1,7 @@
 <ion-toolbar>
   <ion-buttons slot="start">
     <ion-menu-button color="dark" type="button" auto-hide="false"></ion-menu-button>
-  </ion-buttons>  
+  </ion-buttons>
   <ion-buttons slot="end" (click)="hardRefresh()">
     <ion-button color="dark" type="button"><ion-icon name="refresh-outline"></ion-icon></ion-button>
   </ion-buttons>
@@ -24,7 +24,7 @@
       <ion-list>
         <ion-item-group>
           <ion-item *ngFor="let item of categories">
-            <ion-label class="label-info" pisition="stacked">
+            <ion-label class="label-info" position="center">
               <ion-icon name="ellipse" [ngStyle]="{'color': item.color }"></ion-icon>
               <span>{{ item.name }}</span>
             </ion-label>
@@ -34,17 +34,17 @@
               </ion-fab-button>
               <ion-fab-list class="buttonFabList" side="start">
                 <ion-fab-button  color="transparent">
-                    <ion-item-option  type="button" (click)="showModalCategory(item)">
+                    <ion-item-option type="button" (click)="showModalCategory(item)">
                     <ion-icon name="create-outline"></ion-icon>
                   </ion-item-option>
                 </ion-fab-button>
                 <ion-fab-button  color="transparent">
-                    <ion-item-option  type="button" (click)="deleteCategory(item.id)">
+                    <ion-item-option type="button" (click)="deleteCategory(item.id)">
                     <ion-icon name="trash-outline"></ion-icon>
                     </ion-item-option>
                 </ion-fab-button>
-                <ion-fab-button  color="transparent">
-                    <ion-item-option  type="button" (click)="showModalMeta(item.id)">
+                <ion-fab-button color="transparent">
+                    <ion-item-option type="button" (click)="showModalMeta(item.id)">
                     <ion-icon name="eye-outline"></ion-icon>
                     </ion-item-option>
                 </ion-fab-button>
