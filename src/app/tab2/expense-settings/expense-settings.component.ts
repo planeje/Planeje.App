@@ -61,7 +61,7 @@ export class ExpenseSettingsComponent implements OnInit {
       createdAt: new FormControl(new Date(), Validators.required),
       transactionDueDate: new FormControl(new Date(), Validators.required),
       transactionType: new FormControl(TransactionType.EXPENSE),
-      transactionDate: new FormControl(new Date().toJSON(), Validators.required)
+      // transactionDate: new FormControl(new Date().toJSON(), Validators.required)
     });
   }
 
